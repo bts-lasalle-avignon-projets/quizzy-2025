@@ -1,11 +1,10 @@
 #ifndef QUESTION_H
 #define QUESTION_H
 
-
-class question
+class Question
 {
-public:
-    question();
+  public:
+    Question();
 };
 
 #endif // QUESTION_H

@@ -1,6 +1,6 @@
 #include "question.h"
 
-question::question()
+Question::Question()
 {
 
 }

@@ -1,6 +1,12 @@
 #include "communicationbluetooth.h"
+#include <QDebug>
 
-communicationBluetooth::communicationBluetooth()
+CommunicationBluetooth::CommunicationBluetooth(QObject* parent)
 {
+    qDebug() << Q_FUNC_INFO << this << "parent" << parent;
+}
 
+CommunicationBluetooth::~CommunicationBluetooth()
+{
+    qDebug() << Q_FUNC_INFO << this;
 }

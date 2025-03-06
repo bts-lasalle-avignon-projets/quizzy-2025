@@ -1,11 +1,15 @@
 #include "quizzy.h"
+#include "communicationbluetooth.h"
+#include <QDebug>
 
-quizzy::quizzy(QWidget *parent)
-    : QMainWindow(parent)
+Quizzy::Quizzy(QObject* parent) :
+    communicationBluetooth(new CommunicationBluetooth(this))
 {
+    qDebug() << Q_FUNC_INFO << this << "parent" << parent;
 }
 
-quizzy::~quizzy()
+Quizzy::~Quizzy()
 {
+    delete communicationBluetooth;
+    qDebug() << Q_FUNC_INFO << this;
 }
-

@@ -1,6 +1,6 @@
 #include "joueur.h"
 
-joueur::joueur()
+Joueur::Joueur()
 {
 
 }
