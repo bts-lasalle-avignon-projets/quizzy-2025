@@ -3,10 +3,13 @@
 
 #include <QObject>
 
-class communicationBluetooth
+class CommunicationBluetooth : public QObject
 {
-public:
-    communicationBluetooth();
+    Q_OBJECT
+
+  public:
+    CommunicationBluetooth(QObject* parent = nullptr);
+    virtual ~CommunicationBluetooth();
 };
 
 #endif // COMMUNICATIONBLUETOOTH_H

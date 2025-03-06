@@ -1,14 +1,21 @@
 #ifndef QUIZZY_H
 #define QUIZZY_H
 
-#include <QMainWindow>
+#include <QObject>
 
-class quizzy : public QMainWindow
+class CommunicationBluetooth;
+
+class Quizzy : public QObject
 {
     Q_OBJECT
 
-public:
-    quizzy(QWidget *parent = nullptr);
-    ~quizzy();
+  private:
+    CommunicationBluetooth*
+      communicationBluetooth; //!< association vers CommunicationBluetooth
+
+  public:
+    Quizzy(QObject* parent = nullptr);
+    virtual ~Quizzy();
 };
+
 #endif // QUIZZY_H
