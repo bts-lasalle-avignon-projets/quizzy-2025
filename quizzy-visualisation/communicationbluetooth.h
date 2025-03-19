@@ -12,6 +12,10 @@
 #include <QBluetoothLocalDevice>
 #include <QBluetoothDeviceDiscoveryAgent>
 
+static const QString uuidDuService(
+  QStringLiteral("00001101-0000-1000-8000-00805F9B34FB"));
+static const QString nomDuService(QStringLiteral("Quizzy"));
+
 class CommunicationBluetooth : public QObject
 {
     Q_OBJECT
@@ -33,8 +37,13 @@ class CommunicationBluetooth : public QObject
 
     void demarrerServeur();
     void arreterServeur();
+    void activerBluetooth();
+    void verifierLaConnexion();
+    void recupererInformationsAppareil();
+    void rendreAppareilVisible();
 
   private slots:
+
     void connecterAppareil();
     void deconnecterAppareil();
     void recevoirTrame();
