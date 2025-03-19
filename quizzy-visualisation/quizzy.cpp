@@ -31,13 +31,13 @@ void Quizzy::lireTrame(QVector<QString> trameTraitee)
     {
             // TODO
         case 'J':
-            emit joueursConfigures;
+            // emit joueursConfigures;
         case 'S':
-            suivant;
+            // suivant;
         case 'T':
-            teminerLaSession;
+            // teminerLaSession;
         case 'F':
-            finirLeQuiz;
+            // finirLeQuiz;
 
         case 'C':
             emit sessionParametree(trameTraitee[THEME],

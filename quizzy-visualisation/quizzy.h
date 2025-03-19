@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QVector>
 
+#include "communicationbluetooth.h"
 #include "joueur.h"
 #include "question.h"
 
