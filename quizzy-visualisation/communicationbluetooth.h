@@ -16,13 +16,6 @@ class CommunicationBluetooth : public QObject
 {
     Q_OBJECT
 
-  public:
-    CommunicationBluetooth(QObject* parent = nullptr);
-    virtual ~CommunicationBluetooth();
-
-    void demarrerServeur();
-    void arreterServeur();
-
   private:
     bool etatDeConnexion;
 
@@ -33,6 +26,13 @@ class CommunicationBluetooth : public QObject
     QBluetoothServer*     serveur;
     QBluetoothSocket*     socketDeLAppareil;
     QBluetoothServiceInfo informationsDuService;
+
+  public:
+    CommunicationBluetooth(QObject* parent = nullptr);
+    virtual ~CommunicationBluetooth();
+
+    void demarrerServeur();
+    void arreterServeur();
 
   private slots:
     void connecterAppareil();
