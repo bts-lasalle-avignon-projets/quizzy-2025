@@ -59,13 +59,13 @@ class Quizzy : public QObject
     CommunicationBluetooth*
       communicationBluetooth; //!< association vers CommunicationBluetooth
 
-    int  IDQuestionAffichee;
+    int  IdQuestionAffichee;
     bool timerTermine = false;
 
     Etat               etat;
     QString            trame;
     QVector<Joueur*>   joueurs;
-    QVector<Question*> question;
+    QVector<Question*> questions;
 
     QVector<QString> traiterTrame(QString trameRecue);
     void             lireTrame(QVector<QString> trameTraitee);
@@ -75,17 +75,16 @@ class Quizzy : public QObject
 
   signals:
 
-    void sessionParametree(QString theme,
-                           QString temps,
-                           QString nombreDeQuestion,
-                           QString nomJoueur1,
-                           QString nomJoueur2);
+    void sessionParametree(QString     theme,
+                           QString     temps,
+                           QString     nombreDeQuestions,
+                           QStringList nomJoueurs);
     void questionRecue(QString titreQuestion,
-                       QString IDReponse,
+                       QString IdReponse,
                        QString propositionA,
                        QString propositionB,
                        QString propositionC,
                        QString propositionD);
-    void reponseJoueurRecue(QString IDPupitre, QString choixJoueur);
+    void reponseJoueurRecue(QString IdPupitre, QString choixJoueur);
 };
 #endif // QUIZZY_H
