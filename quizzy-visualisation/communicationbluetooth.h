@@ -42,11 +42,11 @@ class CommunicationBluetooth : public QObject
     void recupererInformationsAppareil();
     void rendreAppareilVisible();
 
-  private slots:
-
     void connecterAppareil();
     void deconnecterAppareil();
     void recevoirTrame();
+
+  private slots:
 
   signals:
     void appareilConnecte();

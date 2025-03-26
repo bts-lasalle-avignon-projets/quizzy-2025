@@ -17,39 +17,40 @@ void CommunicationBluetooth::verifierLaConnexion()
         activerBluetooth();
         recupererInformationsAppareil();
         rendreAppareilVisible();
+        qDebug() << Q_FUNC_INFO << "Is valid";
     }
 }
 
 void CommunicationBluetooth::activerBluetooth()
 {
     appareil.powerOn();
+    qDebug() << Q_FUNC_INFO << "Is on";
 }
 
 void CommunicationBluetooth::recupererInformationsAppareil()
 {
     nomDeLappareil      = appareil.name();
     addresseDeLappareil = appareil.address();
+    qDebug() << Q_FUNC_INFO << "Info OK";
 }
 
 void CommunicationBluetooth::rendreAppareilVisible()
 {
     appareil.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
+    qDebug() << Q_FUNC_INFO << "Is visible";
 }
 
 void CommunicationBluetooth::demarrerServeur()
 {
     if(serveur == nullptr)
     {
-        serveur =
-          new QBluetoothServer(QBluetoothServiceInfo::RfcommProtocol, this);
+    serveur = new QBluetoothServer(QBluetoothServiceInfo::RfcommProtocol, this);
 
-        connect(serveur,
-                SIGNAL(newConnection()),
-                this,
-                SLOT(connecterAppareil()));
+    connect(serveur, SIGNAL(newConnection()), this, SLOT(connecterAppareil()));
 
-        QBluetoothUuid uuid(QBluetoothUuid::Rfcomm);
-        informationsDuService = serveur->listen(uuid, nomDuService);
+    QBluetoothUuid uuid(QBluetoothUuid::Rfcomm);
+    informationsDuService = serveur->listen(uuid, nomDuService);
+    qDebug() << Q_FUNC_INFO << "Server On";
     }
 }
 
@@ -66,7 +67,6 @@ void CommunicationBluetooth::arreterServeur()
 void CommunicationBluetooth::connecterAppareil()
 {
     socketDeLAppareil = serveur->nextPendingConnection();
-
     connect(socketDeLAppareil,
             SIGNAL(disconnected()),
             this,

@@ -20,7 +20,8 @@ HEADERS += \
     joueur.h \
     question.h \
     quizzy.h \
-    quizzygui.h
+    quizzygui.h \
+    testbluetooth.h
 
 #COPIES += ressources
 #ressources.files = ressources

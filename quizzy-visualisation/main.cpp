@@ -1,6 +1,8 @@
 #include "quizzygui.h"
 #include <QApplication>
 
+#include "quizzy.h"
+#include "communicationbluetooth.h"
 /**
  * @file main.cpp
  * @brief Programme principal
@@ -16,10 +18,15 @@
 
 int main(int argc, char* argv[])
 {
-    QApplication a(argc, argv);
-    QuizzyGUI    quizzyGUI;
+    QApplication           a(argc, argv);
+    QuizzyGUI              quizzyGUI;
+    CommunicationBluetooth com;
 
     quizzyGUI.show();
+    com.demarrerServeur();
+    com.verifierLaConnexion();
+    // com.connecterAppareil();
+    // com.recevoirTrame();
 
     return a.exec();
 }
