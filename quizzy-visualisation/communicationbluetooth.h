@@ -5,6 +5,7 @@
 
 #include <QObject>
 
+#include <QBluetoothUuid>
 #include <QBluetoothServer>
 #include <QBluetoothSocket>
 #include <QBluetoothAddress>
@@ -12,46 +13,48 @@
 #include <QBluetoothLocalDevice>
 #include <QBluetoothDeviceDiscoveryAgent>
 
-
-static const QString uuidDuService(
+static const QString serviceUuid(
   QStringLiteral("00001101-0000-1000-8000-00805F9B34FB"));
-static const QString nomDuService(QStringLiteral("Quizzy"));
-
+static const QString serviceNom(QStringLiteral("Quizzy"));
 
 class CommunicationBluetooth : public QObject
 {
     Q_OBJECT
 
-  private:
-    bool etatDeConnexion;
-
-    QBluetoothLocalDevice appareil;
-    QBluetoothAddress     addresseDeLappareil;
-    QString               nomDeLappareil;
-
-    QBluetoothServer*     serveur;
-    QBluetoothSocket*     socketDeLAppareil;
-    QBluetoothServiceInfo informationsDuService;
-
   public:
-    CommunicationBluetooth(QObject* parent = nullptr);
-    virtual ~CommunicationBluetooth();
+    explicit CommunicationBluetooth(QObject* parent = 0);
+    ~CommunicationBluetooth();
 
-    void demarrerServeur();
-    void arreterServeur();
+    void                     demarrerServeur();
+    void                     arreterServeur();
+    void                     deconnecterAppareil();
+    bool                     verifierLaConnexion();
+    QString                  getNomAppareil();
+    QString                  getAdresseAppareil();
+    QList<QBluetoothAddress> getPeripheriquesDistants();
+
+  public slots:
+    void envoyer(QString trame);
 
   private slots:
-    void activerBluetooth();
-    void verifierLaConnexion();
-    void recupererInformationsAppareil();
-    void rendreAppareilVisible();
-    void connecterAppareil();
-    void deconnecterAppareil();
-    void recevoirTrame();
+    void appareilConnecte(const QBluetoothAddress& adresse);
+    void appareilDeconnecte(const QBluetoothAddress& adresse);
+    void socketDeconnecte();
+    void socketPretALire();
+    void nouveauClient();
+
+  private:
+    QBluetoothLocalDevice appareil;
+    QBluetoothServer*     serveur;
+    QBluetoothSocket*     socket;
+    QBluetoothServiceInfo informationsDuService;
+    QString               nomDeLAppareil;
+    QString               adresseDeLAppareil;
+    bool                  connecte;
 
   signals:
-    void appareilConnecte();
-    void appareilDeconnecte();
+    void clientConnecte();
+    void clientDeconnecte();
+    void afficherMessage(QString message);
 };
-
 #endif // COMMUNICATIONBLUETOOTH_H

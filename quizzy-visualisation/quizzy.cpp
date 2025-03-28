@@ -13,14 +13,14 @@ Quizzy::~Quizzy()
     delete communicationBluetooth;
     qDebug() << Q_FUNC_INFO << this;
 }
-
+/*
 QVector<QString> Quizzy::traiterTrame(QString trameRecue)
 {
-    // TODO
+    TODO
     QVector<QString> trameTraitee;
     return trameTraitee;
 }
-
+*/
 void Quizzy::lireTrame(QVector<QString> trameTraitee)
 {
     // TODO differencier l'envoie selon la trame recue
