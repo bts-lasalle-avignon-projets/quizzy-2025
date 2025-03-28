@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Quizzy</string>
     <string name="Credits"><u>Crédits</u></string>
+    <string name="creer">Créer</string>
+    <string name="historique">Historique</string>
 </resources>
