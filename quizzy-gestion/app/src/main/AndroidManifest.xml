@@ -13,17 +13,13 @@
         android:theme="@style/Theme.Quizzy"
         tools:targetApi="31">
         <activity
-            android:name=".HistoryActivity"
+            android:name=".ParametresSession"
             android:exported="false" />
         <activity
-            android:name=".ParametersActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".Quizzy"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

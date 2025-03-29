@@ -4,24 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".Quizzy"
     tools:ignore="MissingDefaultResource">
 
-
     <Button
-        android:id="@+id/create"
-        android:layout_width="90dp"
-        android:layout_height="70dp"
-        android:background="@drawable/boutonrond"
-        android:fontFamily="@font/open_sans"
-        android:text="Créer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="202dp" />
-
-    <Button
-        android:id="@+id/credits"
+        android:id="@+id/boutonAfficherCredits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -29,27 +16,20 @@
         android:backgroundTint="@color/white"
         android:fontFamily="@font/open_sans"
         android:text="@string/Credits"
-        android:textColor="@color/grey"
+        android:textColor="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <Button
-        android:id="@+id/history"
+        android:id="@+id/boutonParametrerSession"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="40dp"
         android:fontFamily="@font/open_sans"
-        android:text="Historique"
+        android:text="@string/boutonParametrerSession"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="625dp"
-        android:layout_height="110dp"
-        android:text="Quizzy"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="43dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
