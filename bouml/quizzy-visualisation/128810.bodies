@@ -1,0 +1,13 @@
+class QuizzyGUI
+!!!130730.cpp!!!	QuizzyGUI(inout parent : QWidget = nullptr)
+    qDebug() << Q_FUNC_INFO << this;
+
+    setWindowTitle(QString(NOM_APPLICATION) + QString(" v") +
+                   QString(VERSION_APPLICATION));
+
+#ifdef RASPBERRY_PI
+    showFullScreen();
+#endif
+!!!130858.cpp!!!	~QuizzyGUI()
+    delete quizzy;
+    qDebug() << Q_FUNC_INFO << this;

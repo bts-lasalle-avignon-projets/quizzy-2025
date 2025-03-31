@@ -1,0 +1,19 @@
+class CommunicationBluetooth
+!!!128042.cpp!!!	CommunicationBluetooth(inout parent : QObject = nullptr)
+    qDebug() << Q_FUNC_INFO << this << "parent" << parent;
+!!!128170.cpp!!!	~CommunicationBluetooth()
+    qDebug() << Q_FUNC_INFO << this;
+!!!128298.cpp!!!	demarrerServeur() : void
+    // TODO
+!!!128426.cpp!!!	arreterServeur() : void
+    // TODO
+!!!128554.cpp!!!	connecterAppareil() : void
+    // TODO
+    etatDeConnexion = true;
+    emit appareilConnecte();
+!!!128682.cpp!!!	deconnecterAppareil() : void
+    if(etatDeConnexion)
+        etatDeConnexion = false;
+    emit appareilDeconnecte();
+!!!128810.cpp!!!	recevoirTrame() : void
+    // TODO
