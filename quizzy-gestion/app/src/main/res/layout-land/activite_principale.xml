@@ -4,34 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132" />
-
+    tools:context=".Quizzy"
+    tools:ignore="MissingDefaultResource">
 
     <Button
-        android:id="@+id/create"
-        android:layout_width="90dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="89dp"
-        android:background="@drawable/boutonrond"
-        android:fontFamily="@font/open_sans"
-        android:text="Créer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <Button
-        android:id="@+id/credits"
+        android:id="@+id/boutonAfficherCredits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -39,18 +16,20 @@
         android:backgroundTint="@color/white"
         android:fontFamily="@font/open_sans"
         android:text="@string/Credits"
-        android:textColor="@color/grey"
+        android:textColor="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <Button
-        android:id="@+id/history"
+        android:id="@+id/boutonParametrerSession"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="40dp"
         android:fontFamily="@font/open_sans"
-        android:text="Historique"
+        android:text="@string/boutonParametrerSession"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

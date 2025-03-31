@@ -1,0 +1,17 @@
+class ParametresSession
+!!!137642.java!!!	onCreate(inout savedInstanceState : Bundle) : void
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activite_parametres_session);
+        Log.d(TAG, "onCreate()");
+
+        initialiserRessources();
+!!!137770.java!!!	initialiserRessources() : void
+        this.boutonRetourAccueil = findViewById(R.id.boutonRetourAccueil);
+
+        boutonRetourAccueil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });

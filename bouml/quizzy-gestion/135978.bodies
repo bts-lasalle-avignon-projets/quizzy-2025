@@ -1,0 +1,39 @@
+class Quizzy
+!!!137898.java!!!	onCreate(inout savedInstanceState : Bundle) : void
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activite_principale);
+        Log.d(TAG, "onCreate()");
+
+        initialiserRessources();
+!!!138026.java!!!	onStart() : void
+        super.onStart();
+        Log.d(TAG, "onStart()");
+!!!138154.java!!!	onResume() : void
+        super.onResume();
+        Log.d(TAG, "onResume()");
+!!!138282.java!!!	onPause() : void
+        super.onPause();
+        Log.d(TAG, "onPause()");
+!!!138410.java!!!	onStop() : void
+        super.onStop();
+        Log.d(TAG, "onStop()");
+!!!138538.java!!!	onDestroy() : void
+        super.onDestroy();
+        Log.d(TAG, "onDestroy()");
+!!!138666.java!!!	initialiserRessources() : void
+        this.boutonParametrerSession = findViewById(R.id.boutonParametrerSession);
+        this.boutonAfficherCredits   = findViewById(R.id.boutonAfficherCredits);
+
+        boutonParametrerSession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Log.d(TAG, "clic boutonParametrerSession");
+                Intent activiteParametresSession = new Intent(Quizzy.this, ParametresSession.class);
+                startActivity(activiteParametresSession);
+            }
+        });
+!!!138794.java!!!	onBackPressed() : void
+        super.onBackPressed();
+        Log.d(TAG, "onBackPressed()");
+        finish();
