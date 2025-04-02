@@ -2,6 +2,14 @@
 #define QUIZZYGUI_H
 
 #include <QtWidgets>
+#include <QMessageBox>
+#include <QDebug>
+#include <QBluetoothAddress>
+#include <QBluetoothDeviceInfo>
+
+#define CHEMIN_LOGO ":/images/logo.png"
+
+class CommunicationBluetooth;
 
 /**
  * @def NOM_APPLICATION
@@ -26,12 +34,40 @@ class QuizzyGUI : public QMainWindow
 {
     Q_OBJECT
 
-  private:
-    Quizzy* quizzy; //!< association vers Quizzy
-
   public:
     QuizzyGUI(QWidget* parent = nullptr);
     ~QuizzyGUI();
+
+    enum Ecran
+    {
+        EcranAttente = 0,
+        EcranAccueil,
+        EcranQuestion,
+        EcranReponse,
+        EcranFin
+    };
+
+  private:
+    Quizzy*         quizzy;
+    QStackedWidget* ecrans;
+    QLabel*         messageAttente;
+
+    void initialiserEcrans();
+    void creerEcrans();
+    void creerEcranAttente();
+    void creerEcranAccueil();
+    void creerEcranQuestion();
+    void creerEcranReponse();
+    void creerEcranFin();
+
+    // Ecran d'attente
+
+    QWidget* ecranAttente;
+    QLabel*  titreEcranAttente;
+
+  public slots:
+    void afficherEcran(QuizzyGUI::Ecran ecran);
+    void afficherEcranAttente();
 };
 
 #endif // QUIZZYGUI_H

@@ -24,9 +24,15 @@ int main(int argc, char* argv[])
 
     quizzyGUI.show();
     com.demarrerServeur();
-    com.verifierLaConnexion();
-    // com.connecterAppareil();
-    // com.recevoirTrame();
+
+    if(com.verifierLaConnexion())
+    {
+        quizzyGUI.afficherEcranAttente();
+    }
+    else
+    {
+        qDebug() << "Pas de périphérique Bluetooth connecté.";
+    }
 
     return a.exec();
 }

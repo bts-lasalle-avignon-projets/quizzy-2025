@@ -2,7 +2,7 @@
 #define COMMUNICATIONBLUETOOTH_H
 
 #include "quizzy.h"
-
+#include "quizzygui.h"
 #include <QObject>
 
 #include <QBluetoothUuid>
@@ -42,6 +42,7 @@ class CommunicationBluetooth : public QObject
     void socketDeconnecte();
     void socketPretALire();
     void nouveauClient();
+    void recevoirTrame();
 
   private:
     QBluetoothLocalDevice appareil;
@@ -56,5 +57,6 @@ class CommunicationBluetooth : public QObject
     void clientConnecte();
     void clientDeconnecte();
     void afficherMessage(QString message);
+    void changerEcran(QuizzyGUI::Ecran ecran);
 };
 #endif // COMMUNICATIONBLUETOOTH_H

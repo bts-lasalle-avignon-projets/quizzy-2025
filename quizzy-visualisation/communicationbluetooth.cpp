@@ -118,8 +118,7 @@ void CommunicationBluetooth::socketPretALire()
         donnees += socket->readAll();
         sleep(150000); // cf. timeout
     }
-    emit afficherMessage(QString::fromUtf8("Données reçues : ") +
-                         QString(donnees));
+    qDebug() << Q_FUNC_INFO << "Données reçues : " << QString(donnees);
 }
 
 void CommunicationBluetooth::envoyer(QString trame)
@@ -138,10 +137,8 @@ void CommunicationBluetooth::nouveauClient()
     if(!socket)
         return;
 
-    connect(socket,
-            SIGNAL(appareilDeconnecte()),
-            this,
-            SLOT(socketDeconnecte()));
+    connect(socket, SIGNAL(disconnected()), this, SLOT(socketDeconnecte()));
+    connect(socket, SIGNAL(readyRead()), this, SLOT(recevoirTrame()));
 
     connecte = true;
     emit    clientConnecte();
@@ -157,182 +154,90 @@ CommunicationBluetooth::~CommunicationBluetooth()
     appareil.setHostMode(QBluetoothLocalDevice::HostPoweredOff);
 }
 
-/*
-CommunicationBluetooth::~CommunicationBluetooth()
-{
-    qDebug() << Q_FUNC_INFO << this;
-}
-
-void CommunicationBluetooth::verifierLaConnexion()
-{
-    if(appareil.isValid())
-    {
-        activerBluetooth();
-        recupererInformationsAppareil();
-        rendreAppareilVisible();
-        qDebug() << Q_FUNC_INFO << "Is valid";
-    }
-}
-
-void CommunicationBluetooth::activerBluetooth()
-{
-    appareil.powerOn();
-    qDebug() << Q_FUNC_INFO << "Is on";
-}
-
-void CommunicationBluetooth::recupererInformationsAppareil()
-{
-    nomDeLappareil      = appareil.name();
-    addresseDeLappareil = appareil.address();
-    qDebug() << Q_FUNC_INFO << "Info OK";
-}
-
-void CommunicationBluetooth::rendreAppareilVisible()
-{
-    appareil.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
-    qDebug() << Q_FUNC_INFO << "Is visible";
-}
-
-void CommunicationBluetooth::demarrerServeur()
-{
-    if(serveur == nullptr)
-    {
-    serveur = new QBluetoothServer(QBluetoothServiceInfo::RfcommProtocol, this);
-
-    connect(serveur, SIGNAL(newConnection()), this, SLOT(connecterAppareil()));
-
-    QBluetoothUuid uuid(QBluetoothUuid::Rfcomm);
-    informationsDuService = serveur->listen(uuid, nomDuService);
-    qDebug() << Q_FUNC_INFO << "Server On";
-    }
-}
-
-void CommunicationBluetooth::arreterServeur()
-{
-    socketDeLAppareil->close();
-    delete socketDeLAppareil;
-    socketDeLAppareil = nullptr;
-
-    delete serveur;
-    serveur = nullptr;
-}
-
-void CommunicationBluetooth::connecterAppareil()
-{
-    socketDeLAppareil = serveur->nextPendingConnection();
-    connect(socketDeLAppareil,
-            SIGNAL(disconnected()),
-            this,
-            SLOT(deconnecterAppareil()));
-    connect(socketDeLAppareil,
-            SIGNAL(readyRead()),
-            this,
-            SLOT(recevoirTrame()));
-
-    etatDeConnexion = true;
-
-    emit appareilConnecte();
-}
-
 void CommunicationBluetooth::recevoirTrame()
 {
-    QByteArray donnees;
+    QByteArray donnees = socket->readAll();
+    QString    trame   = QString(donnees);
 
-    donnees       = socketDeLAppareil->readAll();
-    QString trame = QString(donnees);
-    qDebug() << Q_FUNC_INFO << "trame" << trame;
-}
+    qDebug() << Q_FUNC_INFO << "Trame reçue : " << trame;
 
-void CommunicationBluetooth::deconnecterAppareil()
-{
-    if(etatDeConnexion)
-        etatDeConnexion = false;
-    emit appareilDeconnecte();
-}
-
-void CommunicationBluetooth::verifierLaConnexion()
-{
-    if(appareil.isValid())
+    if(trame.startsWith("@@") && trame.endsWith("\n"))
     {
-        activerBluetooth();
-        recupererInformationsAppareil();
-        rendreAppareilVisible();
+        trame = trame.mid(2, trame.length() - 4);
+
+        QStringList parties = trame.split(";");
+
+        QString typeDeTrame = parties[0];
+
+        qDebug() << "Type de trame: " << typeDeTrame;
+
+        if(typeDeTrame == "C")
+        {
+            QString theme       = parties[1];
+            QString temps       = parties[2];
+            QString nbQuestions = parties[3];
+
+            qDebug() << "Thème: " << theme;
+            qDebug() << "Temps: " << temps;
+            qDebug() << "Nombre de questions: " << nbQuestions;
+        }
+        else if(typeDeTrame == "J")
+        {
+            QString joueur1 = parties[1];
+            QString joueur2 = parties[2];
+
+            qDebug() << "Joueur 1: " << joueur1;
+            qDebug() << "Joueur 2: " << joueur2;
+
+            emit changerEcran(QuizzyGUI::EcranAccueil);
+        }
+        else if(typeDeTrame == "Q")
+        {
+            QString titre       = parties[1];
+            QString prop1       = parties[2];
+            QString prop2       = parties[3];
+            QString prop3       = parties[4];
+            QString prop4       = parties[5];
+            QString idReponse   = parties[6];
+            QString explication = parties[7];
+            QString points      = parties[8];
+
+            qDebug() << "Titre: " << titre;
+            qDebug() << "Propositions: " << prop1 << prop2 << prop3 << prop4;
+            qDebug() << "ID Réponse: " << idReponse;
+            qDebug() << "Explication: " << explication;
+            qDebug() << "Points: " << points;
+
+            emit changerEcran(QuizzyGUI::EcranQuestion);
+        }
+        else if(typeDeTrame == "S")
+        {
+            qDebug() << "Passer à la suite";
+            emit changerEcran(QuizzyGUI::EcranReponse);
+        }
+        else if(typeDeTrame == "R")
+        {
+            QString score1 = parties[1];
+            QString score2 = parties[2];
+
+            qDebug() << "Score Joueur 1: " << score1;
+            qDebug() << "Score Joueur 2: " << score2;
+
+            emit changerEcran(QuizzyGUI::EcranFin);
+        }
+        else if(typeDeTrame == "T")
+        {
+            qDebug() << "Session terminée";
+            emit changerEcran(QuizzyGUI::EcranFin);
+        }
+        else if(typeDeTrame == "F")
+        {
+            qDebug() << "Quiz terminé";
+            emit changerEcran(QuizzyGUI::EcranFin);
+        }
+    }
+    else
+    {
+        qDebug() << "Trame invalide";
     }
 }
-
-void CommunicationBluetooth::activerBluetooth()
-{
-    appareil.powerOn();
-}
-
-void CommunicationBluetooth::recupererInformationsAppareil()
-{
-    nomDeLappareil      = appareil.name();
-    addresseDeLappareil = appareil.address();
-}
-
-void CommunicationBluetooth::rendreAppareilVisible()
-{
-    appareil.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
-}
-
-void CommunicationBluetooth::demarrerServeur()
-{
-    if(serveur == nullptr)
-    {
-        serveur =
-          new QBluetoothServer(QBluetoothServiceInfo::RfcommProtocol, this);
-
-        connect(serveur,
-                SIGNAL(newConnection()),
-                this,
-                SLOT(connecterAppareil()));
-
-        QBluetoothUuid uuid(QBluetoothUuid::Rfcomm);
-        informationsDuService = serveur->listen(uuid, nomDuService);
-    }
-}
-
-void CommunicationBluetooth::arreterServeur()
-{
-    socketDeLAppareil->close();
-    delete socketDeLAppareil;
-    socketDeLAppareil = nullptr;
-
-    delete serveur;
-    serveur = nullptr;
-}
-
-void CommunicationBluetooth::connecterAppareil()
-{
-    socketDeLAppareil = serveur->nextPendingConnection();
-
-    connect(socketDeLAppareil,
-            SIGNAL(disconnected()),
-            this,
-            SLOT(deconnecterAppareil()));
-    connect(socketDeLAppareil,
-            SIGNAL(readyRead()),
-            this,
-            SLOT(recevoirTrame()));
-
-    etatDeConnexion = true;
-
-    emit appareilConnecte();
-}
-
-void CommunicationBluetooth::recevoirTrame()
-{
-    QByteArray donnees;
-
-    donnees       = socketDeLAppareil->readAll();
-    QString trame = QString(donnees);
-    qDebug() << Q_FUNC_INFO << "trame" << trame;
-}
-
-void CommunicationBluetooth::deconnecterAppareil()
-{
-    if(etatDeConnexion)
-        etatDeConnexion = false;
-    emit appareilDeconnecte();
-}*/
