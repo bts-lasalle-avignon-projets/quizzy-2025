@@ -199,7 +199,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
           +
           "(4,'Quel musicien est surnommé \"le roi de la pop\" ?','Prince','Michael Jackson','Elton John','Justin Timberlake','Michael Jackson','Michael Jackson est surnommé \"le roi de la pop\" en raison de ses nombreuses contributions au genre pop et de son impact mondial.');";
 
-    public BaseDeDonnees(Context context)
+    private BaseDeDonnees(Context context)
     {
         super(context, NOM_BDD, null, VERSION_BDD);
         Log.d(TAG, "BaseDeDonnees()");
