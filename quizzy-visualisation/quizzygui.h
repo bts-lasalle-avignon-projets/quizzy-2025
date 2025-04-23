@@ -54,20 +54,46 @@ class QuizzyGUI : public QMainWindow
 
     void initialiserEcrans();
     void creerEcrans();
-    void creerEcranAttente();
-    void creerEcranAccueil();
-    void creerEcranQuestion();
-    void creerEcranReponse();
-    void creerEcranFin();
 
     // Ecran d'attente
+
+    void creerEcranAttente();
 
     QWidget* ecranAttente;
     QLabel*  titreEcranAttente;
 
+    // Ecran d'accueil
+
+    void creerEcranAccueil();
+
+    QWidget* ecranAccueil;
+    QLabel*  titreEcranAccueil;
+
+    // Ecran question
+
+    void creerEcranQuestion();
+
+    QWidget* ecranQuestion;
+    QLabel*  titreEcranQuestion;
+
+    // Ecran reponse
+
+    void creerEcranReponse();
+
+    QWidget* ecranReponse;
+    QLabel*  titreEcranReponse;
+
+    // Ecran fin
+
+    void creerEcranFin();
+
+    QWidget* ecranFin;
+    QLabel*  titreEcranFin;
+
   public slots:
     void afficherEcran(QuizzyGUI::Ecran ecran);
     void afficherEcranAttente();
+    void ecranSuivant();
 };
 
 #endif // QUIZZYGUI_H

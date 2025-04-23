@@ -1,6 +1,8 @@
 #include "communicationbluetooth.h"
 #include <QDebug>
+#include "quizzygui.h"
 #include <unistd.h>
+#include <stdio.h>
 
 CommunicationBluetooth::CommunicationBluetooth(QObject* parent) :
     QObject(parent), serveur(NULL), socket(NULL), nomDeLAppareil(""),
@@ -12,17 +14,6 @@ CommunicationBluetooth::CommunicationBluetooth(QObject* parent) :
     adresseDeLAppareil = appareil.address().toString();
 
     appareil.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
-
-    connect(&appareil,
-            SIGNAL(deviceConnected(QBluetoothAddress)),
-            this,
-            SLOT(appareilConnecte(QBluetoothAddress)));
-
-    connect(&appareil,
-            SIGNAL(deviceDisconnected(QBluetoothAddress)),
-            this,
-            SLOT(appareilDeconnecte(QBluetoothAddress)));
-
     demarrerServeur();
 }
 
@@ -36,9 +27,9 @@ void CommunicationBluetooth::demarrerServeur()
 
         QBluetoothUuid uuid(QBluetoothUuid::Rfcomm);
         informationsDuService = serveur->listen(uuid, serviceNom);
+        qDebug() << getNomAppareil() << getAdresseAppareil();
     }
 }
-
 void CommunicationBluetooth::arreterServeur()
 {
     informationsDuService.unregisterService();
@@ -82,27 +73,6 @@ QList<QBluetoothAddress> CommunicationBluetooth::getPeripheriquesDistants()
     return appareil.connectedDevices();
 }
 
-void CommunicationBluetooth::appareilConnecte(const QBluetoothAddress& adresse)
-{
-    QString message =
-      QString::fromUtf8("Demande connexion du client ") + adresse.toString();
-    if(appareil.pairingStatus(adresse) == QBluetoothLocalDevice::Paired ||
-       appareil.pairingStatus(adresse) ==
-         QBluetoothLocalDevice::AuthorizedPaired)
-        message += " [" + QString::fromUtf8("appairé") + "]";
-    else
-        message += " [" + QString::fromUtf8("non appairé") + "]";
-    emit afficherMessage(message);
-}
-
-void CommunicationBluetooth::appareilDeconnecte(
-  const QBluetoothAddress& adresse)
-{
-    QString message =
-      QString::fromUtf8("Client déconnecté") + adresse.toString();
-    emit afficherMessage(message);
-}
-
 void CommunicationBluetooth::socketDeconnecte()
 {
     connecte = false;
@@ -141,11 +111,11 @@ void CommunicationBluetooth::nouveauClient()
     connect(socket, SIGNAL(readyRead()), this, SLOT(recevoirTrame()));
 
     connecte = true;
-    emit    clientConnecte();
+    emit clientConnecte();
+    qDebug() << Q_FUNC_INFO << "Appareil connecté !";
     QString message = QString::fromUtf8("Périphérique ") + socket->peerName() +
                       " [" + socket->peerAddress().toString() + "] " +
                       QString::fromUtf8("connecté ");
-    emit afficherMessage(message);
 }
 
 CommunicationBluetooth::~CommunicationBluetooth()
@@ -156,88 +126,107 @@ CommunicationBluetooth::~CommunicationBluetooth()
 
 void CommunicationBluetooth::recevoirTrame()
 {
-    QByteArray donnees = socket->readAll();
-    QString    trame   = QString(donnees);
+    QByteArray donnees;
 
-    qDebug() << Q_FUNC_INFO << "Trame reçue : " << trame;
+    donnees       = socket->readAll();
+    QString trame = QString(donnees);
+    qDebug() << Q_FUNC_INFO << "Trame reçue :" << trame;
 
-    if(trame.startsWith("@@") && trame.endsWith("\n"))
+    separerTrame(trame);
+}
+
+void CommunicationBluetooth::separerTrame(QString trame)
+{
+    trame.replace("\\n", "\n");
+    trame                    = trame.mid(2, trame.length() - 3);
+    QStringList trameSeparee = trame.split(";");
+    traiterTrame(trameSeparee);
+    // qDebug() << Q_FUNC_INFO << "Trame séparée" << trameSeparee;
+}
+
+void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
+{
+    QChar typeDeTrame = trameSeparee[TYPE_DE_TRAME].at(0);
+
+    qDebug() << "Type de trame: " << typeDeTrame;
+
+    switch(typeDeTrame.toLatin1())
     {
-        trame = trame.mid(2, trame.length() - 4);
-
-        QStringList parties = trame.split(";");
-
-        QString typeDeTrame = parties[0];
-
-        qDebug() << "Type de trame: " << typeDeTrame;
-
-        if(typeDeTrame == "C")
+        case 'C':
         {
-            QString theme       = parties[1];
-            QString temps       = parties[2];
-            QString nbQuestions = parties[3];
+            QString theme       = trameSeparee[THEME];
+            QString temps       = trameSeparee[TEMPS];
+            QString nbQuestions = trameSeparee[NOMBRE_DE_QUESTION];
 
             qDebug() << "Thème: " << theme;
             qDebug() << "Temps: " << temps;
             qDebug() << "Nombre de questions: " << nbQuestions;
+            break;
         }
-        else if(typeDeTrame == "J")
+        case 'J':
         {
-            QString joueur1 = parties[1];
-            QString joueur2 = parties[2];
+            QString joueur1 = trameSeparee[NOM_JOUEUR_1];
+            QString joueur2 = trameSeparee[NOM_JOUEUR_2];
 
             qDebug() << "Joueur 1: " << joueur1;
             qDebug() << "Joueur 2: " << joueur2;
 
             emit changerEcran(QuizzyGUI::EcranAccueil);
+            break;
         }
-        else if(typeDeTrame == "Q")
+        case 'Q':
         {
-            QString titre       = parties[1];
-            QString prop1       = parties[2];
-            QString prop2       = parties[3];
-            QString prop3       = parties[4];
-            QString prop4       = parties[5];
-            QString idReponse   = parties[6];
-            QString explication = parties[7];
-            QString points      = parties[8];
+            QString titre       = trameSeparee[TITRE_QUESTION];
+            QString propA       = trameSeparee[PROPOSITION_A];
+            QString propB       = trameSeparee[PROPOSITION_B];
+            QString propC       = trameSeparee[PROPOSITION_C];
+            QString propD       = trameSeparee[PROPOSITION_D];
+            QString idReponse   = trameSeparee[NUMERO_REPONSE];
+            QString explication = trameSeparee[EXPLICATION];
+            QString points      = trameSeparee[POINTS];
 
             qDebug() << "Titre: " << titre;
-            qDebug() << "Propositions: " << prop1 << prop2 << prop3 << prop4;
+            qDebug() << "Propositions: " << propA << propB << propC << propD;
             qDebug() << "ID Réponse: " << idReponse;
             qDebug() << "Explication: " << explication;
             qDebug() << "Points: " << points;
 
             emit changerEcran(QuizzyGUI::EcranQuestion);
+            break;
         }
-        else if(typeDeTrame == "S")
+        case 'S':
         {
             qDebug() << "Passer à la suite";
-            emit changerEcran(QuizzyGUI::EcranReponse);
+            emit signalEcranSuivant();
+            break;
         }
-        else if(typeDeTrame == "R")
+        case 'R':
         {
-            QString score1 = parties[1];
-            QString score2 = parties[2];
+            QString score1 = trameSeparee[NOM_JOUEUR_1];
+            QString score2 = trameSeparee[NOM_JOUEUR_2];
 
             qDebug() << "Score Joueur 1: " << score1;
             qDebug() << "Score Joueur 2: " << score2;
 
             emit changerEcran(QuizzyGUI::EcranFin);
+            break;
         }
-        else if(typeDeTrame == "T")
+        case 'T':
         {
             qDebug() << "Session terminée";
             emit changerEcran(QuizzyGUI::EcranFin);
+            break;
         }
-        else if(typeDeTrame == "F")
+        case 'F':
         {
             qDebug() << "Quiz terminé";
             emit changerEcran(QuizzyGUI::EcranFin);
+            break;
         }
-    }
-    else
-    {
-        qDebug() << "Trame invalide";
+        default:
+        {
+            qDebug() << "Trame invalide";
+            break;
+        }
     }
 }
