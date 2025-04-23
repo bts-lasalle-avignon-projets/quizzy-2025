@@ -37,12 +37,12 @@ class CommunicationBluetooth : public QObject
     void envoyer(QString trame);
 
   private slots:
-    void appareilConnecte(const QBluetoothAddress& adresse);
-    void appareilDeconnecte(const QBluetoothAddress& adresse);
     void socketDeconnecte();
     void socketPretALire();
     void nouveauClient();
     void recevoirTrame();
+    void separerTrame(QString);
+    void traiterTrame(QStringList);
 
   private:
     QBluetoothLocalDevice appareil;
@@ -58,5 +58,6 @@ class CommunicationBluetooth : public QObject
     void clientDeconnecte();
     void afficherMessage(QString message);
     void changerEcran(QuizzyGUI::Ecran ecran);
+    void signalEcranSuivant();
 };
 #endif // COMMUNICATIONBLUETOOTH_H

@@ -22,17 +22,15 @@ int main(int argc, char* argv[])
     QuizzyGUI              quizzyGUI;
     CommunicationBluetooth com;
 
-    quizzyGUI.show();
+    QFile fichier(":/style.qss");
+
+    if(fichier.open(QFile::ReadOnly))
+    {
+        QString feuilleStyle = QLatin1String(fichier.readAll());
+        a.setStyleSheet(feuilleStyle);
+    }
+
     com.demarrerServeur();
-
-    if(com.verifierLaConnexion())
-    {
-        quizzyGUI.afficherEcranAttente();
-    }
-    else
-    {
-        qDebug() << "Pas de périphérique Bluetooth connecté.";
-    }
-
+    quizzyGUI.show();
     return a.exec();
 }

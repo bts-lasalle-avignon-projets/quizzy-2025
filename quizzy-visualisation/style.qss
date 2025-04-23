@@ -1,0 +1,13 @@
+QWidget {
+    background-color: #ea82fa;
+    padding: 20px;
+}
+
+QLabel {
+    border: none;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 55px;
+    background-color: none;
+    color: #dddddd;
+}

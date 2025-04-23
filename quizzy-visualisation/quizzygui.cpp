@@ -31,6 +31,8 @@ QuizzyGUI::QuizzyGUI(QWidget* parent) :
 
 #ifdef RASPBERRY_PI
     showFullScreen();
+#else
+    showFullScreen();
 #endif
 }
 
@@ -42,7 +44,9 @@ QuizzyGUI::~QuizzyGUI()
 
 void QuizzyGUI::initialiserEcrans()
 {
-    ecrans                       = new QStackedWidget(this);
+    ecrans = new QStackedWidget(this);
+    ecrans->setCurrentIndex(EcranAttente);
+
     QVBoxLayout* layoutPrincipal = new QVBoxLayout();
 
     layoutPrincipal->addWidget(ecrans);
@@ -55,6 +59,7 @@ void QuizzyGUI::initialiserEcrans()
             SIGNAL(changerEcran(QuizzyGUI::Ecran)),
             this,
             SLOT(afficherEcran(QuizzyGUI::Ecran)));
+    connect(com, SIGNAL(signalEcranSuivant()), this, SLOT(ecranSuivant()));
 }
 
 void QuizzyGUI::creerEcrans()
@@ -86,18 +91,50 @@ void QuizzyGUI::creerEcranAttente()
 
 void QuizzyGUI::creerEcranAccueil()
 {
+    ecranAccueil                    = new QWidget(this);
+    QVBoxLayout* layoutEcranAccueil = new QVBoxLayout(ecranAccueil);
+    titreEcranAccueil               = new QLabel(this);
+
+    titreEcranAccueil->setAlignment(Qt::AlignCenter);
+
+    layoutEcranAccueil->addWidget(titreEcranAccueil);
+    ecrans->addWidget(ecranAccueil);
 }
 
 void QuizzyGUI::creerEcranQuestion()
 {
+    ecranQuestion                    = new QWidget(this);
+    QVBoxLayout* layoutEcranQuestion = new QVBoxLayout(ecranQuestion);
+    titreEcranQuestion               = new QLabel(this);
+
+    titreEcranQuestion->setAlignment(Qt::AlignCenter);
+
+    layoutEcranQuestion->addWidget(titreEcranQuestion);
+    ecrans->addWidget(ecranQuestion);
 }
 
 void QuizzyGUI::creerEcranReponse()
 {
+    ecranReponse                    = new QWidget(this);
+    QVBoxLayout* layoutEcranReponse = new QVBoxLayout(ecranReponse);
+    titreEcranReponse               = new QLabel(this);
+
+    titreEcranReponse->setAlignment(Qt::AlignCenter);
+
+    layoutEcranReponse->addWidget(titreEcranReponse);
+    ecrans->addWidget(ecranReponse);
 }
 
 void QuizzyGUI::creerEcranFin()
 {
+    ecranFin                    = new QWidget(this);
+    QVBoxLayout* layoutEcranFin = new QVBoxLayout(ecranFin);
+    titreEcranFin               = new QLabel(this);
+
+    titreEcranFin->setAlignment(Qt::AlignCenter);
+
+    layoutEcranFin->addWidget(titreEcranFin);
+    ecrans->addWidget(ecranFin);
 }
 
 void QuizzyGUI::afficherEcran(QuizzyGUI::Ecran ecran)
@@ -109,4 +146,13 @@ void QuizzyGUI::afficherEcran(QuizzyGUI::Ecran ecran)
 void QuizzyGUI::afficherEcranAttente()
 {
     afficherEcran(Ecran::EcranAttente);
+}
+
+void QuizzyGUI::ecranSuivant()
+{
+    int indexCourant = ecrans->currentIndex();
+    if(indexCourant < ecrans->count() - 1)
+    {
+        ecrans->setCurrentIndex(indexCourant + 1);
+    }
 }
