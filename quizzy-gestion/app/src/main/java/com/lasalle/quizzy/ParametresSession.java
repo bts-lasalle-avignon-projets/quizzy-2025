@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
@@ -44,5 +43,20 @@ public class ParametresSession extends AppCompatActivity
                 finish();
             }
         });
+        w
+        BaseDeDonnees baseDeDonnees = new BaseDeDonnees(this);
+
+        ArrayList<String> themes = baseDeDonnees.getThemes();
+        Spinner spinnerTheme = findViewById(R.id.theme);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                themes
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerTheme.setAdapter(adapter);
+        );
     }
 }

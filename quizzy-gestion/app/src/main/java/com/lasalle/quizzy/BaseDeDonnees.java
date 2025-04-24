@@ -84,14 +84,18 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         );
     */
     private static final String CREE_TABLE_QUESTION =
-      "CREATE TABLE IF NOT EXISTS " + TABLE_QUESTION + "(" + COLONNE_QUESTIONID +
-      " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLONNE_THEMEID + " INTEGER, " + COLONNE_QUESTION +
-      " TEXT NOT NULL, " + COLONNE_PROPOSITION1 + " TEXT NOT NULL, " + COLONNE_PROPOSITION2 +
-      " TEXT NOT NULL, " + COLONNE_PROPOSITION3 + " TEXT NOT NULL, " + COLONNE_PROPOSITION4 +
-      " TEXT NOT NULL, " + COLONNE_EXPLICATION + " TEXT DEFAULT '', " + COLONNE_REPONSE +
-      " INTEGER NOT NULL," + COLONNE_POINTS + " REAL DEFAULT 1,"
-      + "FOREIGN KEY (" + COLONNE_THEMEID + ") REFERENCES " + TABLE_THEME + "(" + COLONNE_THEMEID +
-      ")  ON DELETE CASCADE);";
+      "CREATE TABLE IF NOT EXISTS " + TABLE_QUESTION + "("
+              + COLONNE_QUESTIONID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+              + COLONNE_THEMEID + " INTEGER, "
+              + COLONNE_QUESTION + " TEXT NOT NULL, "
+              + COLONNE_PROPOSITION1 + " TEXT NOT NULL, "
+              + COLONNE_PROPOSITION2 + " TEXT NOT NULL, "
+              + COLONNE_PROPOSITION3 + " TEXT NOT NULL, "
+              + COLONNE_PROPOSITION4 + " TEXT NOT NULL, "
+              + COLONNE_EXPLICATION + " TEXT DEFAULT '', "
+              + COLONNE_REPONSE + " INTEGER NOT NULL,"
+              + COLONNE_POINTS + " REAL DEFAULT 1,"
+              + "FOREIGN KEY (" + COLONNE_THEMEID + ") REFERENCES " + TABLE_THEME + "(" + COLONNE_THEMEID + ")  ON DELETE CASCADE);";
 
     /*
         CREATE TABLE IF NOT EXISTS table_participant(
@@ -117,17 +121,17 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         );
     */
     private static final String CREE_TABLE_REPONSE =
-      "CREATE TABLE IF NOT EXISTS " + TABLE_REPONSE + "(" + COLONNE_QUIZZID + " INTEGER, " +
-      COLONNE_PARTICIPANTID + " INTEGER, " + COLONNE_QUESTIONID + " INTEGER, " + COLONNE_TEMPS +
-      " INTEGER DEFAULT NULL, " + COLONNE_REPONSE + " INTEGER NOT NULL, "
-      + "PRIMARY KEY (" + COLONNE_QUIZZID + ", " + COLONNE_PARTICIPANTID + ", " +
-      COLONNE_QUESTIONID + "), "
-      + "FOREIGN KEY (" + COLONNE_QUIZZID + ") REFERENCES " + TABLE_QUIZ + "(" + COLONNE_QUIZZID +
-      ") ON DELETE CASCADE, "
-      + "FOREIGN KEY (" + COLONNE_PARTICIPANTID + ") REFERENCES " + TABLE_PARTICIPANT + "(" +
-      COLONNE_PARTICIPANTID + ") ON DELETE CASCADE, "
-      + "FOREIGN KEY (" + COLONNE_QUESTIONID + ") REFERENCES " + TABLE_QUESTION + "(" +
-      COLONNE_QUESTIONID + ") ON DELETE CASCADE);";
+      "CREATE TABLE IF NOT EXISTS "
+              + TABLE_REPONSE + "("
+              + COLONNE_QUIZZID + " INTEGER, "
+              + COLONNE_PARTICIPANTID + " INTEGER, "
+              + COLONNE_QUESTIONID + " INTEGER, "
+              + COLONNE_TEMPS + " INTEGER DEFAULT NULL, "
+              + COLONNE_REPONSE + " INTEGER NOT NULL, "
+              + "PRIMARY KEY (" + COLONNE_QUIZZID + ", " + COLONNE_PARTICIPANTID + ", " + COLONNE_QUESTIONID + "), "
+              + "FOREIGN KEY (" + COLONNE_QUIZZID + ") REFERENCES " + TABLE_QUIZ + "(" + COLONNE_QUIZZID + ") ON DELETE CASCADE, "
+              + "FOREIGN KEY (" + COLONNE_PARTICIPANTID + ") REFERENCES " + TABLE_PARTICIPANT + "(" + COLONNE_PARTICIPANTID + ") ON DELETE CASCADE, "
+              + "FOREIGN KEY (" + COLONNE_QUESTIONID + ") REFERENCES " + TABLE_QUESTION + "(" + COLONNE_QUESTIONID + ") ON DELETE CASCADE);";
 
     /*
         CREATE TABLE IF NOT EXISTS table_resultats(
@@ -329,9 +333,51 @@ public class BaseDeDonnees extends SQLiteOpenHelper
                 themes.add(theme);
             } while(curseur.moveToNext());
         }
+
         curseur.close();
         Log.d(TAG, "getThemes() " + themes);
 
         return themes;
     }
+
+    public ArrayList<String> getParticipants()
+    {
+        ArrayList<String> participants = new ArrayList<String>();
+        Cursor curseur = sqlite.rawQuery("SELECT prenom FROM table_participant", null);
+
+        if(curseur.moveToFirst())
+        {
+            do {
+                String participant = curseur.getString(0);
+                participants.add(participant);
+            } while(curseur.moveToNext());
+        }
+
+        curseur.close();
+        Log.d(TAG, "getParticipant() " + participants);
+
+        return participants;
+    }
+
+    public ArrayList<String> getQuestions()
+    {
+        ArrayList<String> questions = new ArrayList<String>();
+        Cursor curseur = sqlite.rawQuery("SELECT question FROM table_question WHERE themeID = ", null);
+
+        if(curseur.moveToFirst())
+        {
+            do {
+                String question = curseur.getString(0);
+                questions.add(question);
+            } while(curseur.moveToNext());
+        }
+
+        curseur.close();
+        Log.d(TAG, "getQuestions() " + questions);
+
+        return questions;
+    }
+
 }
+
+
