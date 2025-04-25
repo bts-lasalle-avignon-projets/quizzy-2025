@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
+import java.util.ArrayList;
 
 /**
  * @class Quizzy
@@ -30,6 +31,12 @@ public class Quizzy extends AppCompatActivity
      */
     private Button boutonParametrerSession; //!< Le bouton permettant de créer une session
     private Button boutonAfficherCredits;   //!< Le bouton permettant d'afficher les credits
+
+    /**
+     * Attributs
+     */
+    private BaseDeDonnees        baseDonnees;           //!< Classe d'accès avec la base de données
+    private ArrayList<String>    themes;           //!< Tableau contenant les thèmes disponibles dans la base de données
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -114,6 +121,9 @@ public class Quizzy extends AppCompatActivity
                 startActivity(activiteParametresSession);
             }
         });
+
+        baseDonnees = BaseDeDonnees.getInstance(this);
+        themes   = baseDonnees.getThemes();
     }
 
     @Override
