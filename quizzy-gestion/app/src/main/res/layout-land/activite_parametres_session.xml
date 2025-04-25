@@ -24,7 +24,9 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -35,7 +37,7 @@
             android:gravity="center" />
 
         <Spinner
-            android:id="@+id/theme"
+            android:id="@+id/spinner_theme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -90,7 +92,9 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -100,18 +104,20 @@
             android:fontFamily="@font/open_sans"
             android:gravity="center" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/joueur1" />
+            android:id="@+id/spinner_joueur1" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -121,11 +127,11 @@
             android:fontFamily="@font/open_sans"
             android:gravity="center" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/joueur2" />
+            android:id="@+id/spinner_joueur2" />
 
     </LinearLayout>
 

@@ -358,26 +358,6 @@ public class BaseDeDonnees extends SQLiteOpenHelper
 
         return participants;
     }
-
-    public ArrayList<String> getQuestions()
-    {
-        ArrayList<String> questions = new ArrayList<String>();
-        Cursor curseur = sqlite.rawQuery("SELECT question FROM table_question WHERE themeID = ", null);
-
-        if(curseur.moveToFirst())
-        {
-            do {
-                String question = curseur.getString(0);
-                questions.add(question);
-            } while(curseur.moveToNext());
-        }
-
-        curseur.close();
-        Log.d(TAG, "getQuestions() " + questions);
-
-        return questions;
-    }
-
 }
 
 

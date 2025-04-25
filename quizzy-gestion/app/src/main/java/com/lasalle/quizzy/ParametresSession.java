@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
+import java.util.ArrayList;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
 
 public class ParametresSession extends AppCompatActivity
 {
@@ -43,20 +46,42 @@ public class ParametresSession extends AppCompatActivity
                 finish();
             }
         });
-        w
-        BaseDeDonnees baseDeDonnees = new BaseDeDonnees(this);
+
+        BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance(this);
 
         ArrayList<String> themes = baseDeDonnees.getThemes();
-        Spinner spinnerTheme = findViewById(R.id.theme);
+        Spinner spinnerTheme = findViewById(R.id.spinner_theme);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+        ArrayAdapter<String> adapterTheme = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
                 themes
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinnerTheme.setAdapter(adapter);
         );
+
+        adapterTheme.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTheme.setAdapter(adapterTheme);
+
+        ArrayList<String> participants = baseDeDonnees.getParticipants();
+        Spinner spinnerJoueur1 = findViewById(R.id.spinner_joueur1);
+
+        ArrayAdapter<String> adapterParticipant1 = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                participants
+        );
+
+        adapterParticipant1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerJoueur1.setAdapter(adapterParticipant1);
+
+        Spinner spinnerJoueur2 = findViewById(R.id.spinner_joueur2);
+
+        ArrayAdapter<String> adapterParticipant2 = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                participants
+        );
+
+        adapterParticipant2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerJoueur2.setAdapter(adapterParticipant2);
     }
 }
