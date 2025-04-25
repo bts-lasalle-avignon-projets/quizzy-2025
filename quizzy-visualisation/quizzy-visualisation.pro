@@ -31,3 +31,6 @@ HEADERS += \
 #CONFIG(release, debug|release):DEFINES+=QT_NO_DEBUG_OUTPUT RASPBERRY_PI
 # Les defines pour la version debug
 CONFIG(debug, debug|release):DEFINES+=DEBUG_QuizzyGUI
+
+RESOURCES += \
+    ressources.qrc

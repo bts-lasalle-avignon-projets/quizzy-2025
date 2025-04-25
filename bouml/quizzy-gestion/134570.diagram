@@ -1,0 +1,25 @@
+format 224
+
+classcanvas 128042 class_ref 135978 // Quizzy
+  classdiagramsettings member_max_width 0 end
+  xyz 13 214 2000
+end
+classcanvas 128170 class_ref 135722 // ParametresSession
+  classdiagramsettings member_max_width 0 end
+  xyz 681 224 2000
+end
+classcanvas 128298 class_ref 135850 // AppCompatActivity
+  classdiagramsettings member_max_width 0 end
+  xyz 478 12 2006
+end
+relationcanvas 128426 relation_ref 135210 // <generalisation>
+  from ref 128042 z 2007 to ref 128298
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128554 relation_ref 135082 // <generalisation>
+  from ref 128170 z 2007 to ref 128298
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

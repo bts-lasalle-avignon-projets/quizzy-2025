@@ -24,7 +24,9 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,12 +36,10 @@
             android:fontFamily="@font/open_sans"
             android:gravity="center" />
 
-        <EditText
-            android:id="@+id/theme"
+        <Spinner
+            android:id="@+id/spinner_theme"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Sélectionner un thème"
-            android:inputType="textCapCharacters"
             android:layout_weight="1" />
 
     </LinearLayout>
@@ -92,7 +92,9 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -102,20 +104,20 @@
             android:fontFamily="@font/open_sans"
             android:gravity="center" />
 
-        <EditText
-            android:id="@+id/joueur1"
+        <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Sélectionner un joueur"
-            android:inputType="textCapCharacters"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:id="@+id/spinner_joueur1" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -125,13 +127,11 @@
             android:fontFamily="@font/open_sans"
             android:gravity="center" />
 
-        <EditText
-            android:id="@+id/tempsQuestion"
+        <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Sélectionner un joueur"
-            android:inputType="textCapCharacters"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:id="@+id/spinner_joueur2" />
 
     </LinearLayout>
 
@@ -173,6 +173,7 @@
             android:layout_weight="1" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

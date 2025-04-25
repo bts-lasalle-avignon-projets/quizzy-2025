@@ -1,0 +1,43 @@
+format 224
+
+classcanvas 128042 class_ref 128554 // Quizzy
+  classdiagramsettings member_max_width 0 end
+  xyz 27 562 2000
+end
+classcanvas 128170 class_ref 128810 // QuizzyGUI
+  classdiagramsettings member_max_width 0 end
+  xyz 27 18 2006
+end
+classcanvas 128426 class_ref 128042 // CommunicationBluetooth
+  classdiagramsettings member_max_width 0 end
+  xyz 977 17 3005
+end
+classcanvas 128682 class_ref 128298 // Joueur
+  classdiagramsettings member_max_width 0 end
+  xyz 170 1001 3005
+end
+classcanvas 128938 class_ref 128426 // Question
+  classdiagramsettings member_max_width 0 end
+  xyz 1167 1001 3005
+end
+relationcanvas 128298 relation_ref 128938 // <unidirectional association>
+  from ref 128170 z 2007 to ref 128042
+  role_a_pos 630 536 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128554 relation_ref 128298 // <unidirectional association>
+  from ref 128042 z 3006 to ref 128426
+  role_a_pos 1053 392 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128810 relation_ref 128554 // <unidirectional association>
+  from ref 128042 z 3006 stereotype "<<QVector>>" xyz 325.5 933 3006 to ref 128682
+  role_a_pos 276 970 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129066 relation_ref 128682 // <unidirectional association>
+  from ref 128042 z 3006 stereotype "<<QVector>>" xyz 1026 933 3006 to ref 128938
+  role_a_pos 1087 981 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end
