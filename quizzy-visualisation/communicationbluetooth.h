@@ -17,21 +17,26 @@ static const QString serviceUuid(
   QStringLiteral("00001101-0000-1000-8000-00805F9B34FB"));
 static const QString serviceNom(QStringLiteral("Quizzy"));
 
+class QuizzyGUI;
+
 class CommunicationBluetooth : public QObject
 {
     Q_OBJECT
 
   public:
-    explicit CommunicationBluetooth(QObject* parent = 0);
+    explicit CommunicationBluetooth(QuizzyGUI* gui    = nullptr,
+                                    QObject*   parent = 0);
     ~CommunicationBluetooth();
 
     void                     demarrerServeur();
     void                     arreterServeur();
     void                     deconnecterAppareil();
     bool                     verifierLaConnexion();
+    bool                     connecte;
     QString                  getNomAppareil();
     QString                  getAdresseAppareil();
     QList<QBluetoothAddress> getPeripheriquesDistants();
+    QuizzyGUI*               gui;
 
   public slots:
     void envoyer(QString trame);
@@ -51,13 +56,11 @@ class CommunicationBluetooth : public QObject
     QBluetoothServiceInfo informationsDuService;
     QString               nomDeLAppareil;
     QString               adresseDeLAppareil;
-    bool                  connecte;
 
   signals:
     void clientConnecte();
     void clientDeconnecte();
     void afficherMessage(QString message);
-    void changerEcran(QuizzyGUI::Ecran ecran);
     void signalEcranSuivant();
 };
 #endif // COMMUNICATIONBLUETOOTH_H

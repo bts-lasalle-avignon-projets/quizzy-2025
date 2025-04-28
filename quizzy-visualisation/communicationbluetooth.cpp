@@ -4,9 +4,11 @@
 #include <unistd.h>
 #include <stdio.h>
 
-CommunicationBluetooth::CommunicationBluetooth(QObject* parent) :
-    QObject(parent), serveur(NULL), socket(NULL), nomDeLAppareil(""),
-    adresseDeLAppareil(""), connecte(false)
+CommunicationBluetooth::CommunicationBluetooth(QuizzyGUI* gui,
+                                               QObject*   parent) :
+    QObject(parent),
+    serveur(NULL), socket(NULL), nomDeLAppareil(""), adresseDeLAppareil(""),
+    connecte(false), gui(gui)
 {
     appareil.powerOn();
 
@@ -14,7 +16,6 @@ CommunicationBluetooth::CommunicationBluetooth(QObject* parent) :
     adresseDeLAppareil = appareil.address().toString();
 
     appareil.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
-    demarrerServeur();
 }
 
 void CommunicationBluetooth::demarrerServeur()
@@ -109,13 +110,11 @@ void CommunicationBluetooth::nouveauClient()
 
     connect(socket, SIGNAL(disconnected()), this, SLOT(socketDeconnecte()));
     connect(socket, SIGNAL(readyRead()), this, SLOT(recevoirTrame()));
+    qDebug() << Q_FUNC_INFO << "Appareil connecté !";
+
+    gui->changerEtatConnexion();
 
     connecte = true;
-    emit clientConnecte();
-    qDebug() << Q_FUNC_INFO << "Appareil connecté !";
-    QString message = QString::fromUtf8("Périphérique ") + socket->peerName() +
-                      " [" + socket->peerAddress().toString() + "] " +
-                      QString::fromUtf8("connecté ");
 }
 
 CommunicationBluetooth::~CommunicationBluetooth()
@@ -141,7 +140,6 @@ void CommunicationBluetooth::separerTrame(QString trame)
     trame                    = trame.mid(2, trame.length() - 3);
     QStringList trameSeparee = trame.split(";");
     traiterTrame(trameSeparee);
-    // qDebug() << Q_FUNC_INFO << "Trame séparée" << trameSeparee;
 }
 
 void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
@@ -171,7 +169,6 @@ void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
             qDebug() << "Joueur 1: " << joueur1;
             qDebug() << "Joueur 2: " << joueur2;
 
-            emit changerEcran(QuizzyGUI::EcranAccueil);
             break;
         }
         case 'Q':
@@ -191,13 +188,13 @@ void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
             qDebug() << "Explication: " << explication;
             qDebug() << "Points: " << points;
 
-            emit changerEcran(QuizzyGUI::EcranQuestion);
             break;
         }
         case 'S':
         {
             qDebug() << "Passer à la suite";
             emit signalEcranSuivant();
+            qDebug() << "test";
             break;
         }
         case 'R':
@@ -208,19 +205,16 @@ void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
             qDebug() << "Score Joueur 1: " << score1;
             qDebug() << "Score Joueur 2: " << score2;
 
-            emit changerEcran(QuizzyGUI::EcranFin);
             break;
         }
         case 'T':
         {
             qDebug() << "Session terminée";
-            emit changerEcran(QuizzyGUI::EcranFin);
             break;
         }
         case 'F':
         {
             qDebug() << "Quiz terminé";
-            emit changerEcran(QuizzyGUI::EcranFin);
             break;
         }
         default:

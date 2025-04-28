@@ -9,5 +9,5 @@ QLabel {
     border-radius: 8px;
     font-size: 55px;
     background-color: none;
-    color: #dddddd;
+    color: #621d85;
 }

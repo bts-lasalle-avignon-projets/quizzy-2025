@@ -52,7 +52,8 @@ class Quizzy : public QObject
         QuizTermine
     };
 
-    char stringToChar(QString chaine);
+    char                    stringToChar(QString chaine);
+    CommunicationBluetooth* getCommunication();
 
   private:
     CommunicationBluetooth*
