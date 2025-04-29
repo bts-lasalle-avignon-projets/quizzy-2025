@@ -24,27 +24,24 @@ class CommunicationBluetooth : public QObject
     Q_OBJECT
 
   public:
-    explicit CommunicationBluetooth(QuizzyGUI* gui    = nullptr,
-                                    QObject*   parent = 0);
+    explicit CommunicationBluetooth(QuizzyGUI* gui = nullptr);
     ~CommunicationBluetooth();
 
-    void                     demarrerServeur();
-    void                     arreterServeur();
-    void                     deconnecterAppareil();
-    bool                     verifierLaConnexion();
-    bool                     connecte;
+    void demarrerServeur();
+    void arreterServeur();
+    void reconnecterAppareil();
+    bool verifierLaConnexion();
+
     QString                  getNomAppareil();
     QString                  getAdresseAppareil();
     QList<QBluetoothAddress> getPeripheriquesDistants();
-    QuizzyGUI*               gui;
 
   public slots:
     void envoyer(QString trame);
 
   private slots:
-    void socketDeconnecte();
-    void socketPretALire();
-    void nouveauClient();
+    void deconnecterAppareil();
+    void connecterAppareil();
     void recevoirTrame();
     void separerTrame(QString);
     void traiterTrame(QStringList);
@@ -56,11 +53,12 @@ class CommunicationBluetooth : public QObject
     QBluetoothServiceInfo informationsDuService;
     QString               nomDeLAppareil;
     QString               adresseDeLAppareil;
+    bool                  connecte;
 
   signals:
-    void clientConnecte();
-    void clientDeconnecte();
-    void afficherMessage(QString message);
+    void appareilConnecte(QString nom, QString adresse);
+    void appareilDeconnecte(QString nom, QString adresse);
     void signalEcranSuivant();
 };
+
 #endif // COMMUNICATIONBLUETOOTH_H

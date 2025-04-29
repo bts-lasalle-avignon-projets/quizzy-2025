@@ -8,6 +8,11 @@
 
 #include "communicationbluetooth.h"
 #include "quizzygui.h"
+#include "ecranattente.h"
+#include "ecranaccueil.h"
+#include "ecranquestion.h"
+#include "ecranreponse.h"
+#include "ecranfin.h"
 #include "quizzy.h"
 #include <QDebug>
 
@@ -19,127 +24,39 @@
  * fenêtre principale de l'application
  */
 
-QuizzyGUI::QuizzyGUI(QWidget* parent) : QMainWindow(parent)
+QuizzyGUI::QuizzyGUI(QWidget* parent) :
+    QMainWindow(parent), communication(new CommunicationBluetooth(this)),
+    quizzy(new Quizzy(this, communication))
 {
-    quizzy        = new Quizzy(this);
-    communication = quizzy->getCommunication();
+    qDebug() << Q_FUNC_INFO << this;
 
     setWindowTitle(QString(NOM_APPLICATION) + QString(" v") +
                    QString(VERSION_APPLICATION));
 
     creerEcrans();
     initialiserEvenements();
+#ifdef RASPBERRY_PI
+    showFullScreen();
+#else
+    showMaximized();
+#endif
+    afficherEcranAttente();
 }
 
 QuizzyGUI::~QuizzyGUI()
 {
-    delete quizzy;
     qDebug() << Q_FUNC_INFO << this;
 }
 
-EcranAttente::EcranAttente(QuizzyGUI* parent)
+QStackedWidget* QuizzyGUI::getEcrans()
 {
-    ecranAttente       = new QWidget(this);
-    layoutEcranAttente = new QVBoxLayout(ecranAttente);
-
-    titreEcranAttente = new QLabel(this);
-    titreEcranAttente->setAlignment(Qt::AlignCenter);
-
-    messageConnexion = new QLabel(this);
-    messageConnexion->setText("En attente de connexion ...");
-    messageConnexion->setAlignment(Qt::AlignCenter);
-
-    layoutEcranAttente->addWidget(titreEcranAttente);
-    layoutEcranAttente->addWidget(messageConnexion);
-
-    parent->ecrans->addWidget(ecranAttente);
-}
-
-EcranAttente::~EcranAttente()
-{
-    delete ecranAttente;
-    qDebug() << Q_FUNC_INFO << this;
-}
-
-EcranAccueil::EcranAccueil(QuizzyGUI* parent)
-{
-    ecranAccueil       = new QWidget(this);
-    layoutEcranAccueil = new QVBoxLayout(ecranAccueil);
-    titreEcranAccueil  = new QLabel(this);
-
-    titreEcranAccueil->setAlignment(Qt::AlignCenter);
-
-    layoutEcranAccueil->addWidget(titreEcranAccueil);
-    parent->ecrans->addWidget(ecranAccueil);
-}
-
-EcranAccueil::~EcranAccueil()
-{
-    delete ecranAccueil;
-    qDebug() << Q_FUNC_INFO << this;
-}
-
-EcranQuestion::EcranQuestion(QuizzyGUI* parent)
-{
-    ecranQuestion       = new QWidget(this);
-    layoutEcranQuestion = new QVBoxLayout(ecranQuestion);
-    titreEcranQuestion  = new QLabel(this);
-
-    titreEcranQuestion->setAlignment(Qt::AlignCenter);
-
-    layoutEcranQuestion->addWidget(titreEcranQuestion);
-    parent->ecrans->addWidget(ecranQuestion);
-}
-
-EcranQuestion::~EcranQuestion()
-{
-    delete ecranQuestion;
-    qDebug() << Q_FUNC_INFO << this;
-}
-
-EcranReponse::EcranReponse(QuizzyGUI* parent)
-{
-    ecranReponse       = new QWidget(this);
-    layoutEcranReponse = new QVBoxLayout(ecranReponse);
-    titreEcranReponse  = new QLabel(this);
-
-    titreEcranReponse->setAlignment(Qt::AlignCenter);
-
-    layoutEcranReponse->addWidget(titreEcranReponse);
-    parent->ecrans->addWidget(ecranReponse);
-}
-
-EcranReponse::~EcranReponse()
-{
-    delete ecranReponse;
-    qDebug() << Q_FUNC_INFO << this;
-}
-
-EcranFin::EcranFin(QuizzyGUI* parent)
-{
-    ecranFin       = new QWidget(this);
-    layoutEcranFin = new QVBoxLayout(ecranFin);
-    titreEcranFin  = new QLabel(this);
-
-    titreEcranFin->setAlignment(Qt::AlignCenter);
-
-    layoutEcranFin->addWidget(titreEcranFin);
-    parent->ecrans->addWidget(ecranFin);
-}
-
-EcranFin::~EcranFin()
-{
-    delete ecranFin;
-    qDebug() << Q_FUNC_INFO << this;
+    return ecrans;
 }
 
 void QuizzyGUI::initialiserEcrans()
 {
-    ecrans = new QStackedWidget(this);
-    ecrans->setCurrentIndex(idEcranAttente);
-
+    ecrans          = new QStackedWidget(this);
     layoutPrincipal = new QVBoxLayout();
-
     layoutPrincipal->addWidget(ecrans);
     QWidget* centralWidget = new QWidget(this);
     centralWidget->setLayout(layoutPrincipal);
@@ -156,9 +73,16 @@ void QuizzyGUI::creerEcrans()
     creerEcranFin();
 }
 
-void QuizzyGUI::changerEtatConnexion()
+void QuizzyGUI::afficherMessageConnexion(QString nom, QString adresse)
 {
-    ecranAttente->messageConnexion->setText("Appareil connecté !");
+    ecranAttente->afficherMessageConnexion(QString("Appareil ") + nom +
+                                           QString(" connecté !"));
+}
+
+void QuizzyGUI::afficherMessageDeconnexion(QString nom, QString adresse)
+{
+    ecranAttente->afficherMessageConnexion(QString("Appareil ") + nom +
+                                           QString(" déconnecté !"));
 }
 
 void QuizzyGUI::creerEcranAttente()
@@ -188,7 +112,7 @@ void QuizzyGUI::creerEcranFin()
 
 void QuizzyGUI::afficherEcran(QuizzyGUI::Ecran ecran)
 {
-    qDebug() << Q_FUNC_INFO << "Ecran affiché" << ecran;
+    qDebug() << Q_FUNC_INFO << "ecran" << ecran;
     ecrans->setCurrentIndex(ecran);
 }
 
@@ -197,20 +121,37 @@ void QuizzyGUI::afficherEcranAttente()
     afficherEcran(Ecran::idEcranAttente);
 }
 
-void QuizzyGUI::ecranSuivant()
+void QuizzyGUI::afficherEcranSuivant()
 {
-    qDebug() << "ecran suivant";
     int indexCourant = ecrans->currentIndex();
     if(indexCourant < ecrans->count() - 1)
     {
-        ecrans->setCurrentIndex(indexCourant + 1);
+        afficherEcran(QuizzyGUI::Ecran(indexCourant + 1));
     }
 }
 
 void QuizzyGUI::initialiserEvenements()
 {
     connect(communication,
+            SIGNAL(appareilConnecte(QString, QString)),
+            this,
+            SLOT(afficherMessageConnexion(QString, QString)));
+    connect(communication,
+            SIGNAL(appareilDeconnecte(QString, QString)),
+            this,
+            SLOT(afficherMessageDeconnexion(QString, QString)));
+    connect(communication,
             &CommunicationBluetooth::signalEcranSuivant,
             this,
-            &QuizzyGUI::ecranSuivant);
+            &QuizzyGUI::afficherEcranSuivant);
+#ifdef TEST_ECRANS
+    // Flèche droite pour écran suivant
+    QAction* actionAllerDroite = new QAction(this);
+    actionAllerDroite->setShortcut(QKeySequence(Qt::Key_Right));
+    addAction(actionAllerDroite);
+    connect(actionAllerDroite,
+            SIGNAL(triggered()),
+            this,
+            SLOT(afficherEcranSuivant()));
+#endif
 }

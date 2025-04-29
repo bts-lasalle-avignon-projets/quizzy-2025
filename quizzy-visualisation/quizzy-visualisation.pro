@@ -9,6 +9,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     communicationbluetooth.cpp \
+    ecranaccueil.cpp \
+    ecranattente.cpp \
+    ecranfin.cpp \
+    ecranquestion.cpp \
+    ecranreponse.cpp \
     joueur.cpp \
     question.cpp \
     quizzygui.cpp \
@@ -17,6 +22,11 @@ SOURCES += \
 
 HEADERS += \
     communicationbluetooth.h \
+    ecranaccueil.h \
+    ecranattente.h \
+    ecranfin.h \
+    ecranquestion.h \
+    ecranreponse.h \
     joueur.h \
     question.h \
     quizzy.h \

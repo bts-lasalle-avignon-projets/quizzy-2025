@@ -18,9 +18,8 @@
 
 int main(int argc, char* argv[])
 {
-    QApplication           a(argc, argv);
-    QuizzyGUI              quizzyGUI;
-    CommunicationBluetooth com(&quizzyGUI);
+    QApplication a(argc, argv);
+    QuizzyGUI    quizzyGUI;
 
     QFile fichier(":/style.qss");
 
@@ -30,7 +29,6 @@ int main(int argc, char* argv[])
         a.setStyleSheet(feuilleStyle);
     }
 
-    com.demarrerServeur();
     quizzyGUI.show();
 
     return a.exec();

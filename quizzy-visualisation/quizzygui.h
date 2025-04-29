@@ -2,12 +2,10 @@
 #define QUIZZYGUI_H
 
 #include <QtWidgets>
-#include <QMessageBox>
-#include <QDebug>
-#include <QBluetoothAddress>
-#include <QBluetoothDeviceInfo>
 
 #define CHEMIN_LOGO ":/images/logo.png"
+
+#define TEST_ECRANS
 
 class CommunicationBluetooth;
 
@@ -35,11 +33,6 @@ class EcranFin;
  * @brief Déclaration de la classe QuizzyGUI
  * @details Cette classe gère l'interface graphique de l'application Quizzy
  */
-/*
-class EcranAttente : public QWidget
-{
-}*/
-
 class QuizzyGUI : public QMainWindow
 {
     Q_OBJECT
@@ -47,6 +40,7 @@ class QuizzyGUI : public QMainWindow
   public:
     QuizzyGUI(QWidget* parent = nullptr);
     ~QuizzyGUI();
+    QStackedWidget* getEcrans();
 
     enum Ecran
     {
@@ -54,26 +48,23 @@ class QuizzyGUI : public QMainWindow
         idEcranAccueil,
         idEcranQuestion,
         idEcranReponse,
-        idEcranFin
+        idEcranFin,
+        NbEcrans
     };
 
-    QStackedWidget* ecrans;
-    QVBoxLayout*    layoutPrincipal;
-    void            changerEtatConnexion();
-
   private:
-    Quizzy*                 quizzy;
     CommunicationBluetooth* communication;
-
-    EcranAttente*  ecranAttente;
-    EcranAccueil*  ecranAccueil;
-    EcranQuestion* ecranQuestion;
-    EcranReponse*  ecranReponse;
-    EcranFin*      ecranFin;
+    Quizzy*                 quizzy;
+    QStackedWidget*         ecrans;
+    QVBoxLayout*            layoutPrincipal;
+    EcranAttente*           ecranAttente;
+    EcranAccueil*           ecranAccueil;
+    EcranQuestion*          ecranQuestion;
+    EcranReponse*           ecranReponse;
+    EcranFin*               ecranFin;
 
     void initialiserEvenements();
     void initialiserEcrans();
-
     void creerEcrans();
     void creerEcranAttente();
     void creerEcranAccueil();
@@ -84,74 +75,9 @@ class QuizzyGUI : public QMainWindow
   public slots:
     void afficherEcran(QuizzyGUI::Ecran ecran);
     void afficherEcranAttente();
-    void ecranSuivant();
-};
-
-class EcranAttente : public QWidget
-{
-    Q_OBJECT
-  public:
-    EcranAttente(QuizzyGUI* parent = nullptr);
-    ~EcranAttente();
-
-    QWidget* ecranAttente;
-    QLabel*  titreEcranAttente;
-    QLabel*  messageConnexion;
-
-    QVBoxLayout* layoutEcranAttente;
-};
-
-class EcranAccueil : public QWidget
-{
-    Q_OBJECT
-  public:
-    EcranAccueil(QuizzyGUI* parent = nullptr);
-    ~EcranAccueil();
-
-    QWidget* ecranAccueil;
-    QLabel*  titreEcranAccueil;
-
-    QVBoxLayout* layoutEcranAccueil;
-};
-
-class EcranQuestion : public QWidget
-{
-    Q_OBJECT
-  public:
-    EcranQuestion(QuizzyGUI* parent = nullptr);
-    ~EcranQuestion();
-
-    QWidget* ecranQuestion;
-    QLabel*  titreEcranQuestion;
-
-    QVBoxLayout* layoutEcranQuestion;
-};
-
-class EcranReponse : public QWidget
-{
-    Q_OBJECT
-  public:
-    EcranReponse(QuizzyGUI* parent = nullptr);
-    ~EcranReponse();
-
-    QWidget* ecranReponse;
-    QLabel*  titreEcranReponse;
-
-    QVBoxLayout* layoutEcranReponse;
-};
-
-class EcranFin : public QWidget
-{
-    Q_OBJECT
-  public:
-    EcranFin(QuizzyGUI* parent = nullptr);
-    ~EcranFin();
-
-    QWidget* ecranFin;
-    QLabel*  titreEcranFin;
-    QLabel*  messageEcranFin;
-
-    QVBoxLayout* layoutEcranFin;
+    void afficherEcranSuivant();
+    void afficherMessageConnexion(QString nom, QString adresse);
+    void afficherMessageDeconnexion(QString nom, QString adresse);
 };
 
 #endif // QUIZZYGUI_H
