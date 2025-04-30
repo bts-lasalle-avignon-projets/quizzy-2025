@@ -3,5 +3,6 @@
 <RCC>
     <qresource prefix="/">
         <file>style.qss</file>
+        <file>../images/ecran_attente.png</file>
     </qresource>
 </RCC>
