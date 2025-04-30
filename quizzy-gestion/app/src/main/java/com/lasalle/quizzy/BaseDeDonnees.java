@@ -358,6 +358,5 @@ public class BaseDeDonnees extends SQLiteOpenHelper
 
         return participants;
     }
+
 }
-
-
