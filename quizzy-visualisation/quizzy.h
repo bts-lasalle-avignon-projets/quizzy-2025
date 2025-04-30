@@ -1,8 +1,9 @@
 #ifndef QUIZZY_H
 #define QUIZZY_H
+
 #include <QObject>
 #include <QVector>
-#include "communicationbluetooth.h"
+
 #include "joueur.h"
 #include "question.h"
 
@@ -37,7 +38,7 @@ class Quizzy : public QObject
 {
     Q_OBJECT
   public:
-    Quizzy(QObject* parent = nullptr);
+    Quizzy(QObject* parent, CommunicationBluetooth* communicationBluetooth);
     virtual ~Quizzy();
 
     enum Etat

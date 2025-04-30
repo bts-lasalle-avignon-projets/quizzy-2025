@@ -2,12 +2,10 @@
 #define QUIZZYGUI_H
 
 #include <QtWidgets>
-#include <QMessageBox>
-#include <QDebug>
-#include <QBluetoothAddress>
-#include <QBluetoothDeviceInfo>
 
 #define CHEMIN_LOGO ":/images/logo.png"
+
+#define TEST_ECRANS
 
 class CommunicationBluetooth;
 
@@ -24,6 +22,11 @@ class CommunicationBluetooth;
 #define VERSION_APPLICATION "1.0"
 
 class Quizzy;
+class EcranAttente;
+class EcranAccueil;
+class EcranQuestion;
+class EcranReponse;
+class EcranFin;
 
 /**
  * @class QuizzyGUI
@@ -37,63 +40,44 @@ class QuizzyGUI : public QMainWindow
   public:
     QuizzyGUI(QWidget* parent = nullptr);
     ~QuizzyGUI();
+    QStackedWidget* getEcrans();
 
     enum Ecran
     {
-        EcranAttente = 0,
-        EcranAccueil,
-        EcranQuestion,
-        EcranReponse,
-        EcranFin
+        idEcranAttente = 0,
+        idEcranAccueil,
+        idEcranQuestion,
+        idEcranReponse,
+        idEcranFin,
+        NbEcrans
     };
 
   private:
-    Quizzy*         quizzy;
-    QStackedWidget* ecrans;
-    QLabel*         messageAttente;
+    CommunicationBluetooth* communication;
+    Quizzy*                 quizzy;
+    QStackedWidget*         ecrans;
+    QVBoxLayout*            layoutPrincipal;
+    EcranAttente*           ecranAttente;
+    EcranAccueil*           ecranAccueil;
+    EcranQuestion*          ecranQuestion;
+    EcranReponse*           ecranReponse;
+    EcranFin*               ecranFin;
 
+    void initialiserEvenements();
     void initialiserEcrans();
     void creerEcrans();
-
-    // Ecran d'attente
-
     void creerEcranAttente();
-
-    QWidget* ecranAttente;
-    QLabel*  titreEcranAttente;
-
-    // Ecran d'accueil
-
     void creerEcranAccueil();
-
-    QWidget* ecranAccueil;
-    QLabel*  titreEcranAccueil;
-
-    // Ecran question
-
     void creerEcranQuestion();
-
-    QWidget* ecranQuestion;
-    QLabel*  titreEcranQuestion;
-
-    // Ecran reponse
-
     void creerEcranReponse();
-
-    QWidget* ecranReponse;
-    QLabel*  titreEcranReponse;
-
-    // Ecran fin
-
     void creerEcranFin();
-
-    QWidget* ecranFin;
-    QLabel*  titreEcranFin;
 
   public slots:
     void afficherEcran(QuizzyGUI::Ecran ecran);
     void afficherEcranAttente();
-    void ecranSuivant();
+    void afficherEcranSuivant();
+    void afficherMessageConnexion(QString nom, QString adresse);
+    void afficherMessageDeconnexion(QString nom, QString adresse);
 };
 
 #endif // QUIZZYGUI_H

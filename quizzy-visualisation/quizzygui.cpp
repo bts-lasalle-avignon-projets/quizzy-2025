@@ -8,6 +8,11 @@
 
 #include "communicationbluetooth.h"
 #include "quizzygui.h"
+#include "ecranattente.h"
+#include "ecranaccueil.h"
+#include "ecranquestion.h"
+#include "ecranreponse.h"
+#include "ecranfin.h"
 #include "quizzy.h"
 #include <QDebug>
 
@@ -20,7 +25,8 @@
  */
 
 QuizzyGUI::QuizzyGUI(QWidget* parent) :
-    QMainWindow(parent), quizzy(new Quizzy(this))
+    QMainWindow(parent), communication(new CommunicationBluetooth(this)),
+    quizzy(new Quizzy(this, communication))
 {
     qDebug() << Q_FUNC_INFO << this;
 
@@ -28,38 +34,33 @@ QuizzyGUI::QuizzyGUI(QWidget* parent) :
                    QString(VERSION_APPLICATION));
 
     creerEcrans();
-
+    initialiserEvenements();
 #ifdef RASPBERRY_PI
     showFullScreen();
 #else
-    showFullScreen();
+    showMaximized();
 #endif
+    afficherEcranAttente();
 }
 
 QuizzyGUI::~QuizzyGUI()
 {
-    delete quizzy;
     qDebug() << Q_FUNC_INFO << this;
+}
+
+QStackedWidget* QuizzyGUI::getEcrans()
+{
+    return ecrans;
 }
 
 void QuizzyGUI::initialiserEcrans()
 {
-    ecrans = new QStackedWidget(this);
-    ecrans->setCurrentIndex(EcranAttente);
-
-    QVBoxLayout* layoutPrincipal = new QVBoxLayout();
-
+    ecrans          = new QStackedWidget(this);
+    layoutPrincipal = new QVBoxLayout();
     layoutPrincipal->addWidget(ecrans);
     QWidget* centralWidget = new QWidget(this);
     centralWidget->setLayout(layoutPrincipal);
     setCentralWidget(centralWidget);
-
-    CommunicationBluetooth* com = new CommunicationBluetooth(this);
-    connect(com,
-            SIGNAL(changerEcran(QuizzyGUI::Ecran)),
-            this,
-            SLOT(afficherEcran(QuizzyGUI::Ecran)));
-    connect(com, SIGNAL(signalEcranSuivant()), this, SLOT(ecranSuivant()));
 }
 
 void QuizzyGUI::creerEcrans()
@@ -72,87 +73,85 @@ void QuizzyGUI::creerEcrans()
     creerEcranFin();
 }
 
+void QuizzyGUI::afficherMessageConnexion(QString nom, QString adresse)
+{
+    ecranAttente->afficherMessageConnexion(QString("Appareil ") + nom +
+                                           QString(" connecté !"));
+}
+
+void QuizzyGUI::afficherMessageDeconnexion(QString nom, QString adresse)
+{
+    ecranAttente->afficherMessageConnexion(QString("Appareil ") + nom +
+                                           QString(" déconnecté !"));
+}
+
 void QuizzyGUI::creerEcranAttente()
 {
-    ecranAttente                    = new QWidget(this);
-    QVBoxLayout* layoutEcranAttente = new QVBoxLayout(ecranAttente);
-    titreEcranAttente               = new QLabel(this);
-
-    titreEcranAttente->setAlignment(Qt::AlignCenter);
-
-    messageAttente = new QLabel("", this);
-    messageAttente->setText("En attente de connexion ...");
-    messageAttente->setAlignment(Qt::AlignCenter);
-
-    layoutEcranAttente->addWidget(titreEcranAttente);
-    layoutEcranAttente->addWidget(messageAttente);
-    ecrans->addWidget(ecranAttente);
+    ecranAttente = new EcranAttente(this);
 }
 
 void QuizzyGUI::creerEcranAccueil()
 {
-    ecranAccueil                    = new QWidget(this);
-    QVBoxLayout* layoutEcranAccueil = new QVBoxLayout(ecranAccueil);
-    titreEcranAccueil               = new QLabel(this);
-
-    titreEcranAccueil->setAlignment(Qt::AlignCenter);
-
-    layoutEcranAccueil->addWidget(titreEcranAccueil);
-    ecrans->addWidget(ecranAccueil);
+    ecranAccueil = new EcranAccueil(this);
 }
 
 void QuizzyGUI::creerEcranQuestion()
 {
-    ecranQuestion                    = new QWidget(this);
-    QVBoxLayout* layoutEcranQuestion = new QVBoxLayout(ecranQuestion);
-    titreEcranQuestion               = new QLabel(this);
-
-    titreEcranQuestion->setAlignment(Qt::AlignCenter);
-
-    layoutEcranQuestion->addWidget(titreEcranQuestion);
-    ecrans->addWidget(ecranQuestion);
+    ecranQuestion = new EcranQuestion(this);
 }
 
 void QuizzyGUI::creerEcranReponse()
 {
-    ecranReponse                    = new QWidget(this);
-    QVBoxLayout* layoutEcranReponse = new QVBoxLayout(ecranReponse);
-    titreEcranReponse               = new QLabel(this);
-
-    titreEcranReponse->setAlignment(Qt::AlignCenter);
-
-    layoutEcranReponse->addWidget(titreEcranReponse);
-    ecrans->addWidget(ecranReponse);
+    ecranReponse = new EcranReponse(this);
 }
 
 void QuizzyGUI::creerEcranFin()
 {
-    ecranFin                    = new QWidget(this);
-    QVBoxLayout* layoutEcranFin = new QVBoxLayout(ecranFin);
-    titreEcranFin               = new QLabel(this);
-
-    titreEcranFin->setAlignment(Qt::AlignCenter);
-
-    layoutEcranFin->addWidget(titreEcranFin);
-    ecrans->addWidget(ecranFin);
+    ecranFin = new EcranFin(this);
 }
 
 void QuizzyGUI::afficherEcran(QuizzyGUI::Ecran ecran)
 {
-    qDebug() << Q_FUNC_INFO << "Ecran affiché" << ecran;
+    qDebug() << Q_FUNC_INFO << "ecran" << ecran;
     ecrans->setCurrentIndex(ecran);
 }
 
 void QuizzyGUI::afficherEcranAttente()
 {
-    afficherEcran(Ecran::EcranAttente);
+    afficherEcran(Ecran::idEcranAttente);
 }
 
-void QuizzyGUI::ecranSuivant()
+void QuizzyGUI::afficherEcranSuivant()
 {
     int indexCourant = ecrans->currentIndex();
     if(indexCourant < ecrans->count() - 1)
     {
-        ecrans->setCurrentIndex(indexCourant + 1);
+        afficherEcran(QuizzyGUI::Ecran(indexCourant + 1));
     }
+}
+
+void QuizzyGUI::initialiserEvenements()
+{
+    connect(communication,
+            SIGNAL(appareilConnecte(QString, QString)),
+            this,
+            SLOT(afficherMessageConnexion(QString, QString)));
+    connect(communication,
+            SIGNAL(appareilDeconnecte(QString, QString)),
+            this,
+            SLOT(afficherMessageDeconnexion(QString, QString)));
+    connect(communication,
+            &CommunicationBluetooth::signalEcranSuivant,
+            this,
+            &QuizzyGUI::afficherEcranSuivant);
+#ifdef TEST_ECRANS
+    // Flèche droite pour écran suivant
+    QAction* actionAllerDroite = new QAction(this);
+    actionAllerDroite->setShortcut(QKeySequence(Qt::Key_Right));
+    addAction(actionAllerDroite);
+    connect(actionAllerDroite,
+            SIGNAL(triggered()),
+            this,
+            SLOT(afficherEcranSuivant()));
+#endif
 }
