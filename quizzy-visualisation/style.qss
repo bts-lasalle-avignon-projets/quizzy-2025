@@ -1,5 +1,5 @@
 QWidget {
-    background-color: #ea82fa;
+    background-color: #fed102;
     padding: 20px;
 }
 
@@ -9,5 +9,18 @@ QLabel {
     border-radius: 8px;
     font-size: 55px;
     background-color: none;
-    color: #621d85;
+    color: #ffffff;
+}
+
+QWidget#ecranAttente {
+border-image: url(:/images/ecran_attente.png);
+}
+
+QLabel#messageConnexion {
+font-size: 75px;
+background-color: none;
+border: none;
+font-family: 'REM';
+margin-bottom: 375px;
+
 }

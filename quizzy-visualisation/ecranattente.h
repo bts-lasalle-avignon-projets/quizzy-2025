@@ -15,7 +15,6 @@ class EcranAttente : public QWidget
   private:
     QWidget*     ecranAttente;
     QVBoxLayout* layoutEcranAttente;
-    QLabel*      titreEcranAttente;
     QLabel*      messageConnexion;
 
   public slots:

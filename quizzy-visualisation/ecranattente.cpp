@@ -5,15 +5,16 @@
 EcranAttente::EcranAttente(QuizzyGUI* parent) :
     QWidget(parent), ecranAttente(new QWidget(this)),
     layoutEcranAttente(new QVBoxLayout(ecranAttente)),
-    titreEcranAttente(new QLabel(this)), messageConnexion(new QLabel(this))
+    messageConnexion(new QLabel(this))
 {
     qDebug() << Q_FUNC_INFO << this << "parent" << parent;
 
-    titreEcranAttente->setAlignment(Qt::AlignCenter);
-    titreEcranAttente->setText("EcranAttente");
+    ecranAttente->setObjectName("ecranAttente");
+    messageConnexion->setObjectName("messageConnexion");
+
     messageConnexion->setText("En attente de connexion ...");
     messageConnexion->setAlignment(Qt::AlignCenter);
-    layoutEcranAttente->addWidget(titreEcranAttente);
+
     layoutEcranAttente->addWidget(messageConnexion);
     parent->getEcrans()->addWidget(ecranAttente);
 }
