@@ -343,7 +343,7 @@ void setup()
 
     afficheur.initialiser();
 
-    String titre  = "";
+    String titre  = "            ";
     String stitre = "=====================";
 
 #ifdef BLUETOOTH
@@ -360,8 +360,8 @@ void setup()
             adresseESP32[3],
             adresseESP32[4],
             adresseESP32[5]);
-    stitre = String("==             ") + String(str) + String(" ==");
-    titre  = nomBluetooth;
+    stitre = String("== ") + String(str) + String(" ==");
+    titre  += nomBluetooth;
 #endif
 #endif
 
