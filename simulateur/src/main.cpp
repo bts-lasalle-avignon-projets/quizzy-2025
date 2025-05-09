@@ -348,7 +348,7 @@ void setup()
 
 #ifdef BLUETOOTH
 #ifdef BLUETOOTH_SLAVE
-    String nomBluetooth = "            quizzy-p" + String(NUMERO_PUPITRE);
+    String nomBluetooth = "quizzy-p" + String(NUMERO_PUPITRE);
     ESPBluetooth.begin(nomBluetooth);
     const uint8_t* adresseESP32 = esp_bt_dev_get_address();
     char           str[18];
@@ -360,7 +360,7 @@ void setup()
             adresseESP32[3],
             adresseESP32[4],
             adresseESP32[5]);
-    stitre = String("== ") + String(str) + String(" ==");
+    stitre = String("==             ") + String(str) + String(" ==");
     titre  = nomBluetooth;
 #endif
 #endif
