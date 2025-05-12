@@ -60,7 +60,7 @@
             android:id="@+id/nbrQuestion"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Insérer le nombre de question"
+            android:hint="questions"
             android:inputType="numberDecimal"
             android:layout_weight="1" />
 
@@ -194,12 +194,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/boutonRetourAccueil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Accueil"
-        android:layout_weight="1" />
+        <Button
+            android:id="@+id/boutonRetourAccueil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accueil"
+            android:layout_weight="1" />
 
     </LinearLayout>
 
