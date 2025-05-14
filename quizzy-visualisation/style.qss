@@ -22,5 +22,13 @@ background-color: none;
 border: none;
 font-family: 'REM';
 margin-bottom: 375px;
+}
 
+QWidget#ecranAccueil {
+border-image: url(:/images/ecran_accueil.png);
+}
+
+QLabel#messageThemeChoisi{
+margin-top: 125px;
+color: #000000;
 }

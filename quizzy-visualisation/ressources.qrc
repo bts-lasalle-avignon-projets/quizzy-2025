@@ -4,5 +4,6 @@
     <qresource prefix="/">
         <file>style.qss</file>
         <file>../images/ecran_attente.png</file>
+        <file>../images/ecran_accueil.png</file>
     </qresource>
 </RCC>

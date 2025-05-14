@@ -155,6 +155,9 @@ void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
 
             qDebug() << Q_FUNC_INFO << "theme" << theme << "temps" << temps
                      << "nbQuestions" << nbQuestions;
+
+            emit signalConfiguration(theme, temps, nbQuestions);
+
             break;
         }
         case 'J':
@@ -164,6 +167,8 @@ void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
 
             qDebug() << Q_FUNC_INFO << "joueur1" << joueur1 << "joueur2"
                      << joueur2;
+            emit signalNomsJoueurs(joueur1, joueur2);
+
             break;
         }
         case 'Q':
