@@ -7,11 +7,16 @@
 package com.lasalle.quizzy;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import android.util.Log;
 import java.util.ArrayList;
 
@@ -35,8 +40,6 @@ public class Quizzy extends AppCompatActivity
     /**
      * Attributs
      */
-    private BaseDeDonnees        baseDonnees;           //!< Classe d'accès avec la base de données
-    private ArrayList<String>    themes;           //!< Tableau contenant les thèmes disponibles dans la base de données
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -48,6 +51,7 @@ public class Quizzy extends AppCompatActivity
         setContentView(R.layout.activite_principale);
         Log.d(TAG, "onCreate()");
 
+        initialiserPermissionsBluetooth();
         initialiserRessources();
     }
 
@@ -121,9 +125,28 @@ public class Quizzy extends AppCompatActivity
                 startActivity(activiteParametresSession);
             }
         });
+    }
 
-        baseDonnees = BaseDeDonnees.getInstance(this);
-        themes   = baseDonnees.getThemes();
+    /**
+     * @brief Initialise les permissions pour utiliser le Bluetooth
+     */
+    private void initialiserPermissionsBluetooth()
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+        {
+            if(ContextCompat.checkSelfPermission(this,
+                                                 android.Manifest.permission.BLUETOOTH_CONNECT) !=
+               PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(
+                  this,
+                  new String[] { android.Manifest.permission.BLUETOOTH_CONNECT,
+                                 android.Manifest.permission.BLUETOOTH_SCAN,
+                                 android.Manifest.permission.ACCESS_FINE_LOCATION,
+                                 android.Manifest.permission.ACCESS_COARSE_LOCATION },
+                  1);
+            }
+        }
     }
 
     @Override

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginBottom="28dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/blanc"
         android:fontFamily="@font/open_sans"
         android:text="@string/Credits"
         android:textColor="#757575"
