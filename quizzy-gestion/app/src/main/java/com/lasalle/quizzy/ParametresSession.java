@@ -1,5 +1,6 @@
 package com.lasalle.quizzy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,9 @@ import androidx.core.app.ActivityCompat;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Build;
+import java.sql.*;
+import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
 
 public class ParametresSession extends AppCompatActivity
 {
@@ -27,7 +31,7 @@ public class ParametresSession extends AppCompatActivity
      * Ressources GUI
      */
     private Button boutonRetourAccueil;
-    private Button boutonlancementCreationJoueur;
+    private Button boutonLancementCreationJoueur;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -44,7 +48,8 @@ public class ParametresSession extends AppCompatActivity
                 );
             }
         }
-        connexionBluetooth = new ConnexionBluetoothClient(this);
+        String adresseMAC = "00:E0:4C:6D:20:A3";
+        connexionBluetooth = new ConnexionBluetoothClient(this, adresseMAC);
         connexionBluetooth.start();
 
         super.onCreate(savedInstanceState);
@@ -74,20 +79,46 @@ public class ParametresSession extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                finish();
+                Log.d(TAG, "clic boutonRetourAccueil");
+                Intent activitePrincipale = new Intent(ParametresSession.this, Quizzy.class);
+                startActivity(activitePrincipale);
             }
         });
-        this.boutonlancementCreationJoueur = findViewById(R.id.boutonlancementCreationJoueur);
 
-        boutonlancementCreationJoueur.setOnClickListener(new View.OnClickListener() {
+        BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance(this);
+
+        this.boutonLancementCreationJoueur = findViewById(R.id.boutonLancementCreationJoueur);
+
+        boutonLancementCreationJoueur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                String trame = "@@S;" + "\n";
-                connexionBluetooth.envoyer(trame);
+                Log.d(TAG, "clic boutonLancemntCreationJoueur");
+                String joueurCreer = ((EditText) findViewById(R.id.creationJoueur)).getText().toString().trim();
+
+                if (joueurCreer.isEmpty()) {
+                    Toast.makeText(ParametresSession.this, "Veuillez remplir le champ", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance(getApplicationContext());
+                    SQLiteDatabase db = baseDeDonnees.getWritableDatabase();
+
+                    ContentValues valeurs = new ContentValues();
+                    valeurs.put("prenom", joueurCreer);
+
+                    long resultat = db.insert("table_participant", null, valeurs);
+
+                    if (resultat != -1) {
+                        Toast.makeText(ParametresSession.this, "Joueur ajouté avec succès", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(ParametresSession.this, "Erreur lors de l'ajout", Toast.LENGTH_SHORT).show();
+                    }
+                    Intent activiteParametresSession = new Intent(ParametresSession.this, ParametresSession.class);
+                    startActivity(activiteParametresSession);
+                }
             }
         });
-        BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance(this);
+
 
         ArrayList<String> themes = baseDeDonnees.getThemes();
         Spinner spinnerTheme = findViewById(R.id.spinner_theme);
@@ -126,7 +157,7 @@ public class ParametresSession extends AppCompatActivity
 
         Spinner spinnerTemps = findViewById(R.id.spinner_tempsQuestion);
 
-        String[] valeurTemps = {"10", "15", "20", "30", "60"};
+        String[] valeurTemps = {"10", "15", "30"};
         ArrayAdapter<String> adapterTemps = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
@@ -142,16 +173,37 @@ public class ParametresSession extends AppCompatActivity
             String theme = ((Spinner) findViewById(R.id.spinner_theme)).getSelectedItem().toString().trim();
             String temps = spinnerTemps.getSelectedItem().toString().trim();
             String nombreQuestions = ((EditText) findViewById(R.id.nbrQuestion)).getText().toString().trim();
+            String joueur1 = spinnerJoueur1.getSelectedItem().toString().trim();
+            String joueur2 = spinnerJoueur2.getSelectedItem().toString().trim();
 
             if (theme.isEmpty() || temps.isEmpty() || nombreQuestions.isEmpty()) {
                 Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            String trame = "@@C;" + theme + ";" + temps + ";" + nombreQuestions + "##";
-
+            String trame = "@@C;" + theme + ";" + temps + ";" + nombreQuestions + "\n";
             connexionBluetooth.envoyer(trame);
-            Toast.makeText(this, "Trame envoyée : " + trame, Toast.LENGTH_SHORT).show();
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            trame = "@@J;" + joueur1 + ";" + joueur2 + "\n";
+            connexionBluetooth.envoyer(trame);
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            trame = "@@S;" + "\n";
+            connexionBluetooth.envoyer(trame);
+
+            Intent activitePrincipale = new Intent(ParametresSession.this, Quizzy.class);
+            startActivity(activitePrincipale);
         });
     }
 }

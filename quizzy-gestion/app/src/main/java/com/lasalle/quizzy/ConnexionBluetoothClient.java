@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Set;
 import java.util.UUID;
 
 public class ConnexionBluetoothClient extends Thread {
@@ -21,44 +20,50 @@ public class ConnexionBluetoothClient extends Thread {
 
     private final BluetoothAdapter bluetoothAdapter;
     private final Context context;
+    private final String adresseMAC;
+
     private BluetoothSocket socket;
     private OutputStream outputStream;
 
-    public ConnexionBluetoothClient(Context context) {
+    public ConnexionBluetoothClient(Context context, String adresseMAC) {
         this.context = context;
+        this.adresseMAC = adresseMAC;
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
     @Override
     public void run() {
+        if (bluetoothAdapter == null) {
+            Log.e(TAG, "Bluetooth non supporté sur cet appareil");
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                Log.e(TAG, "Permission BLUETOOTH_CONNECT non accordée");
+                return;
+            }
+        }
+
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                    Log.e(TAG, "Permission BLUETOOTH_CONNECT non accordée");
-                    return;
-                }
+            BluetoothDevice device = bluetoothAdapter.getRemoteDevice(adresseMAC);
+
+            if (device == null) {
+                Log.e(TAG, "Appareil Bluetooth introuvable pour l'adresse : " + adresseMAC);
+                return;
             }
 
-            Set<BluetoothDevice> appareilsAppaires = bluetoothAdapter.getBondedDevices();
-            for (BluetoothDevice device : appareilsAppaires) {
-                try {
-                    BluetoothSocket tentativeSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
-                    tentativeSocket.connect();
+            socket = device.createRfcommSocketToServiceRecord(MY_UUID);
+            bluetoothAdapter.cancelDiscovery(); // Important pour éviter les ralentissements
+            socket.connect();
 
-                    socket = tentativeSocket;
-                    outputStream = socket.getOutputStream();
-                    Log.i(TAG, "Connecté à : " + device.getName());
-                    return;
+            outputStream = socket.getOutputStream();
+            Log.i(TAG, "Connexion réussie à : " + device.getName());
 
-                } catch (IOException e) {
-                    Log.w(TAG, "Connexion échouée avec " + device.getName() + ", on essaie le suivant...");
-                }
-            }
-
-            Log.e(TAG, "Aucun appareil appairé ne correspond à l'UUID donné ou connexion échouée.");
-
+        } catch (IOException e) {
+            Log.e(TAG, "Erreur de connexion à l'appareil : " + adresseMAC, e);
         } catch (SecurityException e) {
-            Log.e(TAG, "Permission refusée pour accéder aux appareils Bluetooth", e);
+            Log.e(TAG, "Permission Bluetooth refusée", e);
         }
     }
 
@@ -68,6 +73,8 @@ public class ConnexionBluetoothClient extends Thread {
                 outputStream.write(trame.getBytes());
                 outputStream.flush();
                 Log.i(TAG, "Trame envoyée : " + trame);
+            } else {
+                Log.e(TAG, "Connexion non établie. Impossible d'envoyer la trame.");
             }
         } catch (IOException e) {
             Log.e(TAG, "Erreur lors de l'envoi", e);

@@ -6,18 +6,22 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     tools:context=".ParametresSession"
-    tools:ignore="MissingDefaultResource">
+    tools:ignore="MissingDefaultResource"
+    android:background="@color/bleu">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:backgroundTint="@color/jaune" />
 
     </LinearLayout>
 
@@ -26,7 +30,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:background="@color/jaune"
+        android:layout_marginEnd="350dp"
+        android:layout_marginStart="350dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,12 +54,15 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/jaune"
+        android:layout_marginEnd="350dp"
+        android:layout_marginStart="350dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Nombre de questions : "
+            android:text=" Nombre de question : "
             android:fontFamily="@font/open_sans"
             android:textStyle="bold" />
 
@@ -60,7 +70,7 @@
             android:id="@+id/nbrQuestion"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="questions"
+            android:hint="Insérer le nombre de question"
             android:inputType="numberDecimal"
             android:layout_weight="1" />
 
@@ -71,7 +81,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp"
+        android:background="@color/jaune"
+        android:layout_marginEnd="350dp"
+        android:layout_marginStart="350dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -94,7 +107,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp"
+        android:background="@color/jaune"
+        android:layout_marginEnd="350dp"
+        android:layout_marginStart="350dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -117,7 +133,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp"
+        android:background="@color/jaune"
+        android:layout_marginEnd="350dp"
+        android:layout_marginStart="350dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -138,23 +157,28 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginEnd="400dp"
+        android:layout_marginStart="400dp" >
 
         <Button
             android:id="@+id/lancementSession"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="120dp"
             android:layout_marginBottom="120dp"
             android:text="Valider"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:backgroundTint="@color/jaune" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:background="@color/jaune"
+        android:layout_marginEnd="280dp"
+        android:layout_marginStart="280dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -168,7 +192,7 @@
             android:id="@+id/creationJoueur"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Insérer un prénom "
+            android:hint="NOM prénom "
             android:inputType="textCapCharacters"
             android:layout_weight="1" />
 
@@ -177,29 +201,35 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginEnd="400dp"
+        android:layout_marginStart="400dp" >
 
         <Button
-            android:id="@+id/boutonlancementCreationJoueur"
+            android:id="@+id/boutonLancementCreationJoueur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="100dp"
             android:text="Valider"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:backgroundTint="@color/jaune" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginEnd="150dp"
+        android:layout_marginStart="150dp">
 
         <Button
             android:id="@+id/boutonRetourAccueil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Accueil"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:backgroundTint="@color/jaune" />
 
     </LinearLayout>
 
