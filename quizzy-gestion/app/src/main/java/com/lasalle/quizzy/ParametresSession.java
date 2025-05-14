@@ -85,8 +85,6 @@ public class ParametresSession extends AppCompatActivity
             }
         });
 
-        BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance(this);
-
         this.boutonLancementCreationJoueur = findViewById(R.id.boutonLancementCreationJoueur);
 
         boutonLancementCreationJoueur.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +94,7 @@ public class ParametresSession extends AppCompatActivity
                 Log.d(TAG, "clic boutonLancemntCreationJoueur");
                 String joueurCreer = ((EditText) findViewById(R.id.creationJoueur)).getText().toString().trim();
 
+
                 if (joueurCreer.isEmpty()) {
                     Toast.makeText(ParametresSession.this, "Veuillez remplir le champ", Toast.LENGTH_SHORT).show();
                     return;
@@ -103,10 +102,13 @@ public class ParametresSession extends AppCompatActivity
                     BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance(getApplicationContext());
                     SQLiteDatabase db = baseDeDonnees.getWritableDatabase();
 
+
                     ContentValues valeurs = new ContentValues();
                     valeurs.put("prenom", joueurCreer);
 
+
                     long resultat = db.insert("table_participant", null, valeurs);
+
 
                     if (resultat != -1) {
                         Toast.makeText(ParametresSession.this, "Joueur ajouté avec succès", Toast.LENGTH_SHORT).show();
@@ -119,6 +121,7 @@ public class ParametresSession extends AppCompatActivity
             }
         });
 
+        BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance(this);
 
         ArrayList<String> themes = baseDeDonnees.getThemes();
         Spinner spinnerTheme = findViewById(R.id.spinner_theme);
@@ -195,6 +198,15 @@ public class ParametresSession extends AppCompatActivity
 
             try {
                 Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            trame = "@@S;" + "\n";
+            connexionBluetooth.envoyer(trame);
+
+            try {
+                Thread.sleep(6000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

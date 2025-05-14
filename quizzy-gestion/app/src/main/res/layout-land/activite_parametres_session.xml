@@ -11,23 +11,25 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp">
+        android:background="@color/jaune"
+        android:layout_marginBottom="20dp">
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="@string/app_name"
-            android:layout_weight="1"
-            android:backgroundTint="@color/jaune" />
+            android:textStyle="bold"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:layout_weight="1" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
@@ -37,8 +39,8 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Thème : "
+            android:layout_height="fill_parent"
+            android:text="     Thème : "
             android:textStyle="bold"
             android:fontFamily="@font/open_sans"
             android:gravity="center" />
@@ -46,14 +48,14 @@
         <Spinner
             android:id="@+id/spinner_theme"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:background="@color/jaune"
         android:layout_marginEnd="350dp"
@@ -61,15 +63,16 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Nombre de question : "
+            android:layout_height="fill_parent"
+            android:text="     Nombre de question : "
             android:fontFamily="@font/open_sans"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:gravity="center" />
 
         <EditText
             android:id="@+id/nbrQuestion"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:hint="Insérer le nombre de question"
             android:inputType="numberDecimal"
             android:layout_weight="1" />
@@ -78,7 +81,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
@@ -88,8 +91,8 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Temps par question : "
+            android:layout_height="fill_parent"
+            android:text="    Temps par question : "
             android:textStyle="bold"
             android:fontFamily="@font/open_sans"
             android:gravity="center" />
@@ -104,21 +107,20 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         android:background="@color/jaune"
         android:layout_marginEnd="350dp"
         android:layout_marginStart="350dp" >
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Joueur 1 : "
-            android:textStyle="bold"
+            android:layout_height="fill_parent"
             android:fontFamily="@font/open_sans"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="     Joueur 1 : "
+            android:textStyle="bold" />
 
         <Spinner
             android:layout_width="fill_parent"
@@ -130,21 +132,19 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="40dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
         android:background="@color/jaune"
         android:layout_marginEnd="350dp"
         android:layout_marginStart="350dp">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Joueur 2 : "
-            android:textStyle="bold"
+            android:layout_height="fill_parent"
             android:fontFamily="@font/open_sans"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="      Joueur 2 : "
+            android:textStyle="bold" />
 
         <Spinner
             android:layout_width="fill_parent"
@@ -165,7 +165,7 @@
             android:id="@+id/lancementSession"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="120dp"
+            android:layout_marginBottom="80dp"
             android:text="Valider"
             android:layout_weight="1"
             android:backgroundTint="@color/jaune" />
@@ -183,7 +183,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Inscrire un nouveau joueur : "
+            android:text="     Inscrire un nouveau joueur : "
             android:textStyle="bold"
             android:fontFamily="@font/open_sans"
             android:gravity="center" />
@@ -209,7 +209,7 @@
             android:id="@+id/boutonLancementCreationJoueur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="80dp"
             android:text="Valider"
             android:layout_weight="1"
             android:backgroundTint="@color/jaune" />
