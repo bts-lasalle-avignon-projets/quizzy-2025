@@ -78,6 +78,10 @@ class QuizzyGUI : public QMainWindow
     void afficherEcranSuivant();
     void afficherMessageConnexion(QString nom, QString adresse);
     void afficherMessageDeconnexion(QString nom, QString adresse);
+    void afficherConfiguration(QString theme,
+                               QString temps,
+                               QString nbQuestions);
+    void afficherNomsJoueurs(QString nomJoueur1, QString nomJoueur2);
 };
 
 #endif // QUIZZYGUI_H

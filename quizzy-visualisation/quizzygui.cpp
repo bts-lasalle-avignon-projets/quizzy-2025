@@ -130,6 +130,20 @@ void QuizzyGUI::afficherEcranSuivant()
     }
 }
 
+void QuizzyGUI::afficherConfiguration(QString theme,
+                                      QString temps,
+                                      QString nbQuestions)
+{
+    ecranAccueil->afficherThemeChoisi(theme);
+    ecranAccueil->afficherTempsParQuestion(temps);
+    ecranAccueil->afficherNombreDeQuestions(nbQuestions);
+}
+
+void QuizzyGUI::afficherNomsJoueurs(QString nomJoueur1, QString nomJoueur2)
+{
+    ecranAccueil->afficherNomsJoueurs(nomJoueur1, nomJoueur2);
+}
+
 void QuizzyGUI::initialiserEvenements()
 {
     connect(communication,
@@ -144,6 +158,14 @@ void QuizzyGUI::initialiserEvenements()
             &CommunicationBluetooth::signalEcranSuivant,
             this,
             &QuizzyGUI::afficherEcranSuivant);
+    connect(communication,
+            &CommunicationBluetooth::signalConfiguration,
+            this,
+            &QuizzyGUI::afficherConfiguration);
+    connect(communication,
+            &CommunicationBluetooth::signalNomsJoueurs,
+            this,
+            &QuizzyGUI::afficherNomsJoueurs);
 #ifdef TEST_ECRANS
     // Flèche droite pour écran suivant
     QAction* actionAllerDroite = new QAction(this);
