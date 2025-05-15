@@ -153,10 +153,18 @@ void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
             QString temps       = trameSeparee[TEMPS];
             QString nbQuestions = trameSeparee[NOMBRE_DE_QUESTION];
 
+            auto gui = qobject_cast<QuizzyGUI*>(parent());
+            if(!gui)
+                return;
+
+            gui->getQuestion()->setTheme(theme);
+            gui->getQuestion()->setTemps(temps.toInt());
+            gui->getQuestion()->setNombre(nbQuestions.toInt());
+
+            emit signalConfiguration();
+
             qDebug() << Q_FUNC_INFO << "theme" << theme << "temps" << temps
                      << "nbQuestions" << nbQuestions;
-
-            emit signalConfiguration(theme, temps, nbQuestions);
 
             break;
         }
@@ -165,10 +173,17 @@ void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
             QString joueur1 = trameSeparee[NOM_JOUEUR_1];
             QString joueur2 = trameSeparee[NOM_JOUEUR_2];
 
+            auto gui = qobject_cast<QuizzyGUI*>(parent());
+            if(!gui)
+                return;
+
+            gui->getJoueur1()->setNom(joueur1);
+            gui->getJoueur2()->setNom(joueur2);
+
+            emit signalNomsJoueurs();
+
             qDebug() << Q_FUNC_INFO << "joueur1" << joueur1 << "joueur2"
                      << joueur2;
-            emit signalNomsJoueurs(joueur1, joueur2);
-
             break;
         }
         case 'Q':
@@ -180,12 +195,19 @@ void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
             QString propositionD = trameSeparee[PROPOSITION_D];
             QString idReponse    = trameSeparee[NUMERO_REPONSE];
             QString explication  = trameSeparee[EXPLICATION];
-            QString points       = trameSeparee[POINTS];
 
             qDebug() << Q_FUNC_INFO << "titre" << titre << "propositions"
                      << propositionA << propositionB << propositionC
                      << propositionD << "idReponse" << idReponse
-                     << "explication" << explication << "points" << points;
+                     << "explication" << explication;
+
+            emit signalQuestion(titre,
+                                propositionA,
+                                propositionB,
+                                propositionC,
+                                propositionD,
+                                idReponse,
+                                explication);
             break;
         }
         case 'S':

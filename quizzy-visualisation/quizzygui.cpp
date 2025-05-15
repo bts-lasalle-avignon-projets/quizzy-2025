@@ -13,6 +13,7 @@
 #include "ecranquestion.h"
 #include "ecranreponse.h"
 #include "ecranfin.h"
+#include "question.h"
 #include "quizzy.h"
 #include <QDebug>
 
@@ -130,18 +131,34 @@ void QuizzyGUI::afficherEcranSuivant()
     }
 }
 
-void QuizzyGUI::afficherConfiguration(QString theme,
-                                      QString temps,
-                                      QString nbQuestions)
+void QuizzyGUI::afficherConfiguration()
 {
-    ecranAccueil->afficherThemeChoisi(theme);
-    ecranAccueil->afficherTempsParQuestion(temps);
-    ecranAccueil->afficherNombreDeQuestions(nbQuestions);
+    ecranAccueil->afficherThemeChoisi(getQuestion()->getTheme());
+    ecranAccueil->afficherTempsParQuestion(
+      QString::number(getQuestion()->getTemps()));
+    ecranAccueil->afficherNombreDeQuestions(
+      QString::number(getQuestion()->getNombre()));
 }
 
-void QuizzyGUI::afficherNomsJoueurs(QString nomJoueur1, QString nomJoueur2)
+void QuizzyGUI::afficherNomsJoueurs()
 {
-    ecranAccueil->afficherNomsJoueurs(nomJoueur1, nomJoueur2);
+    ecranAccueil->afficherNomsJoueurs(getJoueur1()->getNom(),
+                                      getJoueur2()->getNom());
+}
+
+void QuizzyGUI::afficherQuestion(QString titre,
+                                 QString propositionA,
+                                 QString propositionB,
+                                 QString propositionC,
+                                 QString propositionD,
+                                 QString idReponse,
+                                 QString explication)
+{
+    ecranQuestion->afficherTitreQuestion(titre);
+    ecranQuestion->afficherPropositions(propositionA,
+                                        propositionB,
+                                        propositionC,
+                                        propositionD);
 }
 
 void QuizzyGUI::initialiserEvenements()
@@ -166,6 +183,11 @@ void QuizzyGUI::initialiserEvenements()
             &CommunicationBluetooth::signalNomsJoueurs,
             this,
             &QuizzyGUI::afficherNomsJoueurs);
+    connect(communication,
+            &CommunicationBluetooth::signalQuestion,
+            this,
+            &QuizzyGUI::afficherQuestion);
+
 #ifdef TEST_ECRANS
     // Flèche droite pour écran suivant
     QAction* actionAllerDroite = new QAction(this);

@@ -59,8 +59,16 @@ class CommunicationBluetooth : public QObject
     void appareilConnecte(QString nom, QString adresse);
     void appareilDeconnecte(QString nom, QString adresse);
     void signalEcranSuivant();
-    void signalConfiguration(QString theme, QString temps, QString nbQuestions);
-    void signalNomsJoueurs(QString nomJoueur1, QString nomJoueur2);
+    void signalConfiguration();
+    void signalNomsJoueurs();
+    void signalQuestion(QString titre,
+                        QString propositionA,
+                        QString propositionB,
+                        QString propositionC,
+                        QString propositionD,
+                        QString idReponse,
+                        QString explication);
 };
 
 #endif // COMMUNICATIONBLUETOOTH_H
+

@@ -55,8 +55,14 @@ EcranAccueil::~EcranAccueil()
 
 void EcranAccueil::afficherThemeChoisi(QString theme)
 {
-    QString message = "Le theme choisi est " + theme;
+    QString message = "Le thème choisi est " + theme;
     messageThemeChoisi->setText(message);
+
+    auto gui = qobject_cast<QuizzyGUI*>(parent());
+    if(gui)
+    {
+        gui->getQuestion()->setTheme(theme);
+    }
 }
 
 void EcranAccueil::afficherNombreDeQuestions(QString nbQuestions)

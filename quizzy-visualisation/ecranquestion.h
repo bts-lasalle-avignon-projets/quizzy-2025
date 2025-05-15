@@ -12,10 +12,40 @@ class EcranQuestion : public QWidget
     EcranQuestion(QuizzyGUI* parent = nullptr);
     ~EcranQuestion();
 
+  private slots:
+    void mettreAJourCompteARebours();
+
   private:
-    QWidget*     ecranQuestion;
-    QVBoxLayout* layoutEcranQuestion;
-    QLabel*      titreEcranQuestion;
+    QWidget*      ecranQuestion;
+    QVBoxLayout*  layoutEcranQuestion;
+    QHBoxLayout*  layoutTitre;
+    QHBoxLayout*  layoutThemeNbQuestion;
+    QLabel*       titreQuestion;
+    QLabel*       theme;
+    QLabel*       nombreDeQuestion;
+    QLabel*       messageChoix;
+    QVBoxLayout*  layoutPropositions;
+    QHBoxLayout*  layoutPropositionsAB;
+    QHBoxLayout*  layoutPropositionsCD;
+    QLabel*       propositionA;
+    QLabel*       propositionB;
+    QLabel*       propositionC;
+    QLabel*       propositionD;
+    QHBoxLayout*  layoutTimer;
+    QProgressBar* barreDeProgression;
+    QLabel*       tempsRestant;
+    QTimer*       timer;
+
+    int tempsMax;
+    int tempsActuel;
+
+  public slots:
+    void afficherTitreQuestion(QString titre);
+    void afficherPropositions(QString propA,
+                              QString propB,
+                              QString propC,
+                              QString propD);
 };
 
 #endif // ECRANQUESTION_H
+
