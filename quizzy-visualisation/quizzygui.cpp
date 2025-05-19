@@ -13,8 +13,11 @@
 #include "ecranquestion.h"
 #include "ecranreponse.h"
 #include "ecranfin.h"
+#include "question.h"
 #include "quizzy.h"
 #include <QDebug>
+
+int indexQuestionActuelle = 0;
 
 /**
  * @brief Constructeur de la classe QuizzyGUI
@@ -124,24 +127,56 @@ void QuizzyGUI::afficherEcranAttente()
 void QuizzyGUI::afficherEcranSuivant()
 {
     int indexCourant = ecrans->currentIndex();
-    if(indexCourant < ecrans->count() - 1)
+    if(indexCourant == idEcranReponse)
     {
-        afficherEcran(QuizzyGUI::Ecran(indexCourant + 1));
+        indexQuestionActuelle++;
+        qDebug() << Q_FUNC_INFO << "indexQuestionActuelle"
+                 << indexQuestionActuelle;
+
+        if(indexQuestionActuelle < getQuestion()->getNombre())
+        {
+            afficherEcran(QuizzyGUI::Ecran(indexCourant - 1));
+        }
+        else
+        {
+            afficherEcran(QuizzyGUI::Ecran(indexCourant + 1));
+        }
+    }
+    else
+    {
+        if(indexCourant < ecrans->count() - 1)
+        {
+            afficherEcran(QuizzyGUI::Ecran(indexCourant + 1));
+        }
     }
 }
 
-void QuizzyGUI::afficherConfiguration(QString theme,
-                                      QString temps,
-                                      QString nbQuestions)
+void QuizzyGUI::afficherConfiguration()
 {
-    ecranAccueil->afficherThemeChoisi(theme);
-    ecranAccueil->afficherTempsParQuestion(temps);
-    ecranAccueil->afficherNombreDeQuestions(nbQuestions);
+    ecranAccueil->afficherThemeChoisi(getQuestion()->getTheme());
+    ecranAccueil->afficherTempsParQuestion(
+      QString::number(getQuestion()->getTemps()));
+    ecranAccueil->afficherNombreDeQuestions(
+      QString::number(getQuestion()->getNombre()));
 }
 
-void QuizzyGUI::afficherNomsJoueurs(QString nomJoueur1, QString nomJoueur2)
+void QuizzyGUI::afficherNomsJoueurs()
 {
-    ecranAccueil->afficherNomsJoueurs(nomJoueur1, nomJoueur2);
+    ecranAccueil->afficherNomsJoueurs(getJoueur1()->getNom(),
+                                      getJoueur2()->getNom());
+}
+
+void QuizzyGUI::afficherQuestion()
+{
+    ecranQuestion->afficherTitreQuestion(getQuestion()->getTitre());
+    ecranQuestion->afficherThemeQuestion(getQuestion()->getTheme());
+    ecranQuestion->afficherNbQuestions(
+      QString::number(getQuestion()->getNombre()));
+    ecranQuestion->afficherPropositions(getQuestion()->getPropA(),
+                                        getQuestion()->getPropB(),
+                                        getQuestion()->getPropC(),
+                                        getQuestion()->getPropD());
+    ecranQuestion->afficherTempsRestant(getQuestion()->getTemps());
 }
 
 void QuizzyGUI::initialiserEvenements()
@@ -166,6 +201,11 @@ void QuizzyGUI::initialiserEvenements()
             &CommunicationBluetooth::signalNomsJoueurs,
             this,
             &QuizzyGUI::afficherNomsJoueurs);
+    connect(communication,
+            &CommunicationBluetooth::signalQuestion,
+            this,
+            &QuizzyGUI::afficherQuestion);
+
 #ifdef TEST_ECRANS
     // Flèche droite pour écran suivant
     QAction* actionAllerDroite = new QAction(this);

@@ -13,9 +13,38 @@ class EcranQuestion : public QWidget
     ~EcranQuestion();
 
   private:
-    QWidget*     ecranQuestion;
-    QVBoxLayout* layoutEcranQuestion;
-    QLabel*      titreEcranQuestion;
+    QWidget*      ecranQuestion;
+    QVBoxLayout*  layoutEcranQuestion;
+    QHBoxLayout*  layoutTitre;
+    QHBoxLayout*  layoutThemeNbQuestion;
+    QLabel*       titreQuestion;
+    QLabel*       theme;
+    QLabel*       nombreDeQuestion;
+    QLabel*       messageChoix;
+    QVBoxLayout*  layoutPropositions;
+    QHBoxLayout*  layoutPropositionsAB;
+    QHBoxLayout*  layoutPropositionsCD;
+    QLabel*       propositionA;
+    QLabel*       propositionB;
+    QLabel*       propositionC;
+    QLabel*       propositionD;
+    QHBoxLayout*  layoutTimer;
+    QProgressBar* barreDeProgression;
+    QLabel*       tempsRestant;
+    QTimer*       timer;
+
+    int tempsMax;
+    int tempsActuel;
+
+  public slots:
+    void afficherTitreQuestion(QString titre);
+    void afficherThemeQuestion(QString theme);
+    void afficherNbQuestions(QString nbQuestions);
+    void afficherPropositions(QString propA,
+                              QString propB,
+                              QString propC,
+                              QString propD);
+    void afficherTempsRestant(int temps);
 };
 
 #endif // ECRANQUESTION_H

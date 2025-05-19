@@ -27,8 +27,9 @@ class EcranAccueil : public QWidget
   public slots:
     void afficherThemeChoisi(QString theme);
     void afficherNombreDeQuestions(QString nbQuestion);
-    void afficherNomsJoueurs(QString nomDuJoueur1, QString nomDuJoueur2);
+    void afficherNomsJoueurs(QString nomJoueur1, QString nomJoueur2);
     void afficherTempsParQuestion(QString temps);
 };
 
 #endif // ECRANACCUEIL_H
+

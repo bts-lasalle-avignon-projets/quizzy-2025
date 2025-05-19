@@ -3,6 +3,9 @@
 
 #include <QtWidgets>
 
+#include "joueur.h"
+#include "question.h"
+
 #define CHEMIN_LOGO ":/images/logo.png"
 
 #define TEST_ECRANS
@@ -55,13 +58,17 @@ class QuizzyGUI : public QMainWindow
   private:
     CommunicationBluetooth* communication;
     Quizzy*                 quizzy;
-    QStackedWidget*         ecrans;
-    QVBoxLayout*            layoutPrincipal;
-    EcranAttente*           ecranAttente;
-    EcranAccueil*           ecranAccueil;
-    EcranQuestion*          ecranQuestion;
-    EcranReponse*           ecranReponse;
-    EcranFin*               ecranFin;
+    Joueur                  joueur1;
+    Joueur                  joueur2;
+    Question                question;
+
+    QStackedWidget* ecrans;
+    QVBoxLayout*    layoutPrincipal;
+    EcranAttente*   ecranAttente;
+    EcranAccueil*   ecranAccueil;
+    EcranQuestion*  ecranQuestion;
+    EcranReponse*   ecranReponse;
+    EcranFin*       ecranFin;
 
     void initialiserEvenements();
     void initialiserEcrans();
@@ -72,16 +79,29 @@ class QuizzyGUI : public QMainWindow
     void creerEcranReponse();
     void creerEcranFin();
 
+  public:
+    Joueur* getJoueur1()
+    {
+        return &joueur1;
+    }
+    Joueur* getJoueur2()
+    {
+        return &joueur2;
+    }
+    Question* getQuestion()
+    {
+        return &question;
+    }
+
   public slots:
     void afficherEcran(QuizzyGUI::Ecran ecran);
     void afficherEcranAttente();
     void afficherEcranSuivant();
     void afficherMessageConnexion(QString nom, QString adresse);
     void afficherMessageDeconnexion(QString nom, QString adresse);
-    void afficherConfiguration(QString theme,
-                               QString temps,
-                               QString nbQuestions);
-    void afficherNomsJoueurs(QString nomJoueur1, QString nomJoueur2);
+    void afficherConfiguration();
+    void afficherNomsJoueurs();
+    void afficherQuestion();
 };
 
 #endif // QUIZZYGUI_H

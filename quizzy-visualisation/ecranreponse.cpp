@@ -3,15 +3,10 @@
 #include <QDebug>
 
 EcranReponse::EcranReponse(QuizzyGUI* parent) :
-    QWidget(parent), ecranReponse(new QWidget(this)),
-    layoutEcranReponse(new QVBoxLayout(ecranReponse)),
-    titreEcranReponse(new QLabel(this))
+    QWidget(parent), ecranReponse(new QWidget(this))
 {
     qDebug() << Q_FUNC_INFO << this << "parent" << parent;
 
-    titreEcranReponse->setAlignment(Qt::AlignCenter);
-    titreEcranReponse->setText("EcranReponse");
-    layoutEcranReponse->addWidget(titreEcranReponse);
     parent->getEcrans()->addWidget(ecranReponse);
 }
 

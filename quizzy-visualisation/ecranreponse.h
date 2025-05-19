@@ -13,9 +13,28 @@ class EcranReponse : public QWidget
     ~EcranReponse();
 
   private:
-    QWidget*     ecranReponse;
-    QVBoxLayout* layoutEcranReponse;
-    QLabel*      titreEcranReponse;
+    QWidget* ecranReponse;
+    /*QVBoxLayout* layoutEcranReponse;
+    QHBoxLayout* layoutTitre;
+    QHBoxLayout* layoutThemeNbQuestion;
+    QLabel*      titreQuestion;
+    QLabel*      theme;
+    QLabel*      nombreDeQuestion;
+    QLabel*      messageReponse;
+    QVBoxLayout* layoutPropositions;
+    QHBoxLayout* layoutPropositionsAB;
+    QHBoxLayout* layoutPropositionsCD;
+    QLabel*      propositionA;
+    QLabel*      propositionB;
+    QLabel*      propositionC;
+    QLabel*      propositionD;
+    QHBoxLayout* layoutTimer;
+    QLabel*      explication;
+    QLabel*      tempsRestant;
+    QTimer*      timer;*/
+
+    int tempsMax;
+    int tempsActuel;
 };
 
 #endif // ECRANREPONSE_H
