@@ -101,14 +101,7 @@ class QuizzyGUI : public QMainWindow
     void afficherMessageDeconnexion(QString nom, QString adresse);
     void afficherConfiguration();
     void afficherNomsJoueurs();
-    void afficherQuestion(QString titre,
-                          QString propositionA,
-                          QString propositionB,
-                          QString propositionC,
-                          QString propositionD,
-                          QString idReponse,
-                          QString explication);
+    void afficherQuestion();
 };
 
 #endif // QUIZZYGUI_H
-

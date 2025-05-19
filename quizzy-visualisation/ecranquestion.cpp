@@ -61,33 +61,23 @@ EcranQuestion::EcranQuestion(QuizzyGUI* parent) :
         layoutTimer->addWidget(tempsRestant);
 
         parent->getEcrans()->addWidget(ecranQuestion);
-
-        connect(timer,
-                &QTimer::timeout,
-                this,
-                &EcranQuestion::mettreAJourCompteARebours);
         timer->start(1000);
-    }
-}
-
-void EcranQuestion::mettreAJourCompteARebours()
-{
-    if(tempsActuel > 0)
-    {
-        tempsActuel--;
-        barreDeProgression->setValue((tempsActuel * 100) / tempsMax);
-        tempsRestant->setText(QString::number(tempsActuel) + " s");
-    }
-    else
-    {
-        timer->stop();
-        tempsRestant->setText("Temps écoulé !");
     }
 }
 
 void EcranQuestion::afficherTitreQuestion(QString titre)
 {
     titreQuestion->setText(titre);
+}
+
+void EcranQuestion::afficherThemeQuestion(QString themeQuestions)
+{
+    theme->setText(themeQuestions);
+}
+
+void EcranQuestion::afficherNbQuestions(QString nbQuestions)
+{
+    nombreDeQuestion->setText(nbQuestions);
 }
 
 void EcranQuestion::afficherPropositions(QString propA,
@@ -99,6 +89,11 @@ void EcranQuestion::afficherPropositions(QString propA,
     propositionB->setText(propB);
     propositionC->setText(propC);
     propositionD->setText(propD);
+}
+
+void EcranQuestion::afficherTempsRestant(int temps)
+{
+    tempsRestant->setText(QString::number(temps));
 }
 
 EcranQuestion::~EcranQuestion()

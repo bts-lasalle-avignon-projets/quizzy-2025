@@ -201,13 +201,20 @@ void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
                      << propositionD << "idReponse" << idReponse
                      << "explication" << explication;
 
-            emit signalQuestion(titre,
-                                propositionA,
-                                propositionB,
-                                propositionC,
-                                propositionD,
-                                idReponse,
-                                explication);
+            auto gui = qobject_cast<QuizzyGUI*>(parent());
+            if(!gui)
+                return;
+
+            gui->getQuestion()->setTitre(titre);
+            gui->getQuestion()->setPropA(propositionA);
+            gui->getQuestion()->setPropB(propositionB);
+            gui->getQuestion()->setPropC(propositionC);
+            gui->getQuestion()->setPropD(propositionD);
+            gui->getQuestion()->setIdReponse(idReponse.toInt());
+            gui->getQuestion()->setExplication(explication);
+
+            emit signalQuestion();
+
             break;
         }
         case 'S':

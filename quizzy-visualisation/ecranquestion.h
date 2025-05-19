@@ -12,9 +12,6 @@ class EcranQuestion : public QWidget
     EcranQuestion(QuizzyGUI* parent = nullptr);
     ~EcranQuestion();
 
-  private slots:
-    void mettreAJourCompteARebours();
-
   private:
     QWidget*      ecranQuestion;
     QVBoxLayout*  layoutEcranQuestion;
@@ -41,11 +38,13 @@ class EcranQuestion : public QWidget
 
   public slots:
     void afficherTitreQuestion(QString titre);
+    void afficherThemeQuestion(QString theme);
+    void afficherNbQuestions(QString nbQuestions);
     void afficherPropositions(QString propA,
                               QString propB,
                               QString propC,
                               QString propD);
+    void afficherTempsRestant(int temps);
 };
 
 #endif // ECRANQUESTION_H
-
