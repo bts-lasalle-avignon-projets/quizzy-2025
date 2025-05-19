@@ -39,7 +39,7 @@ class EcranQuestion : public QWidget
   public slots:
     void afficherTitreQuestion(QString titre);
     void afficherThemeQuestion(QString theme);
-    void afficherNbQuestions(QString nbQuestions);
+    void afficherNbQuestions(QString nbQuestions, int indexQuestionActuelle);
     void afficherPropositions(QString propA,
                               QString propB,
                               QString propC,

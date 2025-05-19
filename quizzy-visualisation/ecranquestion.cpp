@@ -19,6 +19,12 @@ EcranQuestion::EcranQuestion(QuizzyGUI* parent) :
     {
         qDebug() << Q_FUNC_INFO << this << "parent" << parent;
 
+        ecranQuestion->setObjectName("ecranQuestion");
+        propositionA->setObjectName("propositionAQuestion");
+        propositionB->setObjectName("propositionBQuestion");
+        propositionC->setObjectName("propositionCQuestion");
+        propositionD->setObjectName("propositionDQuestion");
+
         titreQuestion->setText("Titre de la question");
         theme->setText("Thème");
         nombreDeQuestion->setText("Question x/y");
@@ -29,16 +35,18 @@ EcranQuestion::EcranQuestion(QuizzyGUI* parent) :
         propositionD->setText("D - Proposition D");
         tempsRestant->setText(QString::number(tempsActuel) + " s");
 
-        titreQuestion->setAlignment(Qt::AlignLeft);
-        theme->setAlignment(Qt::AlignRight);
-        nombreDeQuestion->setAlignment(Qt::AlignRight);
+        titreQuestion->setWordWrap(true);
+        titreQuestion->setMaximumWidth(1200);
+        titreQuestion->setAlignment(Qt::AlignCenter);
+        theme->setAlignment(Qt::AlignCenter);
+        nombreDeQuestion->setAlignment(Qt::AlignCenter);
         messageChoix->setAlignment(Qt::AlignCenter);
         tempsRestant->setAlignment(Qt::AlignRight);
         layoutPropositions->setAlignment(Qt::AlignCenter);
-        propositionA->setAlignment(Qt::AlignLeft);
-        propositionB->setAlignment(Qt::AlignRight);
-        propositionC->setAlignment(Qt::AlignLeft);
-        propositionD->setAlignment(Qt::AlignRight);
+        propositionA->setAlignment(Qt::AlignCenter);
+        propositionB->setAlignment(Qt::AlignCenter);
+        propositionC->setAlignment(Qt::AlignCenter);
+        propositionD->setAlignment(Qt::AlignCenter);
 
         layoutEcranQuestion->addLayout(layoutTitre);
         layoutTitre->addWidget(titreQuestion);
@@ -75,9 +83,12 @@ void EcranQuestion::afficherThemeQuestion(QString themeQuestions)
     theme->setText(themeQuestions);
 }
 
-void EcranQuestion::afficherNbQuestions(QString nbQuestions)
+void EcranQuestion::afficherNbQuestions(QString nbQuestions,
+                                        int     indexQuestionActuelle)
 {
-    nombreDeQuestion->setText(nbQuestions);
+    QString texte =
+      QString::number(indexQuestionActuelle) + " / " + nbQuestions;
+    nombreDeQuestion->setText(texte);
 }
 
 void EcranQuestion::afficherPropositions(QString propA,
