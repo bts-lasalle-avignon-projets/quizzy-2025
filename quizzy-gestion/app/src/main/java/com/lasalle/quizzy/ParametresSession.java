@@ -158,7 +158,7 @@ public class ParametresSession extends AppCompatActivity
         spinnerJoueur2.setAdapter(adapterParticipant2);
 
 
-        Spinner spinnerTemps = findViewById(R.id.spinner_tempsQuestion);
+        Spinner spinnerTemps = findViewById(R.id.spinner_TempsQuestion);
 
         String[] valeurTemps = {"10", "15", "30"};
         ArrayAdapter<String> adapterTemps = new ArrayAdapter<>(
@@ -206,10 +206,37 @@ public class ParametresSession extends AppCompatActivity
             connexionBluetooth.envoyer(trame);
 
             try {
-                Thread.sleep(6000);
+                Thread.sleep(4000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+                    int themeID = -1;
+                    ArrayList<String> tousLesThemes = baseDeDonnees.getThemes();
+                    for (int i = 0; i < tousLesThemes.size(); i++) {
+                        if (tousLesThemes.get(i).equals(theme)) {
+                            themeID = i + 1; // IDs dans la BDD commencent à 1
+                            break;
+                        }
+                    }
+
+                    if (themeID == -1) {
+                        Toast.makeText(this, "Thème introuvable", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    String trameQuestion = baseDeDonnees.getQuestionAleatoireParTheme(themeID);
+                    if (!trameQuestion.isEmpty()) {
+                        connexionBluetooth.envoyer(trameQuestion);
+                    } else {
+                        Toast.makeText(this, "Aucune question trouvée pour ce thème", Toast.LENGTH_SHORT).show();
+                    }
+
+                    try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
             trame = "@@S;" + "\n";
             connexionBluetooth.envoyer(trame);

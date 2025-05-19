@@ -35,32 +35,16 @@ public class BaseDeDonnees extends SQLiteOpenHelper
     public static final String COLONNE_PROPOSITION3  = "proposition3";
     public static final String COLONNE_PROPOSITION4  = "proposition4";
     public static final String COLONNE_REPONSE       = "reponse";
-    public static final String COLONNE_POINTS        = "points";
     public static final String COLONNE_EXPLICATION   = "explication";
     public static final String COLONNE_PARTICIPANTID = "participantID";
     public static final String COLONNE_PRENOM        = "prenom";
     public static final String COLONNE_TEMPS         = "temps";
     public static final String COLONNE_SCORE         = "score";
 
-    /*
-        CREATE TABLE IF NOT EXISTS table_theme(
-            themeID INTEGER PRIMARY KEY AUTOINCREMENT,
-            theme TEXT NOT NULL
-        );
-    */
     private static final String CREE_TABLE_THEME =
             "CREATE TABLE IF NOT EXISTS " + TABLE_THEME + "(" + COLONNE_THEMEID +
                     " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLONNE_THEME + " TEXT NOT NULL);";
 
-    /*
-        CREATE TABLE IF NOT EXISTS table_quiz(
-            quizzID INTEGER PRIMARY KEY AUTOINCREMENT,
-            themeID INTEGER,
-            horodatage TEXT NOT NULL,
-            gagnantID INTEGER DEFAULT 0,
-            FOREIGN KEY (themeID) REFERENCES table_theme(themeID) ON DELETE CASCADE
-        );
-    */
     private static final String CREE_TABLE_QUIZZ =
             "CREATE TABLE IF NOT EXISTS " + TABLE_QUIZ + "(" + COLONNE_QUIZZID +
                     " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLONNE_THEMEID + " INTEGER, " + COLONNE_HORODATAGE +
@@ -68,21 +52,6 @@ public class BaseDeDonnees extends SQLiteOpenHelper
                     + "FOREIGN KEY (" + COLONNE_THEMEID + ") REFERENCES " + TABLE_THEME + "(" + COLONNE_THEMEID +
                     ") ON DELETE CASCADE);";
 
-    /*
-        CREATE TABLE IF NOT EXISTS table_question(
-            questionID INTEGER PRIMARY KEY AUTOINCREMENT,
-            themeID INTEGER,
-            question TEXT NOT NULL,
-            proposition1 TEXT NOT NULL,
-            proposition2 TEXT NOT NULL,
-            proposition3 TEXT NOT NULL,
-            proposition4 TEXT NOT NULL,
-            explication TEXT DEFAULT '',
-            reponse INTEGER NOT NULL,
-            points	REAL DEFAULT 1,
-            FOREIGN KEY (themeID) REFERENCES table_theme(themeID) ON DELETE CASCADE
-        );
-    */
     private static final String CREE_TABLE_QUESTION =
             "CREATE TABLE IF NOT EXISTS " + TABLE_QUESTION + "("
                     + COLONNE_QUESTIONID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -94,32 +63,13 @@ public class BaseDeDonnees extends SQLiteOpenHelper
                     + COLONNE_PROPOSITION4 + " TEXT NOT NULL, "
                     + COLONNE_EXPLICATION + " TEXT DEFAULT '', "
                     + COLONNE_REPONSE + " INTEGER NOT NULL,"
-                    + COLONNE_POINTS + " REAL DEFAULT 1,"
                     + "FOREIGN KEY (" + COLONNE_THEMEID + ") REFERENCES " + TABLE_THEME + "(" + COLONNE_THEMEID + ")  ON DELETE CASCADE);";
 
-    /*
-        CREATE TABLE IF NOT EXISTS table_participant(
-            participantID INTEGER PRIMARY KEY AUTOINCREMENT,
-            prenom TEXT NOT NULL
-        );
-    */
     private static final String CREE_TABLE_PARTICIPANT =
             "CREATE TABLE IF NOT EXISTS " + TABLE_PARTICIPANT + "(" + COLONNE_PARTICIPANTID +
                     " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLONNE_PRENOM + " TEXT NOT NULL);";
 
-    /*
-        CREATE TABLE IF NOT EXISTS table_reponse(
-            quizzID INTEGER,
-            participantID INTEGER,
-            questionID INTEGER,
-            temps INTEGER DEFAULT NULL,
-            reponse INTEGER NOT NULL,
-            PRIMARY KEY (quizzID, participantID, questionID),
-            FOREIGN KEY (quizzID) REFERENCES table_quiz(quizzID) ON DELETE CASCADE,
-            FOREIGN KEY (participantID) REFERENCES table_participant(participantID) ON DELETE
-       CASCADE, FOREIGN KEY (questionID) REFERENCES table_question(questionID) ON DELETE CASCADE
-        );
-    */
+
     private static final String CREE_TABLE_REPONSE =
             "CREATE TABLE IF NOT EXISTS "
                     + TABLE_REPONSE + "("
@@ -133,17 +83,6 @@ public class BaseDeDonnees extends SQLiteOpenHelper
                     + "FOREIGN KEY (" + COLONNE_PARTICIPANTID + ") REFERENCES " + TABLE_PARTICIPANT + "(" + COLONNE_PARTICIPANTID + ") ON DELETE CASCADE, "
                     + "FOREIGN KEY (" + COLONNE_QUESTIONID + ") REFERENCES " + TABLE_QUESTION + "(" + COLONNE_QUESTIONID + ") ON DELETE CASCADE);";
 
-    /*
-        CREATE TABLE IF NOT EXISTS table_resultats(
-            quizzID INTEGER,
-            participantID INTEGER,
-            score REAL,
-            PRIMARY KEY (quizzID, participantID),
-            FOREIGN KEY (quizzID) REFERENCES table_quiz(quizzID) ON DELETE CASCADE,
-            FOREIGN KEY (participantID) REFERENCES table_participant(participantID) ON DELETE
-       CASCADE
-        );
-    */
     private static final String CREE_TABLE_RESULTATS =
             "CREATE TABLE IF NOT EXISTS " + TABLE_RESULTATS + "(" + COLONNE_QUIZZID + " INTEGER, " +
                     COLONNE_PARTICIPANTID + " INTEGER, " + COLONNE_SCORE + " REAL, "
@@ -357,6 +296,31 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         Log.d(TAG, "getParticipant() " + participants);
 
         return participants;
+    }
+
+    public String getQuestionAleatoireParTheme(int themeID)
+    {
+        String trameQuestion = "";
+        Cursor curseur = sqlite.rawQuery(
+                "SELECT question, proposition1, proposition2, proposition3, proposition4, reponse, explication " +
+                        "FROM table_question WHERE themeID = ? ORDER BY RANDOM() LIMIT 1",
+                new String[]{String.valueOf(themeID)}
+        );
+
+        if (curseur.moveToFirst())
+        {
+            trameQuestion = "@@Q;" +
+                    curseur.getString(0) + ";" +  // question
+                    curseur.getString(1) + ";" +  // prop1
+                    curseur.getString(2) + ";" +  // prop2
+                    curseur.getString(3) + ";" +  // prop3
+                    curseur.getString(4) + ";" +  // prop4
+                    curseur.getInt(5) + ";" +     // réponse (index)
+                    curseur.getString(6) + "\n";  // explication
+        }
+
+        curseur.close();
+        return trameQuestion;
     }
 
 }
