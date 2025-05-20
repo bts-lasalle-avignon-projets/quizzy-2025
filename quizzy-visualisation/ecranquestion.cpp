@@ -107,6 +107,45 @@ void EcranQuestion::afficherTempsRestant(int temps)
     tempsRestant->setText(QString::number(temps));
 }
 
+void EcranQuestion::demarrerCompteARebours(int tempsDepart)
+{
+    disconnect(timer,
+               &QTimer::timeout,
+               this,
+               &EcranQuestion::mettreAJourCompteARebours);
+
+    tempsActuel = tempsDepart;
+    tempsMax    = tempsDepart;
+
+    barreDeProgression->setMinimum(0);
+    barreDeProgression->setMaximum(tempsMax);
+    barreDeProgression->setValue(tempsActuel);
+
+    afficherTempsRestant(tempsActuel);
+
+    connect(timer,
+            &QTimer::timeout,
+            this,
+            &EcranQuestion::mettreAJourCompteARebours);
+    timer->start(1000);
+}
+
+void EcranQuestion::mettreAJourCompteARebours()
+{
+    tempsActuel--;
+
+    if(tempsActuel >= 0)
+    {
+        afficherTempsRestant(tempsActuel);
+        barreDeProgression->setValue(tempsActuel);
+    }
+    else
+    {
+        timer->stop();
+        qDebug() << "Temps écoulé !";
+    }
+}
+
 EcranQuestion::~EcranQuestion()
 {
     qDebug() << Q_FUNC_INFO << this;

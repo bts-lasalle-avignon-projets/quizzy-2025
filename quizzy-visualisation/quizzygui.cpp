@@ -185,7 +185,7 @@ void QuizzyGUI::afficherQuestion()
                                         getQuestion()->getPropB(),
                                         getQuestion()->getPropC(),
                                         getQuestion()->getPropD());
-    ecranQuestion->afficherTempsRestant(getQuestion()->getTemps());
+    ecranQuestion->demarrerCompteARebours(getQuestion()->getTemps());
 
     ecranReponse->afficherTitreQuestion(getQuestion()->getTitre());
     ecranReponse->afficherThemeQuestion(getQuestion()->getTheme());

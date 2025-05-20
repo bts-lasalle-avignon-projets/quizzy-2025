@@ -29,7 +29,9 @@ class EcranAccueil : public QWidget
     void afficherNombreDeQuestions(QString nbQuestion);
     void afficherNomsJoueurs(QString nomJoueur1, QString nomJoueur2);
     void afficherTempsParQuestion(QString temps);
+
+  signals:
+    void tempsEcoule();
 };
 
 #endif // ECRANACCUEIL_H
-
