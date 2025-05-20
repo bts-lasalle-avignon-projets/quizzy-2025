@@ -90,8 +90,12 @@ public class Quizzy extends AppCompatActivity
 
     private void afficherEtatPartie()
     {
-        TextView texteEtatPartie = findViewById(R.id.texteEtatPartie);
         SharedPreferences prefs = getSharedPreferences("etat_partie", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("partie_en_cours", false);
+        editor.apply();
+
+        TextView texteEtatPartie = findViewById(R.id.texteEtatPartie);
         boolean partieEnCours = prefs.getBoolean("partie_en_cours", false);
         texteEtatPartie.setText(partieEnCours ? "Partie en cours" : "Pas de partie en cours");
     }

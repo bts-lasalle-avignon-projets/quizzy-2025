@@ -9,18 +9,12 @@
     tools:ignore="MissingDefaultResource"
     android:background="@color/bleu">
 
-
-
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:background="@color/jaune"
         android:layout_marginBottom="20dp">
-
-
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,23 +24,13 @@
             android:fontFamily="@font/open_sans"
             android:gravity="center"
             android:layout_weight="1" />
-
-
-
-
     </LinearLayout>
-
-
-
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginStart="1100dp" >
-
-
-
+        android:layout_marginStart="1000dp" >
 
         <TextView
             android:id="@+id/texteEtatPartie"
@@ -58,35 +42,13 @@
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-
-
-
     </LinearLayout>
-
-
-
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginStart="400dp" >
-
-
-
-
-        <Button
-            android:id="@+id/boutonParametrerSession"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/boutonParametrerSession"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
+        android:layout_marginStart="1000dp" >
 
         <Button
             android:id="@+id/BoutonQuestionSuivante"
@@ -95,18 +57,26 @@
             android:layout_marginBottom="40dp"
             android:fontFamily="@font/open_sans"
             android:text="Question Suivante"
-            android:layout_marginStart="500dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-
-
-
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="500dp"
+        android:layout_marginEnd="500dp">
 
-
+    <Button
+        android:id="@+id/boutonParametrerSession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/open_sans"
+        android:text="@string/boutonParametrerSession"
+        android:layout_weight="1" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/boutonAfficherCredits"
@@ -120,5 +90,4 @@
         android:textColor="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 </LinearLayout>
