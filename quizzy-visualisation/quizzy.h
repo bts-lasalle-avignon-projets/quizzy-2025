@@ -29,6 +29,11 @@
 #define NUMERO_DU_JOUEUR      0
 #define NUMERO_REPONSE_JOUEUR 1
 
+#define LARGEUR_ECRAN 1920
+#define HAUTEUR_ECRAN 1080
+
+#define RASPBERRY_PI
+
 class CommunicationBluetooth;
 class Joueur;
 class Question;
