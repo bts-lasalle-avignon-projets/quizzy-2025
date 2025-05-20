@@ -223,7 +223,8 @@ public class ParametresSession extends AppCompatActivity
                 e.printStackTrace();
             }
 
-            connexionBluetooth.envoyer("@@S;\n");
+            trame = "@@S;" + "\n";
+            connexionBluetooth.envoyer(trame);
 
             SharedPreferences prefs = getSharedPreferences("etat_partie", MODE_PRIVATE);
             SharedPreferences.Editor editeur = prefs.edit();
@@ -231,7 +232,7 @@ public class ParametresSession extends AppCompatActivity
             editeur.apply();
 
             Intent activitePrincipale = new Intent(ParametresSession.this, Quizzy.class);
-            activitePrincipale.putExtra("themeID", themeID); // à calculer comme avant
+            activitePrincipale.putExtra("themeID", themeID);
             activitePrincipale.putExtra("tempsParQuestion", Integer.parseInt(temps));
             activitePrincipale.putExtra("nombreQuestions", Integer.parseInt(nombreQuestions));
             activitePrincipale.putExtra("lancerTimer", true);

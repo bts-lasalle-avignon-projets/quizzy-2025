@@ -32,23 +32,6 @@ public class Quizzy extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[] {
-                                android.Manifest.permission.BLUETOOTH_CONNECT,
-                                android.Manifest.permission.BLUETOOTH_SCAN,
-                                android.Manifest.permission.ACCESS_FINE_LOCATION,
-                                android.Manifest.permission.ACCESS_COARSE_LOCATION
-                        },
-                        1
-                );
-            }
-        }
-        String adresseMAC = "00:E0:4C:6D:20:A3";
-        connexionBluetooth = new ConnexionBluetoothClient(this, adresseMAC);
-        connexionBluetooth.start();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activite_principale);
         Log.d(TAG, "onCreate()");
@@ -60,6 +43,23 @@ public class Quizzy extends AppCompatActivity
         boolean lancerTimer = intent.getBooleanExtra("lancerTimer", false);
 
         if (lancerTimer) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this,
+                            new String[] {
+                                    android.Manifest.permission.BLUETOOTH_CONNECT,
+                                    android.Manifest.permission.BLUETOOTH_SCAN,
+                                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                            },
+                            1
+                    );
+                }
+            }
+            String adresseMAC = "00:E0:4C:6D:20:A3";
+            connexionBluetooth = new ConnexionBluetoothClient(this, adresseMAC);
+            connexionBluetooth.start();
+
             initialiserBluetoothEtParams(intent);
             planifierReponseInitiale();
         }
@@ -125,12 +125,13 @@ public class Quizzy extends AppCompatActivity
             if (questionsEnvoyees >= nombreQuestions) {
                 Log.d(TAG, "Toutes les questions ont été envoyées");
 
+                connexionBluetooth.envoyer("@@R;17;18\n");
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                connexionBluetooth.envoyer("@@S;\n");
+                connexionBluetooth.envoyer("@@S\n");
                 return;
             }
 

@@ -68,14 +68,14 @@
         android:layout_marginStart="500dp"
         android:layout_marginEnd="500dp">
 
-    <Button
-        android:id="@+id/boutonParametrerSession"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:fontFamily="@font/open_sans"
-        android:text="@string/boutonParametrerSession"
-        android:layout_weight="1" />
+        <Button
+            android:id="@+id/boutonParametrerSession"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/boutonParametrerSession"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <Button
