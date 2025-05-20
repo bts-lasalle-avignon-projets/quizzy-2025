@@ -227,6 +227,15 @@ void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
             QString score1 = trameSeparee[NOM_JOUEUR_1];
             QString score2 = trameSeparee[NOM_JOUEUR_2];
 
+            auto gui = qobject_cast<QuizzyGUI*>(parent());
+            if(!gui)
+                return;
+
+            gui->getJoueur1()->setScore(score1.toInt());
+            gui->getJoueur2()->setScore(score2.toInt());
+
+            emit signalScore();
+
             qDebug() << Q_FUNC_INFO << "score1" << score1 << "score2" << score2;
             break;
         }

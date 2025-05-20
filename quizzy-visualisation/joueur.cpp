@@ -19,7 +19,7 @@ void Joueur::setScore(int score)
     this->score = score;
 }
 
-int Joueur::getScore() const
+int Joueur::getScore()
 {
     return score;
 }

@@ -12,7 +12,7 @@ class Joueur
     QString getNom() const;
 
     void setScore(int score);
-    int  getScore() const;
+    int  getScore();
 
   private:
     QString nom;
@@ -20,4 +20,3 @@ class Joueur
 };
 
 #endif // JOUEUR_H
-

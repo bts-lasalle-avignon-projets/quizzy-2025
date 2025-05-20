@@ -88,3 +88,7 @@ QLabel#propositionIncorrecte {
 QWidget#ecranReponse {
 border-image: url(:/images/ecran_question_reponse.png);
 }
+
+QWidget#ecranFin {
+border-image: url(:/images/ecran_question_reponse.png);
+}

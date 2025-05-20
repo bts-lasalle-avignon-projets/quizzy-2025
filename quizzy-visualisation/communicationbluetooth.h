@@ -62,6 +62,7 @@ class CommunicationBluetooth : public QObject
     void signalConfiguration();
     void signalNomsJoueurs();
     void signalQuestion();
+    void signalScore();
 };
 
 #endif // COMMUNICATIONBLUETOOTH_H

@@ -1,22 +1,34 @@
 #ifndef ECRANFIN_H
 #define ECRANFIN_H
 
-#include <QtWidgets>
+#include <QWidget>
+#include <QVBoxLayout>
+#include <QLabel>
 
 class QuizzyGUI;
 
 class EcranFin : public QWidget
 {
     Q_OBJECT
+
   public:
-    EcranFin(QuizzyGUI* parent = nullptr);
+    explicit EcranFin(QuizzyGUI* parent = nullptr);
     ~EcranFin();
+
+    void afficherScores(QString nomJoueur1,
+                        QString nomJoueur2,
+                        QString scoreJoueur1,
+                        QString scoreJoueur2);
+    void afficherGagnant(QString texte);
 
   private:
     QWidget*     ecranFin;
     QVBoxLayout* layoutEcranFin;
-    QLabel*      titreEcranFin;
-    QLabel*      messageEcranFin;
+    QLabel*      messageFelicitation;
+    QLabel*      messageGagnant;
+    QLabel*      scoreGagnant;
+    QLabel*      scorePerdant;
+    QLabel*      messageFinDePartie;
 };
 
 #endif // ECRANFIN_H
