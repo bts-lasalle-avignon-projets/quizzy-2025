@@ -40,7 +40,9 @@ QuizzyGUI::QuizzyGUI(QWidget* parent) :
     creerEcrans();
     initialiserEvenements();
 #ifdef RASPBERRY_PI
+    setFixedSize(LARGEUR_ECRAN, HAUTEUR_ECRAN);
     showFullScreen();
+
 #else
     showMaximized();
 #endif
