@@ -16,6 +16,7 @@
 #include "question.h"
 #include "quizzy.h"
 #include <QDebug>
+#include <QThread>
 
 int indexQuestionActuelle = 0;
 
@@ -136,6 +137,12 @@ void QuizzyGUI::afficherEcranSuivant()
         if(indexQuestionActuelle < getQuestion()->getNombre())
         {
             afficherEcran(QuizzyGUI::Ecran(indexCourant - 1));
+            ecranQuestion->afficherNbQuestions(
+              QString::number((getQuestion()->getNombre())),
+              indexQuestionActuelle + 1);
+            ecranReponse->afficherNbQuestions(
+              QString::number((getQuestion()->getNombre())),
+              indexQuestionActuelle + 1);
         }
         else
         {
@@ -168,15 +175,30 @@ void QuizzyGUI::afficherNomsJoueurs()
 
 void QuizzyGUI::afficherQuestion()
 {
+    QThread::sleep(1);
     ecranQuestion->afficherTitreQuestion(getQuestion()->getTitre());
     ecranQuestion->afficherThemeQuestion(getQuestion()->getTheme());
     ecranQuestion->afficherNbQuestions(
-      QString::number(getQuestion()->getNombre()));
+      QString::number(getQuestion()->getNombre()),
+      indexQuestionActuelle + 1);
     ecranQuestion->afficherPropositions(getQuestion()->getPropA(),
                                         getQuestion()->getPropB(),
                                         getQuestion()->getPropC(),
                                         getQuestion()->getPropD());
-    ecranQuestion->afficherTempsRestant(getQuestion()->getTemps());
+    ecranQuestion->demarrerCompteARebours(getQuestion()->getTemps());
+
+    ecranReponse->afficherTitreQuestion(getQuestion()->getTitre());
+    ecranReponse->afficherThemeQuestion(getQuestion()->getTheme());
+    ecranReponse->afficherNbQuestions(
+      QString::number(getQuestion()->getNombre()),
+      indexQuestionActuelle + 1);
+    ecranReponse->afficherPropositions(getQuestion()->getPropA(),
+                                       getQuestion()->getPropB(),
+                                       getQuestion()->getPropC(),
+                                       getQuestion()->getPropD());
+    ecranReponse->afficherPropositionCorrecte(getQuestion()->getIdReponse());
+    ecranReponse->afficherTempsRestant(0);
+    ecranReponse->afficherExplication(getQuestion()->getExplication());
 }
 
 void QuizzyGUI::initialiserEvenements()

@@ -32,3 +32,59 @@ QLabel#messageThemeChoisi{
 margin-top: 125px;
 color: #000000;
 }
+
+QWidget#ecranQuestion {
+border-image: url(:/images/ecran_question_reponse.png);
+}
+
+QLabel#propositionAQuestion {
+background-color: #F15475;
+color: white;
+padding: 10px;
+border-radius: 8px;
+font-weight: bold;
+}
+
+QLabel#propositionBQuestion {
+background-color: #F5CA49;
+color: white;
+padding: 10px;
+border-radius: 8px;
+font-weight: bold;
+}
+
+QLabel#propositionCQuestion {
+background-color: #89DDEF;
+color: white;
+padding: 10px;
+border-radius: 8px;
+font-weight: bold;
+}
+
+QLabel#propositionDQuestion {
+background-color: #A5ED48;
+color: white;
+padding: 10px;
+border-radius: 8px;
+font-weight: bold;
+}
+
+QLabel#propositionCorrecte {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+QLabel#propositionIncorrecte {
+    background-color: #E74C3C;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+QWidget#ecranReponse {
+border-image: url(:/images/ecran_question_reponse.png);
+}

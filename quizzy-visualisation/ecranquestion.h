@@ -34,17 +34,19 @@ class EcranQuestion : public QWidget
     QTimer*       timer;
 
     int tempsMax;
-    int tempsActuel;
+    int tempsActuel = 0;
 
   public slots:
     void afficherTitreQuestion(QString titre);
     void afficherThemeQuestion(QString theme);
-    void afficherNbQuestions(QString nbQuestions);
+    void afficherNbQuestions(QString nbQuestions, int indexQuestionActuelle);
     void afficherPropositions(QString propA,
                               QString propB,
                               QString propC,
                               QString propD);
     void afficherTempsRestant(int temps);
+    void mettreAJourCompteARebours();
+    void demarrerCompteARebours(int tempsDepart);
 };
 
 #endif // ECRANQUESTION_H
