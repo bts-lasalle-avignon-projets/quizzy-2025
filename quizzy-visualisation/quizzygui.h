@@ -102,6 +102,8 @@ class QuizzyGUI : public QMainWindow
     void afficherConfiguration();
     void afficherNomsJoueurs();
     void afficherQuestion();
+    void afficherScores();
+    void determinerGagnant();
 };
 
 #endif // QUIZZYGUI_H

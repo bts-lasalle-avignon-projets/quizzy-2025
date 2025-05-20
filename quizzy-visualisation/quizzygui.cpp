@@ -201,6 +201,39 @@ void QuizzyGUI::afficherQuestion()
     ecranReponse->afficherExplication(getQuestion()->getExplication());
 }
 
+void QuizzyGUI::afficherScores()
+{
+    QString nomJ1   = getJoueur1()->getNom();
+    QString nomJ2   = getJoueur2()->getNom();
+    QString scoreJ1 = QString::number(getJoueur1()->getScore());
+    QString scoreJ2 = QString::number(getJoueur2()->getScore());
+
+    ecranFin->afficherScores(nomJ1, nomJ2, scoreJ1, scoreJ2);
+}
+
+void QuizzyGUI::determinerGagnant()
+{
+    QString nomJ1   = getJoueur1()->getNom();
+    QString nomJ2   = getJoueur2()->getNom();
+    int     scoreJ1 = getJoueur1()->getScore();
+    int     scoreJ2 = getJoueur2()->getScore();
+
+    if(scoreJ1 > scoreJ2)
+    {
+        ecranFin->afficherGagnant("Gagnant : " + nomJ1);
+    }
+    else if(scoreJ2 > scoreJ1)
+    {
+        ecranFin->afficherGagnant("Gagnant : " + nomJ2);
+    }
+    else
+    {
+        ecranFin->afficherGagnant("Égalité !");
+    }
+
+    afficherScores();
+}
+
 void QuizzyGUI::initialiserEvenements()
 {
     connect(communication,
@@ -227,7 +260,10 @@ void QuizzyGUI::initialiserEvenements()
             &CommunicationBluetooth::signalQuestion,
             this,
             &QuizzyGUI::afficherQuestion);
-
+    connect(communication,
+            &CommunicationBluetooth::signalScore,
+            this,
+            &QuizzyGUI::determinerGagnant);
 #ifdef TEST_ECRANS
     // Flèche droite pour écran suivant
     QAction* actionAllerDroite = new QAction(this);
