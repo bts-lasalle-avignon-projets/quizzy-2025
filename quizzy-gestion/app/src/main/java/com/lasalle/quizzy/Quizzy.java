@@ -56,7 +56,7 @@ public class Quizzy extends AppCompatActivity
                     );
                 }
             }
-            String adresseMAC = "00:E0:4C:6D:20:A3";
+            String adresseMAC = "2C:CF:67:94:F2:3D";
             connexionBluetooth = new ConnexionBluetoothClient(this, adresseMAC);
             connexionBluetooth.start();
 
@@ -106,7 +106,7 @@ public class Quizzy extends AppCompatActivity
         tempsParQuestion = intent.getIntExtra("tempsParQuestion", 10);
         nombreQuestions = intent.getIntExtra("nombreQuestions", 1);
 
-        connexionBluetooth = new ConnexionBluetoothClient(this, "00:E0:4C:6D:20:A3");
+        connexionBluetooth = new ConnexionBluetoothClient(this, "2C:CF:67:94:F2:3D");
         connexionBluetooth.start();
         Log.d(TAG, "Bluetooth initialisé avec themeID=" + themeID + ", temps=" + tempsParQuestion + ", nbQuestions=" + nombreQuestions);
     }

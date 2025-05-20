@@ -48,7 +48,7 @@ public class ParametresSession extends AppCompatActivity
                 );
             }
         }
-        String adresseMAC = "00:E0:4C:6D:20:A3";
+        String adresseMAC = "2C:CF:67:94:F2:3D";
         connexionBluetooth = new ConnexionBluetoothClient(this, adresseMAC);
         connexionBluetooth.start();
 
