@@ -10,8 +10,6 @@
 #include "esp_bt_main.h"
 #include "esp_bt_device.h"
 
-#define DEBUG
-
 // Brochages
 #define GPIO_LED_ROUGE   5  //!<
 #define GPIO_LED_ORANGE  17 //!<
@@ -138,7 +136,10 @@ unsigned long tempsMaxReponse = 0;
 unsigned long tempsDebutQuestion = 0;
 unsigned long tempsPrecedent     = 0;
 int           reponse            = 0;
-bool          repondu            = false;
+bool          reponduJoueur1     = false;
+bool          reponduJoueur2     = false;
+bool          timeoutJoueur1     = false;
+bool          timeoutJoueur2     = false;
 bool          encodeur           = false;      //!<
 bool          encodeurA          = false;      //!<
 bool          encodeurB          = false;      //!<
@@ -185,7 +186,9 @@ String extraireChamp(const String& trame, unsigned int numeroChamp)
  * @brief Envoie une trame réponse
  *
  */
-void envoyerTrameReponse(int numeroReponse, unsigned long tempsReponse)
+void envoyerTrameReponse(int           numeroReponse,
+                         unsigned long tempsReponse,
+                         int           joueur)
 {
     char trameEnvoi[64];
     // Format : $A;NUMERO_REPONSE;NUMERO_PUPITRE\n
@@ -193,9 +196,8 @@ void envoyerTrameReponse(int numeroReponse, unsigned long tempsReponse)
             "%sA;%s;%d\n",
             entete.c_str(),
             nomsCouleursBoutons[numeroReponse].c_str(),
-            NUMERO_PUPITRE);
+            joueur);
     ESPBluetooth.write((uint8_t*)trameEnvoi, strlen((char*)trameEnvoi));
-    repondu = true;
 #ifdef DEBUG
     String trame = String(trameEnvoi);
     trame.remove(trame.indexOf("\n"), 1);
@@ -314,6 +316,32 @@ bool estEcheance(unsigned long intervalle)
 }
 
 /**
+ * @brief Déclenchée par interruption sur le bouton SW1
+ * @fn repondreJoueur1()
+ */
+void IRAM_ATTR repondreJoueur1()
+{
+    if(antiRebond || reponduJoueur1 || etatBuzzers == EtatBuzzer::Desactive)
+        return;
+
+    reponduJoueur1 = true;
+    antiRebond     = true;
+}
+
+/**
+ * @brief Déclenchée par interruption sur le bouton SW1
+ * @fn repondreJoueur2()
+ */
+void IRAM_ATTR repondreJoueur2()
+{
+    if(antiRebond || reponduJoueur2 || etatBuzzers == EtatBuzzer::Desactive)
+        return;
+
+    reponduJoueur2 = true;
+    antiRebond     = true;
+}
+
+/**
  * @brief Initialise les ressources du programme
  *
  * @fn setup
@@ -328,14 +356,18 @@ void setup()
     pinMode(GPIO_LED_ROUGE, OUTPUT);
     pinMode(GPIO_LED_ORANGE, OUTPUT);
     pinMode(GPIO_LED_VERTE, OUTPUT);
-
+    pinMode(GPIO_SW1, INPUT_PULLUP);
+    pinMode(GPIO_SW2, INPUT_PULLUP);
     pinMode(GPIO_ENCODEUR_A, INPUT_PULLUP);
     pinMode(GPIO_ENCODEUR_B, INPUT_PULLUP);
-    pinMode(GPIO_ENCODEUR_E, INPUT_PULLUP);
+    // pinMode(GPIO_ENCODEUR_E, INPUT_PULLUP);
 
+    attachInterrupt(digitalPinToInterrupt(GPIO_SW1), repondreJoueur1, FALLING);
+    attachInterrupt(digitalPinToInterrupt(GPIO_SW2), repondreJoueur2, FALLING);
     attachInterrupt(digitalPinToInterrupt(GPIO_ENCODEUR_A), encoderA, FALLING);
     attachInterrupt(digitalPinToInterrupt(GPIO_ENCODEUR_B), encoderB, FALLING);
-    attachInterrupt(digitalPinToInterrupt(GPIO_ENCODEUR_E), encoderE, FALLING);
+    // attachInterrupt(digitalPinToInterrupt(GPIO_ENCODEUR_E), encoderE,
+    // FALLING);
 
     digitalWrite(GPIO_LED_ROUGE, LOW);
     digitalWrite(GPIO_LED_ORANGE, LOW);
@@ -343,12 +375,12 @@ void setup()
 
     afficheur.initialiser();
 
-    String titre  = "            ";
+    String titre  = "           ";
     String stitre = "=====================";
 
 #ifdef BLUETOOTH
 #ifdef BLUETOOTH_SLAVE
-    String nomBluetooth = "quizzy-p" + String(NUMERO_PUPITRE);
+    String nomBluetooth = "quiz-pupitre";
     ESPBluetooth.begin(nomBluetooth);
     const uint8_t* adresseESP32 = esp_bt_dev_get_address();
     char           str[18];
@@ -361,7 +393,7 @@ void setup()
             adresseESP32[4],
             adresseESP32[5]);
     stitre = String("== ") + String(str) + String(" ==");
-    titre  += nomBluetooth;
+    titre += nomBluetooth;
 #endif
 #endif
 
@@ -389,7 +421,7 @@ void loop()
 {
     String         trame;
     TypeTrameRecue typeTrame;
-    char           strMessageDisplay[24];
+    char           strMessageDisplay[32];
 
     if(refresh)
     {
@@ -404,43 +436,98 @@ void loop()
         antiRebond = false;
     }
 
-    if(estEcheance(tempsMaxReponse) && !repondu) // timeout
+    if(estEcheance(tempsMaxReponse)) // timeout
     {
-        reponse     = 0;
-        etatBuzzers = EtatBuzzer::Desactive;
-        envoyerTrameReponse(reponse, tempsMaxReponse);
-        digitalWrite(GPIO_LED_ROUGE, LOW);
-        digitalWrite(GPIO_LED_ORANGE, HIGH);
-        digitalWrite(GPIO_LED_VERTE, LOW);
-        afficheur.setMessageLigne(Afficheur::Ligne3, String("-> X"));
-        sprintf(strMessageDisplay, "-> %lu", tempsMaxReponse);
-        afficheur.setMessageLigne(Afficheur::Ligne4, String(strMessageDisplay));
-        refresh = true;
+        // Joueur 1 ?
+        if(!reponduJoueur1)
+        {
+            sprintf(strMessageDisplay, "J1 -> X (%lu ms)", tempsMaxReponse);
+            envoyerTrameReponse(0, tempsMaxReponse, 1);
+            timeoutJoueur1 = true;
+        }
+        // Joueur 2 ?
+        if(!reponduJoueur2)
+        {
+            sprintf(strMessageDisplay, "J2 -> X (%lu ms)", tempsMaxReponse);
+            envoyerTrameReponse(0, tempsMaxReponse, 2);
+            timeoutJoueur2 = true;
+        }
+        // Joueur 1 ou Joueur 2 ?
+        if(!reponduJoueur1 || !reponduJoueur2)
+        {
+            afficheur.setMessageLigne(Afficheur::Ligne4,
+                                      String(strMessageDisplay));
+            refresh = true;
+        }
+        // Joueur 1 et Joueur 2 ?
+        if(!reponduJoueur1 && !reponduJoueur2)
+        {
+            etatBuzzers    = EtatBuzzer::Desactive;
+            reponse        = 0;
+            timeoutJoueur1 = true;
+            timeoutJoueur2 = true;
+            digitalWrite(GPIO_LED_ROUGE, LOW);
+            digitalWrite(GPIO_LED_ORANGE, HIGH);
+            digitalWrite(GPIO_LED_VERTE, LOW);
+        }
+        if(!reponduJoueur1)
+        {
+            reponduJoueur1 = true;
+        }
+        if(!reponduJoueur2)
+        {
+            reponduJoueur2 = true;
+        }
     }
 
-    if(encodeur && !repondu)
+    if(reponduJoueur1 || reponduJoueur2)
     {
         // validation
         unsigned long tempsReponse = millis() - tempsDebutQuestion;
-        etatBuzzers                = EtatBuzzer::Desactive;
-        envoyerTrameReponse(reponse, tempsReponse);
-        encodeur = false;
-        digitalWrite(GPIO_LED_ROUGE, LOW);
-        digitalWrite(GPIO_LED_ORANGE, HIGH);
-        digitalWrite(GPIO_LED_VERTE, LOW);
-        sprintf(strMessageDisplay, "-> %lu", tempsReponse);
-        afficheur.setMessageLigne(Afficheur::Ligne4, String(strMessageDisplay));
-        refresh = true;
+        if(reponduJoueur1 && !timeoutJoueur1)
+        {
+            envoyerTrameReponse(reponse, tempsReponse, 1);
+            sprintf(strMessageDisplay,
+                    "J1 -> %d (%lu ms)",
+                    reponse,
+                    tempsReponse);
+            afficheur.setMessageLigne(Afficheur::Ligne4,
+                                      String(strMessageDisplay));
+            refresh        = true;
+            timeoutJoueur1 = true;
+        }
+        if(reponduJoueur2 && !timeoutJoueur2)
+        {
+            envoyerTrameReponse(reponse, tempsReponse, 2);
+            sprintf(strMessageDisplay,
+                    "J2 -> %d (%lu ms)",
+                    reponse,
+                    tempsReponse);
+            afficheur.setMessageLigne(Afficheur::Ligne4,
+                                      String(strMessageDisplay));
+            refresh        = true;
+            timeoutJoueur2 = true;
+        }
+        if(reponduJoueur1 && reponduJoueur2)
+        {
+            etatBuzzers    = EtatBuzzer::Desactive;
+            reponse        = 0;
+            timeoutJoueur1 = true;
+            timeoutJoueur2 = true;
+            digitalWrite(GPIO_LED_ROUGE, HIGH);
+            digitalWrite(GPIO_LED_ORANGE, LOW);
+            digitalWrite(GPIO_LED_VERTE, LOW);
+        }
     }
 
-    if(encodeurA && !repondu)
+    if(encodeurA)
     {
         // gauche
         reponse = (reponse - 1) % (NB_BUZZERS + 1);
         if(reponse == 0)
             reponse = NB_BUZZERS;
         encodeurA = false;
-        sprintf(strMessageDisplay, "-> %s", nomsCouleurs[reponse].c_str());
+        sprintf(strMessageDisplay, "-> %s", nomsCouleurs[reponse - 1].c_str());
         afficheur.setMessageLigne(Afficheur::Ligne3, String(strMessageDisplay));
         refresh = true;
 #ifdef DEBUG
@@ -448,14 +535,14 @@ void loop()
 #endif
     }
 
-    if(encodeurB && !repondu)
+    if(encodeurB)
     {
         // droite
         reponse = (reponse + 1) % (NB_BUZZERS + 1);
         if(reponse == 0)
             reponse = 1;
         encodeurB = false;
-        sprintf(strMessageDisplay, "-> %s", nomsCouleurs[reponse].c_str());
+        sprintf(strMessageDisplay, "-> %s", nomsCouleurs[reponse - 1].c_str());
         afficheur.setMessageLigne(Afficheur::Ligne3, String(strMessageDisplay));
         refresh = true;
 #ifdef DEBUG
@@ -485,7 +572,10 @@ void loop()
 #endif
                     quizzEncours   = true;
                     numeroQuestion = 0;
-                    repondu        = false;
+                    reponduJoueur1 = false;
+                    reponduJoueur2 = false;
+                    timeoutJoueur1 = false;
+                    timeoutJoueur2 = false;
                     reponse        = 0;
                     strNbQuestions =
                       extraireChamp(trame, ChampTrame::NB_QUESTIONS);
@@ -526,7 +616,10 @@ void loop()
                     Serial.println(String(nbQuestions));
 #endif
                     etatBuzzers        = EtatBuzzer::Active;
-                    repondu            = false;
+                    reponduJoueur1     = false;
+                    reponduJoueur2     = false;
+                    timeoutJoueur1     = false;
+                    timeoutJoueur2     = false;
                     reponse            = 1;
                     tempsDebutQuestion = millis();
                     tempsPrecedent     = tempsDebutQuestion;
@@ -543,6 +636,9 @@ void loop()
                                               String("Question ") +
                                                 String(numeroQuestion) + " / " +
                                                 String(nbQuestions));
+                    sprintf(strMessageDisplay,
+                            "-> %s",
+                            nomsCouleurs[0].c_str());
                     afficheur.afficher();
                 }
                 break;
@@ -561,6 +657,10 @@ void loop()
                     afficheur.setMessageLigne(Afficheur::Ligne2,
                                               String("Fin du quizz"));
                     afficheur.afficher();
+                    reponduJoueur1 = false;
+                    reponduJoueur2 = false;
+                    timeoutJoueur1 = false;
+                    timeoutJoueur2 = false;
                 }
                 break;
             default:
