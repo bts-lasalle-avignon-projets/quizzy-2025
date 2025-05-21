@@ -121,7 +121,8 @@ const String nomsCouleursBoutons[CouleurBuzzer::NbCouleurs] = {
     "R",
     "J",
     "B",
-    "V"
+    "V",
+    "A"
 }; //!< nom des couleurs dans le protocole
 const String nomsCouleurs[CouleurBuzzer::NbCouleurs] = {
     "Rouge",
@@ -191,12 +192,12 @@ void envoyerTrameReponse(int           numeroReponse,
                          int           joueur)
 {
     char trameEnvoi[64];
-    // Format : $A;NUMERO_REPONSE;NUMERO_PUPITRE\n
+    // Format : $A;NUMERO_PUPITRE;COULEUR_BOUTON;\n
     sprintf((char*)trameEnvoi,
-            "%sA;%s;%d\n",
+            "%sA;%d;%s\n",
             entete.c_str(),
-            nomsCouleursBoutons[numeroReponse].c_str(),
-            joueur);
+            joueur,
+            nomsCouleursBoutons[numeroReponse - 1].c_str());
     ESPBluetooth.write((uint8_t*)trameEnvoi, strlen((char*)trameEnvoi));
 #ifdef DEBUG
     String trame = String(trameEnvoi);
@@ -258,7 +259,7 @@ bool lireTrame(String& trame)
 }
 
 /**
- * @brief Vérifie si la trame reçue est valide et retorune le type de la trame
+ * @brief Vérifie si la trame reçue est valide et retourne le type de la trame
  *
  * @fn verifierTrame(String &trame)
  * @param trame
@@ -407,7 +408,6 @@ void setup()
     afficheur.afficher();
 
     // initialise le générateur pseudo-aléatoire
-    // Serial.println(randomSeed(analogRead(34)));
     esp_random();
 }
 
@@ -441,15 +441,19 @@ void loop()
         // Joueur 1 ?
         if(!reponduJoueur1)
         {
-            sprintf(strMessageDisplay, "J1 -> X (%lu ms)", tempsMaxReponse);
-            envoyerTrameReponse(0, tempsMaxReponse, 1);
+            sprintf(strMessageDisplay,
+                    "J1 -> A (%lu s)",
+                    ulong(tempsMaxReponse / 1000));
+            envoyerTrameReponse(CouleurBuzzer::NbCouleurs, tempsMaxReponse, 1);
             timeoutJoueur1 = true;
         }
         // Joueur 2 ?
         if(!reponduJoueur2)
         {
-            sprintf(strMessageDisplay, "J2 -> X (%lu ms)", tempsMaxReponse);
-            envoyerTrameReponse(0, tempsMaxReponse, 2);
+            sprintf(strMessageDisplay,
+                    "J2 -> A (%lu s)",
+                    ulong(tempsMaxReponse / 1000));
+            envoyerTrameReponse(CouleurBuzzer::NbCouleurs, tempsMaxReponse, 2);
             timeoutJoueur2 = true;
         }
         // Joueur 1 ou Joueur 2 ?
@@ -488,9 +492,9 @@ void loop()
         {
             envoyerTrameReponse(reponse, tempsReponse, 1);
             sprintf(strMessageDisplay,
-                    "J1 -> %d (%lu ms)",
-                    reponse,
-                    tempsReponse);
+                    "J1 -> %s (%.1f s)",
+                    nomsCouleursBoutons[reponse - 1].c_str(),
+                    float(tempsReponse / 1000.0));
             afficheur.setMessageLigne(Afficheur::Ligne4,
                                       String(strMessageDisplay));
             refresh        = true;
@@ -500,9 +504,9 @@ void loop()
         {
             envoyerTrameReponse(reponse, tempsReponse, 2);
             sprintf(strMessageDisplay,
-                    "J2 -> %d (%lu ms)",
-                    reponse,
-                    tempsReponse);
+                    "J2 -> %s (%.1f s)",
+                    nomsCouleursBoutons[reponse - 1].c_str(),
+                    float(tempsReponse / 1000.0));
             afficheur.setMessageLigne(Afficheur::Ligne4,
                                       String(strMessageDisplay));
             refresh        = true;
@@ -514,9 +518,6 @@ void loop()
             reponse        = 0;
             timeoutJoueur1 = true;
             timeoutJoueur2 = true;
-            digitalWrite(GPIO_LED_ROUGE, HIGH);
-            digitalWrite(GPIO_LED_ORANGE, LOW);
-            digitalWrite(GPIO_LED_VERTE, LOW);
         }
     }
 
@@ -639,6 +640,9 @@ void loop()
                     sprintf(strMessageDisplay,
                             "-> %s",
                             nomsCouleurs[0].c_str());
+                    afficheur.setMessageLigne(Afficheur::Ligne3,
+                                              String(strMessageDisplay));
+                    afficheur.setMessageLigne(Afficheur::Ligne4, String(""));
                     afficheur.afficher();
                 }
                 break;
@@ -656,6 +660,8 @@ void loop()
                     digitalWrite(GPIO_LED_VERTE, LOW);
                     afficheur.setMessageLigne(Afficheur::Ligne2,
                                               String("Fin du quizz"));
+                    afficheur.setMessageLigne(Afficheur::Ligne3, String(""));
+                    afficheur.setMessageLigne(Afficheur::Ligne4, String(""));
                     afficheur.afficher();
                     reponduJoueur1 = false;
                     reponduJoueur2 = false;
