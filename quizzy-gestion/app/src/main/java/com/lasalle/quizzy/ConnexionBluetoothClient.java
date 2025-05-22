@@ -1,5 +1,6 @@
 package com.lasalle.quizzy;
 
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -37,29 +38,23 @@ public class ConnexionBluetoothClient extends Thread {
             Log.e(TAG, "Bluetooth non supporté sur cet appareil");
             return;
         }
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
                 Log.e(TAG, "Permission BLUETOOTH_CONNECT non accordée");
                 return;
             }
         }
-
         try {
             BluetoothDevice device = bluetoothAdapter.getRemoteDevice(adresseMAC);
-
             if (device == null) {
                 Log.e(TAG, "Appareil Bluetooth introuvable pour l'adresse : " + adresseMAC);
                 return;
             }
-
             socket = device.createRfcommSocketToServiceRecord(MY_UUID);
-            bluetoothAdapter.cancelDiscovery(); // Important pour éviter les ralentissements
+            bluetoothAdapter.cancelDiscovery();
             socket.connect();
-
             outputStream = socket.getOutputStream();
             Log.i(TAG, "Connexion réussie à : " + device.getName());
-
         } catch (IOException e) {
             Log.e(TAG, "Erreur de connexion à l'appareil : " + adresseMAC, e);
         } catch (SecurityException e) {

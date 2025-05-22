@@ -9,12 +9,14 @@
     tools:ignore="MissingDefaultResource"
     android:background="@color/bleu">
 
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:background="@color/jaune"
         android:layout_marginBottom="20dp">
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -25,17 +27,19 @@
             android:gravity="center"
             android:layout_weight="1" />
 
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:background="@color/jaune"
         android:layout_marginEnd="350dp"
         android:layout_marginStart="350dp">
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,21 +49,24 @@
             android:fontFamily="@font/open_sans"
             android:gravity="center" />
 
+
         <Spinner
             android:id="@+id/spinner_theme"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1" />
 
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal"
         android:background="@color/jaune"
         android:layout_marginEnd="350dp"
         android:layout_marginStart="350dp">
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,6 +76,7 @@
             android:textStyle="bold"
             android:gravity="center" />
 
+
         <EditText
             android:id="@+id/nbrQuestion"
             android:layout_width="fill_parent"
@@ -77,17 +85,19 @@
             android:inputType="numberDecimal"
             android:layout_weight="1" />
 
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:background="@color/jaune"
         android:layout_marginEnd="350dp"
         android:layout_marginStart="350dp" >
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -97,22 +107,25 @@
             android:fontFamily="@font/open_sans"
             android:gravity="center" />
 
+
         <Spinner
             android:id="@+id/spinner_TempsQuestion"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal"
         android:layout_marginBottom="10dp"
         android:background="@color/jaune"
         android:layout_marginEnd="350dp"
         android:layout_marginStart="350dp" >
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,13 +135,16 @@
             android:text="     Joueur 1 : "
             android:textStyle="bold" />
 
+
         <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/spinner_joueur1" />
 
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -138,6 +154,7 @@
         android:layout_marginEnd="350dp"
         android:layout_marginStart="350dp">
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
@@ -146,20 +163,23 @@
             android:text="      Joueur 2 : "
             android:textStyle="bold" />
 
+
         <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/spinner_joueur2" />
 
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginEnd="400dp"
         android:layout_marginStart="400dp" >
+
 
         <Button
             android:id="@+id/lancementSession"
@@ -170,7 +190,9 @@
             android:layout_weight="1"
             android:backgroundTint="@color/jaune" />
 
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -180,6 +202,7 @@
         android:layout_marginEnd="280dp"
         android:layout_marginStart="280dp">
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -187,6 +210,7 @@
             android:textStyle="bold"
             android:fontFamily="@font/open_sans"
             android:gravity="center" />
+
 
         <EditText
             android:id="@+id/creationJoueur"
@@ -196,14 +220,16 @@
             android:inputType="textCapCharacters"
             android:layout_weight="1" />
 
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginEnd="400dp"
         android:layout_marginStart="400dp" >
+
 
         <Button
             android:id="@+id/boutonLancementCreationJoueur"
@@ -214,14 +240,16 @@
             android:layout_weight="1"
             android:backgroundTint="@color/jaune" />
 
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginEnd="150dp"
         android:layout_marginStart="150dp">
+
 
         <Button
             android:id="@+id/boutonRetourAccueil"
@@ -230,6 +258,7 @@
             android:text="Accueil"
             android:layout_weight="1"
             android:backgroundTint="@color/jaune" />
+
 
     </LinearLayout>
 
