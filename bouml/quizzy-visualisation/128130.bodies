@@ -1,0 +1,16 @@
+class EcranAttente
+!!!130562.cpp!!!	EcranAttente(inout parent : QuizzyGUI = nullptr)
+    qDebug() << Q_FUNC_INFO << this << "parent" << parent;
+
+    ecranAttente->setObjectName("ecranAttente");
+    messageConnexion->setObjectName("messageConnexion");
+
+    messageConnexion->setText("En attente de connexion ...");
+    messageConnexion->setAlignment(Qt::AlignCenter);
+
+    layoutEcranAttente->addWidget(messageConnexion);
+    parent->getEcrans()->addWidget(ecranAttente);
+!!!130690.cpp!!!	~EcranAttente()
+    qDebug() << Q_FUNC_INFO << this;
+!!!130818.cpp!!!	afficherMessageConnexion(in message : QString) : void
+    messageConnexion->setText(message);

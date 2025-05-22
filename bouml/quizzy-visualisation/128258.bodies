@@ -1,0 +1,32 @@
+class EcranFin
+!!!130946.cpp!!!	EcranFin(inout parent : QuizzyGUI = nullptr)
+    qDebug() << Q_FUNC_INFO << this << "parent" << parent;
+
+    ecranFin->setObjectName("ecranFin");
+
+    messageFelicitation->setAlignment(Qt::AlignCenter);
+    messageFelicitation->setText(
+      "Bravo, vous avez répondu à toutes les questions !");
+    layoutEcranFin->addWidget(messageFelicitation);
+
+    messageGagnant->setAlignment(Qt::AlignCenter);
+    layoutEcranFin->addWidget(messageGagnant);
+
+    scoreGagnant->setAlignment(Qt::AlignCenter);
+    layoutEcranFin->addWidget(scoreGagnant);
+
+    scorePerdant->setAlignment(Qt::AlignCenter);
+    layoutEcranFin->addWidget(scorePerdant);
+
+    messageFinDePartie->setAlignment(Qt::AlignCenter);
+    messageFinDePartie->setText("La partie va se terminer ...");
+    layoutEcranFin->addWidget(messageFinDePartie);
+
+    parent->getEcrans()->addWidget(ecranFin);
+!!!131074.cpp!!!	~EcranFin()
+    qDebug() << Q_FUNC_INFO << this;
+!!!131202.cpp!!!	afficherScores(in nomJoueur1 : QString, in nomJoueur2 : QString, in scoreJoueur1 : QString, in scoreJoueur2 : QString) : void
+    scoreGagnant->setText(nomJoueur1 + " : " + scoreJoueur1 + " points");
+    scorePerdant->setText(nomJoueur2 + " : " + scoreJoueur2 + " points");
+!!!131330.cpp!!!	afficherGagnant(in texte : QString) : void
+    messageGagnant->setText(texte);

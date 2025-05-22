@@ -1,0 +1,94 @@
+class EcranReponse
+!!!132610.cpp!!!	EcranReponse(inout parent : QuizzyGUI = nullptr)
+    qDebug() << Q_FUNC_INFO << this << "parent" << parent;
+
+    ecranReponse->setObjectName("ecranReponse");
+
+    titreQuestion->setText("Titre de la question");
+    theme->setText("Thème");
+    nombreDeQuestion->setText("Question x/y");
+    messageReponse->setText("Voici la réponse !");
+    propositionA->setText("A - Proposition A");
+    propositionB->setText("B - Proposition B");
+    propositionC->setText("C - Proposition C");
+    propositionD->setText("D - Proposition D");
+    explication->setText("Explication de la bonne réponse.");
+
+    titreQuestion->setWordWrap(true);
+    titreQuestion->setMaximumWidth(1200);
+    titreQuestion->setAlignment(Qt::AlignCenter);
+    theme->setAlignment(Qt::AlignCenter);
+    nombreDeQuestion->setAlignment(Qt::AlignCenter);
+    messageReponse->setAlignment(Qt::AlignCenter);
+    explication->setWordWrap(true);
+    explication->setMaximumWidth(1800);
+    explication->setAlignment(Qt::AlignCenter);
+    tempsRestant->setAlignment(Qt::AlignRight);
+    layoutPropositions->setAlignment(Qt::AlignCenter);
+    propositionA->setAlignment(Qt::AlignCenter);
+    propositionB->setAlignment(Qt::AlignCenter);
+    propositionC->setAlignment(Qt::AlignCenter);
+    propositionD->setAlignment(Qt::AlignCenter);
+
+    layoutEcranReponse->addLayout(layoutTitre);
+    layoutTitre->addWidget(titreQuestion);
+    layoutTitre->addLayout(layoutThemeNbQuestion);
+    layoutThemeNbQuestion->addWidget(theme);
+    layoutThemeNbQuestion->addWidget(nombreDeQuestion);
+
+    layoutEcranReponse->addWidget(messageReponse);
+
+    layoutEcranReponse->addLayout(layoutPropositions);
+    layoutPropositions->addLayout(layoutPropositionsAB);
+    layoutPropositionsAB->addWidget(propositionA);
+    layoutPropositionsAB->addWidget(propositionB);
+    layoutPropositions->addLayout(layoutPropositionsCD);
+    layoutPropositionsCD->addWidget(propositionC);
+    layoutPropositionsCD->addWidget(propositionD);
+
+    layoutEcranReponse->addWidget(explication);
+
+    layoutEcranReponse->addLayout(layoutTimer);
+    layoutTimer->addStretch();
+    layoutTimer->addWidget(tempsRestant);
+
+    parent->getEcrans()->addWidget(ecranReponse);
+!!!132738.cpp!!!	~EcranReponse()
+    qDebug() << Q_FUNC_INFO << this;
+!!!132866.cpp!!!	afficherTitreQuestion(in titre : QString) : void
+    titreQuestion->setText(titre);
+!!!132994.cpp!!!	afficherThemeQuestion(in themeQuestions : QString) : void
+    theme->setText(themeQuestions);
+!!!133122.cpp!!!	afficherNbQuestions(in nbQuestions : QString, in indexQuestionActuelle : int) : void
+    QString texte =
+      QString::number(indexQuestionActuelle) + " / " + nbQuestions;
+    nombreDeQuestion->setText(texte);
+!!!133250.cpp!!!	afficherPropositions(in propA : QString, in propB : QString, in propC : QString, in propD : QString) : void
+    propositionA->setText(propA);
+    propositionB->setText(propB);
+    propositionC->setText(propC);
+    propositionD->setText(propD);
+!!!133378.cpp!!!	afficherTempsRestant(in temps : int) : void
+    tempsRestant->setText(QString::number(temps));
+!!!133506.cpp!!!	afficherExplication(in texte : QString) : void
+    explication->setText(texte);
+!!!133634.cpp!!!	afficherPropositionCorrecte(in idReponse : int) : void
+    QVector<QLabel*> propositions = { propositionA,
+                                      propositionB,
+                                      propositionC,
+                                      propositionD };
+
+    for(int i = 0; i < 4; ++i)
+    {
+        if(i == idReponse - 1)
+        {
+            propositions[i]->setObjectName("propositionCorrecte");
+        }
+        else
+        {
+            propositions[i]->setObjectName("propositionIncorrecte");
+        }
+        propositions[i]->style()->unpolish(propositions[i]);
+        propositions[i]->style()->polish(propositions[i]);
+        propositions[i]->update();
+    }
