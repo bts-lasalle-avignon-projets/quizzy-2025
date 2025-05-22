@@ -1,8 +1,7 @@
 class Quizzy
-!!!129450.cpp!!!	Quizzy(inout parent : QObject = nullptr)
+!!!129450.cpp!!!	Quizzy(inout parent : QObject, inout communicationBluetooth : CommunicationBluetooth)
     qDebug() << Q_FUNC_INFO << this << "parent" << parent;
 !!!129578.cpp!!!	~Quizzy()
-    delete communicationBluetooth;
     qDebug() << Q_FUNC_INFO << this;
 !!!129834.cpp!!!	traiterTrame(in trameRecue : QString) : QVector<QString>
     // TODO
