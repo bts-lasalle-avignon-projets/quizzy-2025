@@ -1,21 +1,5 @@
-#include "ecranquestion.h"
-#include "quizzygui.h"
-#include <QDebug>
-
-EcranQuestion::EcranQuestion(QuizzyGUI* parent) :
-    QWidget(parent), ecranQuestion(new QWidget(this)),
-    layoutEcranQuestion(new QVBoxLayout(ecranQuestion)),
-    layoutTitre(new QHBoxLayout()), layoutThemeNbQuestion(new QHBoxLayout()),
-    titreQuestion(new QLabel(this)), theme(new QLabel(this)),
-    nombreDeQuestion(new QLabel(this)), messageChoix(new QLabel(this)),
-    layoutPropositions(new QVBoxLayout()),
-    layoutPropositionsAB(new QHBoxLayout()),
-    layoutPropositionsCD(new QHBoxLayout()), propositionA(new QLabel(this)),
-    propositionB(new QLabel(this)), propositionC(new QLabel(this)),
-    propositionD(new QLabel(this)), layoutTimer(new QHBoxLayout()),
-    barreDeProgression(new QProgressBar(this)), tempsRestant(new QLabel(this)),
-    timer(new QTimer(this))
-{
+class EcranQuestion
+!!!131458.cpp!!!	EcranQuestion(inout parent : QuizzyGUI = nullptr)
     {
         qDebug() << Q_FUNC_INFO << this << "parent" << parent;
 
@@ -71,44 +55,37 @@ EcranQuestion::EcranQuestion(QuizzyGUI* parent) :
         parent->getEcrans()->addWidget(ecranQuestion);
         timer->start(1000);
     }
-}
-
-void EcranQuestion::afficherTitreQuestion(QString titre)
-{
+!!!131586.cpp!!!	~EcranQuestion()
+    qDebug() << Q_FUNC_INFO << this;
+!!!131714.cpp!!!	afficherTitreQuestion(in titre : QString) : void
     titreQuestion->setText(titre);
-}
-
-void EcranQuestion::afficherThemeQuestion(QString themeQuestions)
-{
+!!!131842.cpp!!!	afficherThemeQuestion(in themeQuestions : QString) : void
     theme->setText(themeQuestions);
-}
-
-void EcranQuestion::afficherNbQuestions(QString nbQuestions,
-                                        int     indexQuestionActuelle)
-{
+!!!131970.cpp!!!	afficherNbQuestions(in nbQuestions : QString, in indexQuestionActuelle : int) : void
     QString texte =
       QString::number(indexQuestionActuelle) + " / " + nbQuestions;
     nombreDeQuestion->setText(texte);
-}
-
-void EcranQuestion::afficherPropositions(QString propA,
-                                         QString propB,
-                                         QString propC,
-                                         QString propD)
-{
+!!!132098.cpp!!!	afficherPropositions(in propA : QString, in propB : QString, in propC : QString, in propD : QString) : void
     propositionA->setText(propA);
     propositionB->setText(propB);
     propositionC->setText(propC);
     propositionD->setText(propD);
-}
-
-void EcranQuestion::afficherTempsRestant(int temps)
-{
+!!!132226.cpp!!!	afficherTempsRestant(in temps : int) : void
     tempsRestant->setText(QString::number(temps));
-}
+!!!132354.cpp!!!	mettreAJourCompteARebours() : void
+    tempsActuel--;
 
-void EcranQuestion::demarrerCompteARebours(int tempsDepart)
-{
+    if(tempsActuel >= 0)
+    {
+        afficherTempsRestant(tempsActuel);
+        barreDeProgression->setValue(tempsActuel);
+    }
+    else
+    {
+        timer->stop();
+        qDebug() << "Temps écoulé !";
+    }
+!!!132482.cpp!!!	demarrerCompteARebours(in tempsDepart : int) : void
     disconnect(timer,
                &QTimer::timeout,
                this,
@@ -128,25 +105,3 @@ void EcranQuestion::demarrerCompteARebours(int tempsDepart)
             this,
             &EcranQuestion::mettreAJourCompteARebours);
     timer->start(1000);
-}
-
-void EcranQuestion::mettreAJourCompteARebours()
-{
-    tempsActuel--;
-
-    if(tempsActuel >= 0)
-    {
-        afficherTempsRestant(tempsActuel);
-        barreDeProgression->setValue(tempsActuel);
-    }
-    else
-    {
-        timer->stop();
-        qDebug() << "Temps écoulé !";
-    }
-}
-
-EcranQuestion::~EcranQuestion()
-{
-    qDebug() << Q_FUNC_INFO << this;
-}

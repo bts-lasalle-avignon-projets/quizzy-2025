@@ -13,8 +13,12 @@
 #include "ecranquestion.h"
 #include "ecranreponse.h"
 #include "ecranfin.h"
+#include "question.h"
 #include "quizzy.h"
 #include <QDebug>
+#include <QThread>
+
+int indexQuestionActuelle = 0;
 
 /**
  * @brief Constructeur de la classe QuizzyGUI
@@ -36,7 +40,9 @@ QuizzyGUI::QuizzyGUI(QWidget* parent) :
     creerEcrans();
     initialiserEvenements();
 #ifdef RASPBERRY_PI
+    setFixedSize(LARGEUR_ECRAN, HAUTEUR_ECRAN);
     showFullScreen();
+
 #else
     showMaximized();
 #endif
@@ -124,24 +130,110 @@ void QuizzyGUI::afficherEcranAttente()
 void QuizzyGUI::afficherEcranSuivant()
 {
     int indexCourant = ecrans->currentIndex();
-    if(indexCourant < ecrans->count() - 1)
+    if(indexCourant == idEcranReponse)
     {
-        afficherEcran(QuizzyGUI::Ecran(indexCourant + 1));
+        indexQuestionActuelle++;
+        qDebug() << Q_FUNC_INFO << "indexQuestionActuelle"
+                 << indexQuestionActuelle;
+
+        if(indexQuestionActuelle < getQuestion()->getNombre())
+        {
+            afficherEcran(QuizzyGUI::Ecran(indexCourant - 1));
+            ecranQuestion->afficherNbQuestions(
+              QString::number((getQuestion()->getNombre())),
+              indexQuestionActuelle + 1);
+            ecranReponse->afficherNbQuestions(
+              QString::number((getQuestion()->getNombre())),
+              indexQuestionActuelle + 1);
+        }
+        else
+        {
+            afficherEcran(QuizzyGUI::Ecran(indexCourant + 1));
+        }
+    }
+    else
+    {
+        if(indexCourant < ecrans->count() - 1)
+        {
+            afficherEcran(QuizzyGUI::Ecran(indexCourant + 1));
+        }
     }
 }
 
-void QuizzyGUI::afficherConfiguration(QString theme,
-                                      QString temps,
-                                      QString nbQuestions)
+void QuizzyGUI::afficherConfiguration()
 {
-    ecranAccueil->afficherThemeChoisi(theme);
-    ecranAccueil->afficherTempsParQuestion(temps);
-    ecranAccueil->afficherNombreDeQuestions(nbQuestions);
+    ecranAccueil->afficherThemeChoisi(getQuestion()->getTheme());
+    ecranAccueil->afficherTempsParQuestion(
+      QString::number(getQuestion()->getTemps()));
+    ecranAccueil->afficherNombreDeQuestions(
+      QString::number(getQuestion()->getNombre()));
 }
 
-void QuizzyGUI::afficherNomsJoueurs(QString nomJoueur1, QString nomJoueur2)
+void QuizzyGUI::afficherNomsJoueurs()
 {
-    ecranAccueil->afficherNomsJoueurs(nomJoueur1, nomJoueur2);
+    ecranAccueil->afficherNomsJoueurs(getJoueur1()->getNom(),
+                                      getJoueur2()->getNom());
+}
+
+void QuizzyGUI::afficherQuestion()
+{
+    QThread::sleep(1);
+    ecranQuestion->afficherTitreQuestion(getQuestion()->getTitre());
+    ecranQuestion->afficherThemeQuestion(getQuestion()->getTheme());
+    ecranQuestion->afficherNbQuestions(
+      QString::number(getQuestion()->getNombre()),
+      indexQuestionActuelle + 1);
+    ecranQuestion->afficherPropositions(getQuestion()->getPropA(),
+                                        getQuestion()->getPropB(),
+                                        getQuestion()->getPropC(),
+                                        getQuestion()->getPropD());
+    ecranQuestion->demarrerCompteARebours(getQuestion()->getTemps());
+
+    ecranReponse->afficherTitreQuestion(getQuestion()->getTitre());
+    ecranReponse->afficherThemeQuestion(getQuestion()->getTheme());
+    ecranReponse->afficherNbQuestions(
+      QString::number(getQuestion()->getNombre()),
+      indexQuestionActuelle + 1);
+    ecranReponse->afficherPropositions(getQuestion()->getPropA(),
+                                       getQuestion()->getPropB(),
+                                       getQuestion()->getPropC(),
+                                       getQuestion()->getPropD());
+    ecranReponse->afficherPropositionCorrecte(getQuestion()->getIdReponse());
+    ecranReponse->afficherTempsRestant(0);
+    ecranReponse->afficherExplication(getQuestion()->getExplication());
+}
+
+void QuizzyGUI::afficherScores()
+{
+    QString nomJ1   = getJoueur1()->getNom();
+    QString nomJ2   = getJoueur2()->getNom();
+    QString scoreJ1 = QString::number(getJoueur1()->getScore());
+    QString scoreJ2 = QString::number(getJoueur2()->getScore());
+
+    ecranFin->afficherScores(nomJ1, nomJ2, scoreJ1, scoreJ2);
+}
+
+void QuizzyGUI::determinerGagnant()
+{
+    QString nomJ1   = getJoueur1()->getNom();
+    QString nomJ2   = getJoueur2()->getNom();
+    int     scoreJ1 = getJoueur1()->getScore();
+    int     scoreJ2 = getJoueur2()->getScore();
+
+    if(scoreJ1 > scoreJ2)
+    {
+        ecranFin->afficherGagnant("Gagnant : " + nomJ1);
+    }
+    else if(scoreJ2 > scoreJ1)
+    {
+        ecranFin->afficherGagnant("Gagnant : " + nomJ2);
+    }
+    else
+    {
+        ecranFin->afficherGagnant("Égalité !");
+    }
+
+    afficherScores();
 }
 
 void QuizzyGUI::initialiserEvenements()
@@ -166,6 +258,14 @@ void QuizzyGUI::initialiserEvenements()
             &CommunicationBluetooth::signalNomsJoueurs,
             this,
             &QuizzyGUI::afficherNomsJoueurs);
+    connect(communication,
+            &CommunicationBluetooth::signalQuestion,
+            this,
+            &QuizzyGUI::afficherQuestion);
+    connect(communication,
+            &CommunicationBluetooth::signalScore,
+            this,
+            &QuizzyGUI::determinerGagnant);
 #ifdef TEST_ECRANS
     // Flèche droite pour écran suivant
     QAction* actionAllerDroite = new QAction(this);

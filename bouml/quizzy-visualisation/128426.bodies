@@ -1,3 +1,43 @@
 class Question
+!!!134274.cpp!!!	setTheme(in theme : QString) : void
+    this->theme = theme;
+!!!134402.cpp!!!	getTheme() : QString
+    return theme;
+!!!134530.cpp!!!	setTitre(inout titre : QString) : void
+    this->titre = titre;
+!!!134658.cpp!!!	getTitre() : QString
+    return titre;
+!!!134786.cpp!!!	setPropA(inout propositionA : QString) : void
+    this->propositionA = propositionA;
+!!!134914.cpp!!!	getPropA() : QString
+    return propositionA;
+!!!135042.cpp!!!	setPropB(inout propositionB : QString) : void
+    this->propositionB = propositionB;
+!!!135170.cpp!!!	getPropB() : QString
+    return propositionB;
+!!!135298.cpp!!!	setPropC(inout propositionC : QString) : void
+    this->propositionC = propositionC;
+!!!135426.cpp!!!	getPropC() : QString
+    return propositionC;
+!!!135554.cpp!!!	setPropD(inout propositionD : QString) : void
+    this->propositionD = propositionD;
+!!!135682.cpp!!!	getPropD() : QString
+    return propositionD;
+!!!135810.cpp!!!	setExplication(inout explication : QString) : void
+    this->explication = explication;
+!!!135938.cpp!!!	getExplication() : QString
+    return explication;
+!!!136066.cpp!!!	setIdReponse(in idReponse : int) : void
+    this->idReponse = idReponse;
+!!!136194.cpp!!!	getIdReponse() : int
+    return idReponse;
+!!!136322.cpp!!!	setTemps(in secondes : int) : void
+    tempsParQuestion = secondes;
+!!!136450.cpp!!!	getTemps() : int
+    return tempsParQuestion;
+!!!136578.cpp!!!	setNombre(in nb : int) : void
+    nombreDeQuestions = nb;
+!!!136706.cpp!!!	getNombre() : int
+    return nombreDeQuestions;
 !!!129322.cpp!!!	Question()
 

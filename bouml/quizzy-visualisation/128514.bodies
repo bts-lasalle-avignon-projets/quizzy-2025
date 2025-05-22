@@ -1,20 +1,5 @@
-#include "ecranreponse.h"
-#include "quizzygui.h"
-#include <QDebug>
-
-EcranReponse::EcranReponse(QuizzyGUI* parent) :
-    QWidget(parent), ecranReponse(new QWidget(this)),
-    layoutEcranReponse(new QVBoxLayout(ecranReponse)),
-    layoutTitre(new QHBoxLayout()), layoutThemeNbQuestion(new QHBoxLayout()),
-    titreQuestion(new QLabel(this)), theme(new QLabel(this)),
-    nombreDeQuestion(new QLabel(this)), messageReponse(new QLabel(this)),
-    layoutPropositions(new QVBoxLayout()),
-    layoutPropositionsAB(new QHBoxLayout()),
-    layoutPropositionsCD(new QHBoxLayout()), propositionA(new QLabel(this)),
-    propositionB(new QLabel(this)), propositionC(new QLabel(this)),
-    propositionD(new QLabel(this)), layoutTimer(new QHBoxLayout()),
-    explication(new QLabel(this)), tempsRestant(new QLabel(this))
-{
+class EcranReponse
+!!!132610.cpp!!!	EcranReponse(inout parent : QuizzyGUI = nullptr)
     qDebug() << Q_FUNC_INFO << this << "parent" << parent;
 
     ecranReponse->setObjectName("ecranReponse");
@@ -68,39 +53,26 @@ EcranReponse::EcranReponse(QuizzyGUI* parent) :
     layoutTimer->addWidget(tempsRestant);
 
     parent->getEcrans()->addWidget(ecranReponse);
-}
-
-void EcranReponse::afficherTitreQuestion(QString titre)
-{
+!!!132738.cpp!!!	~EcranReponse()
+    qDebug() << Q_FUNC_INFO << this;
+!!!132866.cpp!!!	afficherTitreQuestion(in titre : QString) : void
     titreQuestion->setText(titre);
-}
-
-void EcranReponse::afficherThemeQuestion(QString themeQuestions)
-{
+!!!132994.cpp!!!	afficherThemeQuestion(in themeQuestions : QString) : void
     theme->setText(themeQuestions);
-}
-
-void EcranReponse::afficherNbQuestions(QString nbQuestions,
-                                       int     indexQuestionActuelle)
-{
+!!!133122.cpp!!!	afficherNbQuestions(in nbQuestions : QString, in indexQuestionActuelle : int) : void
     QString texte =
       QString::number(indexQuestionActuelle) + " / " + nbQuestions;
     nombreDeQuestion->setText(texte);
-}
-
-void EcranReponse::afficherPropositions(QString propA,
-                                        QString propB,
-                                        QString propC,
-                                        QString propD)
-{
+!!!133250.cpp!!!	afficherPropositions(in propA : QString, in propB : QString, in propC : QString, in propD : QString) : void
     propositionA->setText(propA);
     propositionB->setText(propB);
     propositionC->setText(propC);
     propositionD->setText(propD);
-}
-
-void EcranReponse::afficherPropositionCorrecte(int idReponse)
-{
+!!!133378.cpp!!!	afficherTempsRestant(in temps : int) : void
+    tempsRestant->setText(QString::number(temps));
+!!!133506.cpp!!!	afficherExplication(in texte : QString) : void
+    explication->setText(texte);
+!!!133634.cpp!!!	afficherPropositionCorrecte(in idReponse : int) : void
     QVector<QLabel*> propositions = { propositionA,
                                       propositionB,
                                       propositionC,
@@ -120,19 +92,3 @@ void EcranReponse::afficherPropositionCorrecte(int idReponse)
         propositions[i]->style()->polish(propositions[i]);
         propositions[i]->update();
     }
-}
-
-void EcranReponse::afficherTempsRestant(int temps)
-{
-    tempsRestant->setText(QString::number(temps));
-}
-
-void EcranReponse::afficherExplication(QString texte)
-{
-    explication->setText(texte);
-}
-
-EcranReponse::~EcranReponse()
-{
-    qDebug() << Q_FUNC_INFO << this;
-}

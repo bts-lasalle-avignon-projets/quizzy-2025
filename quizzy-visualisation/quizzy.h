@@ -25,10 +25,14 @@
 #define PROPOSITION_D  5
 #define NUMERO_REPONSE 6
 #define EXPLICATION    7
-#define POINTS         8
 
 #define NUMERO_DU_JOUEUR      0
 #define NUMERO_REPONSE_JOUEUR 1
+
+#define LARGEUR_ECRAN 1920
+#define HAUTEUR_ECRAN 1080
+
+#define RASPBERRY_PI
 
 class CommunicationBluetooth;
 class Joueur;
@@ -88,3 +92,4 @@ class Quizzy : public QObject
     void reponseJoueurRecue(QString IdPupitre, QString choixJoueur);
 };
 #endif // QUIZZY_H
+

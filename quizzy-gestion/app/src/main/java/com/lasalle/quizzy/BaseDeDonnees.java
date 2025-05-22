@@ -280,4 +280,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         curseur.close();
         return trameQuestion;
     }
+        curseur.close();
+        return trameQuestion;
+    }
 }

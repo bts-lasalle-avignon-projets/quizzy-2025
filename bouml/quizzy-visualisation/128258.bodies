@@ -1,14 +1,5 @@
-#include "ecranfin.h"
-#include "quizzygui.h"
-#include <QDebug>
-
-EcranFin::EcranFin(QuizzyGUI* parent) :
-    QWidget(parent), ecranFin(new QWidget(this)),
-    layoutEcranFin(new QVBoxLayout(ecranFin)),
-    messageFelicitation(new QLabel(this)), messageGagnant(new QLabel(this)),
-    scoreGagnant(new QLabel(this)), scorePerdant(new QLabel(this)),
-    messageFinDePartie(new QLabel(this))
-{
+class EcranFin
+!!!130946.cpp!!!	EcranFin(inout parent : QuizzyGUI = nullptr)
     qDebug() << Q_FUNC_INFO << this << "parent" << parent;
 
     ecranFin->setObjectName("ecranFin");
@@ -32,23 +23,10 @@ EcranFin::EcranFin(QuizzyGUI* parent) :
     layoutEcranFin->addWidget(messageFinDePartie);
 
     parent->getEcrans()->addWidget(ecranFin);
-}
-
-void EcranFin::afficherScores(QString nomJoueur1,
-                              QString nomJoueur2,
-                              QString scoreJoueur1,
-                              QString scoreJoueur2)
-{
+!!!131074.cpp!!!	~EcranFin()
+    qDebug() << Q_FUNC_INFO << this;
+!!!131202.cpp!!!	afficherScores(in nomJoueur1 : QString, in nomJoueur2 : QString, in scoreJoueur1 : QString, in scoreJoueur2 : QString) : void
     scoreGagnant->setText(nomJoueur1 + " : " + scoreJoueur1 + " points");
     scorePerdant->setText(nomJoueur2 + " : " + scoreJoueur2 + " points");
-}
-
-void EcranFin::afficherGagnant(QString texte)
-{
+!!!131330.cpp!!!	afficherGagnant(in texte : QString) : void
     messageGagnant->setText(texte);
-}
-
-EcranFin::~EcranFin()
-{
-    qDebug() << Q_FUNC_INFO << this;
-}

@@ -1,17 +1,5 @@
-#include "ecranaccueil.h"
-#include "quizzygui.h"
-#include <QDebug>
-
-EcranAccueil::EcranAccueil(QuizzyGUI* parent) :
-    QWidget(parent), ecranAccueil(new QWidget(this)),
-    layoutVEcranAccueil(new QVBoxLayout(ecranAccueil)),
-    layoutHEcranAccueil(new QHBoxLayout(ecranAccueil)),
-    layoutNomsJoueurs(new QVBoxLayout(ecranAccueil)),
-    messageThemeChoisi(new QLabel(this)), nomJoueur1(new QLabel(this)),
-    nomJoueur2(new QLabel(this)), nombreDeQuestions(new QLabel(this)),
-    tempsParQuestion(new QLabel(this)), messagePreparation(new QLabel(this))
-
-{
+class EcranAccueil
+!!!129666.cpp!!!	EcranAccueil(inout parent : QuizzyGUI = nullptr)
     qDebug() << Q_FUNC_INFO << this << "parent" << parent;
 
     ecranAccueil->setObjectName("ecranAccueil");
@@ -46,15 +34,9 @@ EcranAccueil::EcranAccueil(QuizzyGUI* parent) :
     layoutNomsJoueurs->addWidget(nomJoueur2);
 
     parent->getEcrans()->addWidget(ecranAccueil);
-}
-
-EcranAccueil::~EcranAccueil()
-{
+!!!129794.cpp!!!	~EcranAccueil()
     qDebug() << Q_FUNC_INFO << this;
-}
-
-void EcranAccueil::afficherThemeChoisi(QString theme)
-{
+!!!129922.cpp!!!	afficherThemeChoisi(in theme : QString) : void
     QString message = "Le thème choisi est " + theme;
     messageThemeChoisi->setText(message);
 
@@ -63,25 +45,14 @@ void EcranAccueil::afficherThemeChoisi(QString theme)
     {
         gui->getQuestion()->setTheme(theme);
     }
-}
-
-void EcranAccueil::afficherNombreDeQuestions(QString nbQuestions)
-{
+!!!130050.cpp!!!	afficherNombreDeQuestions(in nbQuestions : QString) : void
     QString message = "Le quiz comporte \n" + nbQuestions + " questions";
     nombreDeQuestions->setText(message);
-}
-
-void EcranAccueil::afficherTempsParQuestion(QString temps)
-{
-    QString message = "Vous avez " + temps + " secondes par question.";
-    tempsParQuestion->setText(message);
-}
-
-void EcranAccueil::afficherNomsJoueurs(QString nomDuJoueur1,
-                                       QString nomDuJoueur2)
-{
+!!!130178.cpp!!!	afficherNomsJoueurs(in nomDuJoueur1 : QString, in nomDuJoueur2 : QString) : void
     QString nomJ1 = "Joueur 1 : " + nomDuJoueur1;
     QString nomJ2 = "Joueur 2 : " + nomDuJoueur2;
     nomJoueur1->setText(nomJ1);
     nomJoueur2->setText(nomJ2);
-}
+!!!130306.cpp!!!	afficherTempsParQuestion(in temps : QString) : void
+    QString message = "Vous avez " + temps + " secondes par question.";
+    tempsParQuestion->setText(message);
