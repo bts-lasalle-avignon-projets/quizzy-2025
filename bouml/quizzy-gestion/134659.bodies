@@ -1,0 +1,92 @@
+class BaseDeDonnees
+!!!134659.java!!!	BaseDeDonnees(inout context : Context)
+        super(context, NOM_BDD, null, VERSION_BDD);
+        Log.d(TAG, "BaseDeDonnees()");
+        sqlite = this.getWritableDatabase();
+!!!134787.java!!!	getInstance(inout context : Context) : BaseDeDonnees
+        Log.d(TAG, "getInstance()");
+        if(baseDeDonnees == null)
+        {
+            baseDeDonnees = new BaseDeDonnees(context);
+        }
+        return baseDeDonnees;
+!!!134915.java!!!	effacer() : void
+        Log.d(TAG, "effacer()");
+        onUpgrade(sqlite, sqlite.getVersion(), sqlite.getVersion() + 1);
+!!!135043.java!!!	onCreate(inout db : SQLiteDatabase) : void
+        Log.d(TAG, "onCreate()");
+        db.execSQL(CREE_TABLE_PARTICIPANT);
+        db.execSQL(CREE_TABLE_THEME);
+        db.execSQL(CREE_TABLE_QUIZZ);
+        db.execSQL(CREE_TABLE_QUESTION);
+        db.execSQL(CREE_TABLE_RESULTATS);
+        db.execSQL(CREE_TABLE_REPONSE);
+        insererDonnees(db);
+!!!135171.java!!!	onUpgrade(inout db : SQLiteDatabase, in oldVersion : int, in newVersion : int) : void
+        Log.d(TAG, "onUpgrade()");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESULTATS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_REPONSE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUESTION);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZ);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_THEME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PARTICIPANT);
+        db.setVersion(newVersion);
+        onCreate(db);
+!!!135299.java!!!	insererDonnees(inout db : SQLiteDatabase) : void
+        Log.d(TAG, "insererDonnees()");
+        // Pour les tests
+        db.execSQL(AJOUTE_PARTICIPANTS);
+        db.execSQL(AJOUTE_THEMES);
+        db.execSQL(AJOUTE_QUESTIONS);
+!!!135427.java!!!	getThemes() : ArrayList<String>
+        ArrayList<String> themes  = new ArrayList<String>();
+        Cursor            curseur = sqlite.rawQuery("SELECT theme FROM table_theme", null);
+        if(curseur.moveToFirst())
+        {
+            do
+            {
+                String theme = curseur.getString(0);
+                themes.add(theme);
+            } while(curseur.moveToNext());
+        }
+
+        curseur.close();
+        Log.d(TAG, "getThemes() " + themes);
+        return themes;
+!!!135555.java!!!	getParticipants() : ArrayList<String>
+        ArrayList<String> participants = new ArrayList<String>();
+        Cursor curseur = sqlite.rawQuery("SELECT prenom FROM table_participant", null);
+
+        if(curseur.moveToFirst())
+        {
+            do {
+                String participant = curseur.getString(0);
+                participants.add(participant);
+            } while(curseur.moveToNext());
+        }
+
+        curseur.close();
+        Log.d(TAG, "getParticipant() " + participants);
+
+        return participants;
+!!!135683.java!!!	getQuestionAleatoireParTheme(in themeID : int) : String
+        String trameQuestion = "";
+        Cursor curseur = sqlite.rawQuery(
+                "SELECT question, proposition1, proposition2, proposition3, proposition4, reponse, explication " +
+                        "FROM table_question WHERE themeID = ? ORDER BY RANDOM() LIMIT 1",
+                new String[]{String.valueOf(themeID)}
+        );
+
+        if (curseur.moveToFirst())
+        {
+            trameQuestion = "@@Q;" +
+                    curseur.getString(0) + ";" + 
+                    curseur.getString(1) + ";" + 
+                    curseur.getString(2) + ";" +  
+                    curseur.getString(3) + ";" +  
+                    curseur.getString(4) + ";" +  
+                    curseur.getInt(5) + ";" +    
+                    curseur.getString(6) + "\n";  
+        }
+        curseur.close();
+        return trameQuestion;
