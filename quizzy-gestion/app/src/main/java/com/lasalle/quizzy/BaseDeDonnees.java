@@ -1,13 +1,11 @@
 package com.lasalle.quizzy;
 
-
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
 import android.content.Context;
 import android.util.Log;
 import java.util.ArrayList;
-
 
 public class BaseDeDonnees extends SQLiteOpenHelper
 {
@@ -269,17 +267,14 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         if (curseur.moveToFirst())
         {
             trameQuestion = "@@Q;" +
-                    curseur.getString(0) + ";" +  // question
-                    curseur.getString(1) + ";" +  // prop1
-                    curseur.getString(2) + ";" +  // prop2
-                    curseur.getString(3) + ";" +  // prop3
-                    curseur.getString(4) + ";" +  // prop4
-                    curseur.getInt(5) + ";" +     // réponse (index)
-                    curseur.getString(6) + "\n";  // explication
+                    curseur.getString(0) + ";" + 
+                    curseur.getString(1) + ";" + 
+                    curseur.getString(2) + ";" +  
+                    curseur.getString(3) + ";" +  
+                    curseur.getString(4) + ";" +  
+                    curseur.getInt(5) + ";" +    
+                    curseur.getString(6) + "\n";  
         }
-        curseur.close();
-        return trameQuestion;
-    }
         curseur.close();
         return trameQuestion;
     }

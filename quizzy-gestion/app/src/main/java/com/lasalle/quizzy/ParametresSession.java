@@ -23,12 +23,12 @@ import android.widget.TextView;
 
 public class ParametresSession extends AppCompatActivity
 {
-
     private static final String TAG = "_ParametresSession"; //!< TAG pour les logs (cf. Logcat)
     private ConnexionBluetoothClient connexionBluetooth;
 
     private Button boutonRetourAccueil;
     private Button boutonLancementCreationJoueur;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -45,7 +45,7 @@ public class ParametresSession extends AppCompatActivity
                 );
             }
         }
-        String adresseMAC = "2C:CF:67:94:F2:3D";
+        String adresseMAC = "00:E0:4C:6D:20:A3";
         connexionBluetooth = new ConnexionBluetoothClient(this, adresseMAC);
         connexionBluetooth.start();
 
@@ -85,6 +85,7 @@ public class ParametresSession extends AppCompatActivity
                 Log.d(TAG, "clic boutonLancemntCreationJoueur");
                 String joueurCreer = ((EditText) findViewById(R.id.creationJoueur)).getText().toString().trim();
 
+
                 if (joueurCreer.isEmpty()) {
                     Toast.makeText(ParametresSession.this, "Veuillez remplir le champ", Toast.LENGTH_SHORT).show();
                     return;
@@ -92,10 +93,13 @@ public class ParametresSession extends AppCompatActivity
                     BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance(getApplicationContext());
                     SQLiteDatabase db = baseDeDonnees.getWritableDatabase();
 
+
                     ContentValues valeurs = new ContentValues();
                     valeurs.put("prenom", joueurCreer);
 
+
                     long resultat = db.insert("table_participant", null, valeurs);
+
 
                     if (resultat != -1) {
                         Toast.makeText(ParametresSession.this, "Joueur ajouté avec succès", Toast.LENGTH_SHORT).show();
@@ -197,7 +201,7 @@ public class ParametresSession extends AppCompatActivity
             ArrayList<String> tousLesThemes = baseDeDonnees.getThemes();
             for (int i = 0; i < tousLesThemes.size(); i++) {
                 if (tousLesThemes.get(i).equals(theme)) {
-                    themeID = i + 1; // IDs dans la BDD commencent à 1
+                    themeID = i + 1;
                     break;
                 }
             }
@@ -220,47 +224,17 @@ public class ParametresSession extends AppCompatActivity
                 e.printStackTrace();
             }
 
-                    int themeID = -1;
-                    ArrayList<String> tousLesThemes = baseDeDonnees.getThemes();
-                    for (int i = 0; i < tousLesThemes.size(); i++) {
-                        if (tousLesThemes.get(i).equals(theme)) {
-                            themeID = i + 1; // IDs dans la BDD commencent à 1
-                            break;
-                        }
-                    }
-
-                    if (themeID == -1) {
-                        Toast.makeText(this, "Thème introuvable", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    String trameQuestion = baseDeDonnees.getQuestionAleatoireParTheme(themeID);
-                    if (!trameQuestion.isEmpty()) {
-                        connexionBluetooth.envoyer(trameQuestion);
-                    } else {
-                        Toast.makeText(this, "Aucune question trouvée pour ce thème", Toast.LENGTH_SHORT).show();
-                    }
-
-                    try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
             trame = "@@S;" + "\n";
             connexionBluetooth.envoyer(trame);
 
-            SharedPreferences prefs = getSharedPreferences("etat_partie", MODE_PRIVATE);
-            SharedPreferences.Editor editeur = prefs.edit();
-            editeur.putBoolean("partie_en_cours", true);
-            editeur.apply();
+            Intent activitePartieEnCours = new Intent(ParametresSession.this, PartieEnCours.class);
+            activitePartieEnCours.putExtra("themeID", themeID);
+            activitePartieEnCours.putExtra("tempsParQuestion", Integer.parseInt(temps));
+            activitePartieEnCours.putExtra("nombreQuestions", Integer.parseInt(nombreQuestions));
+            activitePartieEnCours.putExtra("lancerTimer", true);
+            startActivity(activitePartieEnCours);
 
-            Intent activitePrincipale = new Intent(ParametresSession.this, Quizzy.class);
-            activitePrincipale.putExtra("themeID", themeID);
-            activitePrincipale.putExtra("tempsParQuestion", Integer.parseInt(temps));
-            activitePrincipale.putExtra("nombreQuestions", Integer.parseInt(nombreQuestions));
-            activitePrincipale.putExtra("lancerTimer", true);
-            startActivity(activitePrincipale);
         });
     }
 }
+
