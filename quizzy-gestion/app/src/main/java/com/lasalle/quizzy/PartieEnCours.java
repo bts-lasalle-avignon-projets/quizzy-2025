@@ -56,8 +56,11 @@ public class PartieEnCours extends AppCompatActivity {
                     );
                 }
             }
-            String adresseMAC = "00:E0:4C:6D:20:A3";
-            connexionBluetooth = new ConnexionBluetoothClient(this, adresseMAC);
+            connexionBluetooth = new ConnexionBluetoothClient(
+                    this,
+                    "00:E0:4C:6D:20:A3", // écran
+                    "24:6F:28:10:5A:46"  // pupitre
+            );
             connexionBluetooth.start();
 
             initialiserBluetoothEtParams(intent);
@@ -118,16 +121,13 @@ private void initialiserRessources() {
         themeID = intent.getIntExtra("themeID", 1);
         tempsParQuestion = intent.getIntExtra("tempsParQuestion", 10);
         nombreQuestions = intent.getIntExtra("nombreQuestions", 1);
-
-        connexionBluetooth = new ConnexionBluetoothClient(this, "00:E0:4C:6D:20:A3");
-        connexionBluetooth.start();
         Log.d(TAG, "Bluetooth initialisé avec themeID=" + themeID + ", temps=" + tempsParQuestion + ", nbQuestions=" + nombreQuestions);
     }
 
     private void planifierReponseInitiale()
     {
         new Handler().postDelayed(() -> {
-            connexionBluetooth.envoyer("@@S;\n");
+            connexionBluetooth.envoyerEcran("@@S;\n");
             Log.d(TAG, "Révélation réponse première question");
         }, tempsParQuestion * 1000);
     }
@@ -138,13 +138,13 @@ private void initialiserRessources() {
             if (questionsEnvoyees >= nombreQuestions) {
                 Log.d(TAG, "Toutes les questions ont été envoyées");
 
-                connexionBluetooth.envoyer("@@R;17;18\n");
+                connexionBluetooth.envoyerEcran("@@R;17;18\n");
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                connexionBluetooth.envoyer("@@S\n");
+                connexionBluetooth.envoyerEcran("@@S\n");
                 return;
             }
             else {
@@ -163,17 +163,17 @@ private void initialiserRessources() {
 
             BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance(getApplicationContext());
             String trameQuestion = baseDeDonnees.getQuestionAleatoireParTheme(themeID);
-            connexionBluetooth.envoyer(trameQuestion);
+            connexionBluetooth.envoyerEcran(trameQuestion);
 
             Log.d(TAG, "Question envoyée : " + trameQuestion);
             questionsEnvoyees++;
 
             new Handler().postDelayed(() -> {
-                connexionBluetooth.envoyer("@@S\n");
+                connexionBluetooth.envoyerEcran("@@S\n");
                 Log.d(TAG, "Trame suivant envoyée (affichage question)");
 
                 new Handler().postDelayed(() -> {
-                    connexionBluetooth.envoyer("@@S\n");
+                    connexionBluetooth.envoyerEcran("@@S\n");
                     Log.d(TAG, "Trame suivant envoyée (affichage réponse)");
                 }, tempsParQuestion * 1000);
 
