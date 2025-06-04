@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet Quizzy:  Fichier source de ecranfin.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet Quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS CIEL IR LaSalle Avignon 2025</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('ecranfin_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">ecranfin.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="ecranfin_8cpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ecranfin_8h.html">ecranfin.h</a>&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="quizzygui_8h.html">quizzygui.h</a>&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QDebug&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="class_ecran_fin.html#a09ce92503b705fe1e83eec152b7feac2">    5</a></span>&#160;<a class="code" href="class_ecran_fin.html#a09ce92503b705fe1e83eec152b7feac2">EcranFin::EcranFin</a>(<a class="code" href="class_quizzy_g_u_i.html">QuizzyGUI</a>* parent) :</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <a class="code" href="class_q_widget.html">QWidget</a>(parent), ecranFin(new <a class="code" href="class_q_widget.html">QWidget</a>(this)),</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    layoutEcranFin(new QVBoxLayout(ecranFin)),</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    messageFelicitation(new QLabel(this)), messageGagnant(new QLabel(this)),</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    scoreGagnant(new QLabel(this)), scorePerdant(new QLabel(this)),</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    messageFinDePartie(new QLabel(this))</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="stringliteral">&quot;parent&quot;</span> &lt;&lt; parent;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="class_ecran_fin.html#a0f57564c0c217c238a4e092fe481cd07">ecranFin</a>-&gt;setObjectName(<span class="stringliteral">&quot;ecranFin&quot;</span>);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_ecran_fin.html#af5a4302fa927ec24bf9446a7da0d13d1">messageFelicitation</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="class_ecran_fin.html#af5a4302fa927ec24bf9446a7da0d13d1">messageFelicitation</a>-&gt;setText(</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;      <span class="stringliteral">&quot;Bravo, vous avez répondu à toutes les questions !&quot;</span>);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_ecran_fin.html#ac406f54cbb04e2e375d68e9de3f3afb3">layoutEcranFin</a>-&gt;addWidget(<a class="code" href="class_ecran_fin.html#af5a4302fa927ec24bf9446a7da0d13d1">messageFelicitation</a>);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_ecran_fin.html#aa0879a4b4a31498ecabd97d2c90c5f53">messageGagnant</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_ecran_fin.html#ac406f54cbb04e2e375d68e9de3f3afb3">layoutEcranFin</a>-&gt;addWidget(<a class="code" href="class_ecran_fin.html#aa0879a4b4a31498ecabd97d2c90c5f53">messageGagnant</a>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_ecran_fin.html#a799000890c403b3b67279ca25ff7a4dc">scoreGagnant</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_ecran_fin.html#ac406f54cbb04e2e375d68e9de3f3afb3">layoutEcranFin</a>-&gt;addWidget(<a class="code" href="class_ecran_fin.html#a799000890c403b3b67279ca25ff7a4dc">scoreGagnant</a>);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_ecran_fin.html#a920e9af5381fc130e90aae5e44ece84f">scorePerdant</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_ecran_fin.html#ac406f54cbb04e2e375d68e9de3f3afb3">layoutEcranFin</a>-&gt;addWidget(<a class="code" href="class_ecran_fin.html#a920e9af5381fc130e90aae5e44ece84f">scorePerdant</a>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_ecran_fin.html#accacbadbe8285e68dc19d24213ca078d">messageFinDePartie</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_ecran_fin.html#accacbadbe8285e68dc19d24213ca078d">messageFinDePartie</a>-&gt;setText(<span class="stringliteral">&quot;La partie va se terminer ...&quot;</span>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_ecran_fin.html#ac406f54cbb04e2e375d68e9de3f3afb3">layoutEcranFin</a>-&gt;addWidget(<a class="code" href="class_ecran_fin.html#accacbadbe8285e68dc19d24213ca078d">messageFinDePartie</a>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    parent-&gt;<a class="code" href="class_quizzy_g_u_i.html#a85d0b7faacb42f889ce1ea2911cc208e">getEcrans</a>()-&gt;addWidget(<a class="code" href="class_ecran_fin.html#a0f57564c0c217c238a4e092fe481cd07">ecranFin</a>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_ecran_fin.html#ab20f8a230453dd2d4c907f157c1bc9de">   37</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_ecran_fin.html#ab20f8a230453dd2d4c907f157c1bc9de">EcranFin::afficherScores</a>(QString nomJoueur1,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                              QString nomJoueur2,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                              QString scoreJoueur1,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                              QString scoreJoueur2)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_ecran_fin.html#a799000890c403b3b67279ca25ff7a4dc">scoreGagnant</a>-&gt;setText(nomJoueur1 + <span class="stringliteral">&quot; : &quot;</span> + scoreJoueur1 + <span class="stringliteral">&quot; points&quot;</span>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_ecran_fin.html#a920e9af5381fc130e90aae5e44ece84f">scorePerdant</a>-&gt;setText(nomJoueur2 + <span class="stringliteral">&quot; : &quot;</span> + scoreJoueur2 + <span class="stringliteral">&quot; points&quot;</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_ecran_fin.html#aa6c9cbc75579b1d9d98147bb30900447">   46</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_ecran_fin.html#aa6c9cbc75579b1d9d98147bb30900447">EcranFin::afficherGagnant</a>(QString texte)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="class_ecran_fin.html#aa0879a4b4a31498ecabd97d2c90c5f53">messageGagnant</a>-&gt;setText(texte);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_ecran_fin.html#ac0617c504ec97d5917f45c1191375da1">   51</a></span>&#160;<a class="code" href="class_ecran_fin.html#ac0617c504ec97d5917f45c1191375da1">EcranFin::~EcranFin</a>()</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="ttc" id="aclass_ecran_fin_html_a09ce92503b705fe1e83eec152b7feac2"><div class="ttname"><a href="class_ecran_fin.html#a09ce92503b705fe1e83eec152b7feac2">EcranFin::EcranFin</a></div><div class="ttdeci">EcranFin(QuizzyGUI *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> <a href="ecranfin_8cpp_source.html#l00005">ecranfin.cpp:5</a></div></div>
+<div class="ttc" id="aclass_ecran_fin_html_a0f57564c0c217c238a4e092fe481cd07"><div class="ttname"><a href="class_ecran_fin.html#a0f57564c0c217c238a4e092fe481cd07">EcranFin::ecranFin</a></div><div class="ttdeci">QWidget * ecranFin</div><div class="ttdef"><b>Definition:</b> <a href="ecranfin_8h_source.html#l00025">ecranfin.h:25</a></div></div>
+<div class="ttc" id="aclass_ecran_fin_html_a799000890c403b3b67279ca25ff7a4dc"><div class="ttname"><a href="class_ecran_fin.html#a799000890c403b3b67279ca25ff7a4dc">EcranFin::scoreGagnant</a></div><div class="ttdeci">QLabel * scoreGagnant</div><div class="ttdef"><b>Definition:</b> <a href="ecranfin_8h_source.html#l00029">ecranfin.h:29</a></div></div>
+<div class="ttc" id="aclass_ecran_fin_html_a920e9af5381fc130e90aae5e44ece84f"><div class="ttname"><a href="class_ecran_fin.html#a920e9af5381fc130e90aae5e44ece84f">EcranFin::scorePerdant</a></div><div class="ttdeci">QLabel * scorePerdant</div><div class="ttdef"><b>Definition:</b> <a href="ecranfin_8h_source.html#l00030">ecranfin.h:30</a></div></div>
+<div class="ttc" id="aclass_ecran_fin_html_aa0879a4b4a31498ecabd97d2c90c5f53"><div class="ttname"><a href="class_ecran_fin.html#aa0879a4b4a31498ecabd97d2c90c5f53">EcranFin::messageGagnant</a></div><div class="ttdeci">QLabel * messageGagnant</div><div class="ttdef"><b>Definition:</b> <a href="ecranfin_8h_source.html#l00028">ecranfin.h:28</a></div></div>
+<div class="ttc" id="aclass_ecran_fin_html_aa6c9cbc75579b1d9d98147bb30900447"><div class="ttname"><a href="class_ecran_fin.html#aa6c9cbc75579b1d9d98147bb30900447">EcranFin::afficherGagnant</a></div><div class="ttdeci">void afficherGagnant(QString texte)</div><div class="ttdef"><b>Definition:</b> <a href="ecranfin_8cpp_source.html#l00046">ecranfin.cpp:46</a></div></div>
+<div class="ttc" id="aclass_ecran_fin_html_ab20f8a230453dd2d4c907f157c1bc9de"><div class="ttname"><a href="class_ecran_fin.html#ab20f8a230453dd2d4c907f157c1bc9de">EcranFin::afficherScores</a></div><div class="ttdeci">void afficherScores(QString nomJoueur1, QString nomJoueur2, QString scoreJoueur1, QString scoreJoueur2)</div><div class="ttdef"><b>Definition:</b> <a href="ecranfin_8cpp_source.html#l00037">ecranfin.cpp:37</a></div></div>
+<div class="ttc" id="aclass_ecran_fin_html_ac0617c504ec97d5917f45c1191375da1"><div class="ttname"><a href="class_ecran_fin.html#ac0617c504ec97d5917f45c1191375da1">EcranFin::~EcranFin</a></div><div class="ttdeci">~EcranFin()</div><div class="ttdef"><b>Definition:</b> <a href="ecranfin_8cpp_source.html#l00051">ecranfin.cpp:51</a></div></div>
+<div class="ttc" id="aclass_ecran_fin_html_ac406f54cbb04e2e375d68e9de3f3afb3"><div class="ttname"><a href="class_ecran_fin.html#ac406f54cbb04e2e375d68e9de3f3afb3">EcranFin::layoutEcranFin</a></div><div class="ttdeci">QVBoxLayout * layoutEcranFin</div><div class="ttdef"><b>Definition:</b> <a href="ecranfin_8h_source.html#l00026">ecranfin.h:26</a></div></div>
+<div class="ttc" id="aclass_ecran_fin_html_accacbadbe8285e68dc19d24213ca078d"><div class="ttname"><a href="class_ecran_fin.html#accacbadbe8285e68dc19d24213ca078d">EcranFin::messageFinDePartie</a></div><div class="ttdeci">QLabel * messageFinDePartie</div><div class="ttdef"><b>Definition:</b> <a href="ecranfin_8h_source.html#l00031">ecranfin.h:31</a></div></div>
+<div class="ttc" id="aclass_ecran_fin_html_af5a4302fa927ec24bf9446a7da0d13d1"><div class="ttname"><a href="class_ecran_fin.html#af5a4302fa927ec24bf9446a7da0d13d1">EcranFin::messageFelicitation</a></div><div class="ttdeci">QLabel * messageFelicitation</div><div class="ttdef"><b>Definition:</b> <a href="ecranfin_8h_source.html#l00027">ecranfin.h:27</a></div></div>
+<div class="ttc" id="aclass_q_widget_html"><div class="ttname"><a href="class_q_widget.html">QWidget</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html"><div class="ttname"><a href="class_quizzy_g_u_i.html">QuizzyGUI</a></div><div class="ttdoc">Déclaration de la classe QuizzyGUI.</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00039">quizzygui.h:40</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a85d0b7faacb42f889ce1ea2911cc208e"><div class="ttname"><a href="class_quizzy_g_u_i.html#a85d0b7faacb42f889ce1ea2911cc208e">QuizzyGUI::getEcrans</a></div><div class="ttdeci">QStackedWidget * getEcrans()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00057">quizzygui.cpp:57</a></div></div>
+<div class="ttc" id="aecranfin_8h_html"><div class="ttname"><a href="ecranfin_8h.html">ecranfin.h</a></div></div>
+<div class="ttc" id="aquizzygui_8h_html"><div class="ttname"><a href="quizzygui_8h.html">quizzygui.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_9342060438ee5d92e314df48637a6ec8.html">quizzy-visualisation</a></li><li class="navelem"><a class="el" href="ecranfin_8cpp.html">ecranfin.cpp</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Mercredi 4 Juin 2025 13:55:20 pour Projet Quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

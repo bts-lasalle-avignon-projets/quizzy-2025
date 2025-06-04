@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet Quizzy:  Fichier source de ecranquestion.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet Quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS CIEL IR LaSalle Avignon 2025</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('ecranquestion_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">ecranquestion.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="ecranquestion_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ECRANQUESTION_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ECRANQUESTION_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QtWidgets&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">class </span><a class="code" href="class_quizzy_g_u_i.html">QuizzyGUI</a>;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="class_ecran_question.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_ecran_question.html">EcranQuestion</a> : <span class="keyword">public</span> <a class="code" href="class_q_widget.html">QWidget</a></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="class_ecran_question.html#af8c8805310c34a205fc98d6e318b3bde">EcranQuestion</a>(<a class="code" href="class_quizzy_g_u_i.html">QuizzyGUI</a>* parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="class_ecran_question.html#a479c4451736cef5db5c03f70fa2515bc">~EcranQuestion</a>();</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_ecran_question.html#ad7919feb394b35f153aeb5b448a21c5a">   16</a></span>&#160;    <a class="code" href="class_q_widget.html">QWidget</a>*      <a class="code" href="class_ecran_question.html#ad7919feb394b35f153aeb5b448a21c5a">ecranQuestion</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_ecran_question.html#aafb9b2e34df1cc86d6024a623cd9b77a">   17</a></span>&#160;    QVBoxLayout*  <a class="code" href="class_ecran_question.html#aafb9b2e34df1cc86d6024a623cd9b77a">layoutEcranQuestion</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a07e3c09858c1037ead419ef22bdf241f">   18</a></span>&#160;    QHBoxLayout*  <a class="code" href="class_ecran_question.html#a07e3c09858c1037ead419ef22bdf241f">layoutTitre</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_ecran_question.html#ad6251be05ac7af1b15c73784bba27f77">   19</a></span>&#160;    QHBoxLayout*  <a class="code" href="class_ecran_question.html#ad6251be05ac7af1b15c73784bba27f77">layoutThemeNbQuestion</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a2d8b03a937e80b2a9daf112869a6a5e9">   20</a></span>&#160;    QLabel*       <a class="code" href="class_ecran_question.html#a2d8b03a937e80b2a9daf112869a6a5e9">titreQuestion</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a65d4813cb0a18e8b24d46794a374df3f">   21</a></span>&#160;    QLabel*       <a class="code" href="class_ecran_question.html#a65d4813cb0a18e8b24d46794a374df3f">theme</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a9a139949c7a7a353b0166982a4d0dc56">   22</a></span>&#160;    QLabel*       <a class="code" href="class_ecran_question.html#a9a139949c7a7a353b0166982a4d0dc56">nombreDeQuestion</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a3ee2e2fe26bea030b860e18efd1942ef">   23</a></span>&#160;    QLabel*       <a class="code" href="class_ecran_question.html#a3ee2e2fe26bea030b860e18efd1942ef">messageChoix</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_ecran_question.html#ad69aeb59562e0df1e15fb119f9fc1de0">   24</a></span>&#160;    QVBoxLayout*  <a class="code" href="class_ecran_question.html#ad69aeb59562e0df1e15fb119f9fc1de0">layoutPropositions</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a554fa130545876714ec93ae3b95ae624">   25</a></span>&#160;    QHBoxLayout*  <a class="code" href="class_ecran_question.html#a554fa130545876714ec93ae3b95ae624">layoutPropositionsAB</a>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_ecran_question.html#ab64333b72a55b5931a6937fa1c58c65b">   26</a></span>&#160;    QHBoxLayout*  <a class="code" href="class_ecran_question.html#ab64333b72a55b5931a6937fa1c58c65b">layoutPropositionsCD</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a9725424a07b7d0f9e35c776f359e5c33">   27</a></span>&#160;    QLabel*       <a class="code" href="class_ecran_question.html#a9725424a07b7d0f9e35c776f359e5c33">propositionA</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_ecran_question.html#afcea7e77925f8407944078d2f248d1f9">   28</a></span>&#160;    QLabel*       <a class="code" href="class_ecran_question.html#afcea7e77925f8407944078d2f248d1f9">propositionB</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a72f76f066083c06687199e4ed9a1eb74">   29</a></span>&#160;    QLabel*       <a class="code" href="class_ecran_question.html#a72f76f066083c06687199e4ed9a1eb74">propositionC</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a9f597b2608031aeb7db9c6879827b7ba">   30</a></span>&#160;    QLabel*       <a class="code" href="class_ecran_question.html#a9f597b2608031aeb7db9c6879827b7ba">propositionD</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a288ecea89f457f007e0e23da4ffbec27">   31</a></span>&#160;    QHBoxLayout*  <a class="code" href="class_ecran_question.html#a288ecea89f457f007e0e23da4ffbec27">layoutTimer</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a84bff7d18291734383544a29c35f8199">   32</a></span>&#160;    QProgressBar* <a class="code" href="class_ecran_question.html#a84bff7d18291734383544a29c35f8199">barreDeProgression</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a9783e23617341e5a1c750ff7f531d530">   33</a></span>&#160;    QLabel*       <a class="code" href="class_ecran_question.html#a9783e23617341e5a1c750ff7f531d530">tempsRestant</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_ecran_question.html#aa4281e2ff19964c3a680e532b45a63aa">   34</a></span>&#160;    QTimer*       <a class="code" href="class_ecran_question.html#aa4281e2ff19964c3a680e532b45a63aa">timer</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_ecran_question.html#a4064d495b98fcf411534ad40700d6ecf">   36</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_ecran_question.html#a4064d495b98fcf411534ad40700d6ecf">tempsMax</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_ecran_question.html#aded14a5e73af00f04ec2f43ac01b1c45">   37</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_ecran_question.html#aded14a5e73af00f04ec2f43ac01b1c45">tempsActuel</a> = 0;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_ecran_question.html#a3419a5feb9d5592ffa72954b9a3a6dc3">afficherTitreQuestion</a>(QString titre);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_ecran_question.html#aeb7e642cbcab258203c430d68b171a01">afficherThemeQuestion</a>(QString <a class="code" href="class_ecran_question.html#a65d4813cb0a18e8b24d46794a374df3f">theme</a>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_ecran_question.html#a1273ba4be3acd27aed60f710fc8be7db">afficherNbQuestions</a>(QString nbQuestions, <span class="keywordtype">int</span> <a class="code" href="quizzygui_8cpp.html#a0ca970582bafcbb9679992b6456ed6ce">indexQuestionActuelle</a>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_ecran_question.html#a7aefc43bfdaf4e879c1a8cca51a89a83">afficherPropositions</a>(QString propA,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                              QString propB,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                              QString propC,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                              QString propD);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_ecran_question.html#a9eff9294da2e6954a896cffd68ddeb57">afficherTempsRestant</a>(<span class="keywordtype">int</span> temps);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_ecran_question.html#a9acae68269483f51896b00acc1d86246">mettreAJourCompteARebours</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_ecran_question.html#a9fef9916f2d6b44d1b8fc71a355e899f">demarrerCompteARebours</a>(<span class="keywordtype">int</span> tempsDepart);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// ECRANQUESTION_H</span></div>
+<div class="ttc" id="aclass_ecran_question_html"><div class="ttname"><a href="class_ecran_question.html">EcranQuestion</a></div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00008">ecranquestion.h:9</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a07e3c09858c1037ead419ef22bdf241f"><div class="ttname"><a href="class_ecran_question.html#a07e3c09858c1037ead419ef22bdf241f">EcranQuestion::layoutTitre</a></div><div class="ttdeci">QHBoxLayout * layoutTitre</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00018">ecranquestion.h:18</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a1273ba4be3acd27aed60f710fc8be7db"><div class="ttname"><a href="class_ecran_question.html#a1273ba4be3acd27aed60f710fc8be7db">EcranQuestion::afficherNbQuestions</a></div><div class="ttdeci">void afficherNbQuestions(QString nbQuestions, int indexQuestionActuelle)</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8cpp_source.html#l00086">ecranquestion.cpp:86</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a288ecea89f457f007e0e23da4ffbec27"><div class="ttname"><a href="class_ecran_question.html#a288ecea89f457f007e0e23da4ffbec27">EcranQuestion::layoutTimer</a></div><div class="ttdeci">QHBoxLayout * layoutTimer</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00031">ecranquestion.h:31</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a2d8b03a937e80b2a9daf112869a6a5e9"><div class="ttname"><a href="class_ecran_question.html#a2d8b03a937e80b2a9daf112869a6a5e9">EcranQuestion::titreQuestion</a></div><div class="ttdeci">QLabel * titreQuestion</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00020">ecranquestion.h:20</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a3419a5feb9d5592ffa72954b9a3a6dc3"><div class="ttname"><a href="class_ecran_question.html#a3419a5feb9d5592ffa72954b9a3a6dc3">EcranQuestion::afficherTitreQuestion</a></div><div class="ttdeci">void afficherTitreQuestion(QString titre)</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8cpp_source.html#l00076">ecranquestion.cpp:76</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a3ee2e2fe26bea030b860e18efd1942ef"><div class="ttname"><a href="class_ecran_question.html#a3ee2e2fe26bea030b860e18efd1942ef">EcranQuestion::messageChoix</a></div><div class="ttdeci">QLabel * messageChoix</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00023">ecranquestion.h:23</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a4064d495b98fcf411534ad40700d6ecf"><div class="ttname"><a href="class_ecran_question.html#a4064d495b98fcf411534ad40700d6ecf">EcranQuestion::tempsMax</a></div><div class="ttdeci">int tempsMax</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00036">ecranquestion.h:36</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a479c4451736cef5db5c03f70fa2515bc"><div class="ttname"><a href="class_ecran_question.html#a479c4451736cef5db5c03f70fa2515bc">EcranQuestion::~EcranQuestion</a></div><div class="ttdeci">~EcranQuestion()</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8cpp_source.html#l00149">ecranquestion.cpp:149</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a554fa130545876714ec93ae3b95ae624"><div class="ttname"><a href="class_ecran_question.html#a554fa130545876714ec93ae3b95ae624">EcranQuestion::layoutPropositionsAB</a></div><div class="ttdeci">QHBoxLayout * layoutPropositionsAB</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00025">ecranquestion.h:25</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a65d4813cb0a18e8b24d46794a374df3f"><div class="ttname"><a href="class_ecran_question.html#a65d4813cb0a18e8b24d46794a374df3f">EcranQuestion::theme</a></div><div class="ttdeci">QLabel * theme</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00021">ecranquestion.h:21</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a72f76f066083c06687199e4ed9a1eb74"><div class="ttname"><a href="class_ecran_question.html#a72f76f066083c06687199e4ed9a1eb74">EcranQuestion::propositionC</a></div><div class="ttdeci">QLabel * propositionC</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00029">ecranquestion.h:29</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a7aefc43bfdaf4e879c1a8cca51a89a83"><div class="ttname"><a href="class_ecran_question.html#a7aefc43bfdaf4e879c1a8cca51a89a83">EcranQuestion::afficherPropositions</a></div><div class="ttdeci">void afficherPropositions(QString propA, QString propB, QString propC, QString propD)</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8cpp_source.html#l00094">ecranquestion.cpp:94</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a84bff7d18291734383544a29c35f8199"><div class="ttname"><a href="class_ecran_question.html#a84bff7d18291734383544a29c35f8199">EcranQuestion::barreDeProgression</a></div><div class="ttdeci">QProgressBar * barreDeProgression</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00032">ecranquestion.h:32</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a9725424a07b7d0f9e35c776f359e5c33"><div class="ttname"><a href="class_ecran_question.html#a9725424a07b7d0f9e35c776f359e5c33">EcranQuestion::propositionA</a></div><div class="ttdeci">QLabel * propositionA</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00027">ecranquestion.h:27</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a9783e23617341e5a1c750ff7f531d530"><div class="ttname"><a href="class_ecran_question.html#a9783e23617341e5a1c750ff7f531d530">EcranQuestion::tempsRestant</a></div><div class="ttdeci">QLabel * tempsRestant</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00033">ecranquestion.h:33</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a9a139949c7a7a353b0166982a4d0dc56"><div class="ttname"><a href="class_ecran_question.html#a9a139949c7a7a353b0166982a4d0dc56">EcranQuestion::nombreDeQuestion</a></div><div class="ttdeci">QLabel * nombreDeQuestion</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00022">ecranquestion.h:22</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a9acae68269483f51896b00acc1d86246"><div class="ttname"><a href="class_ecran_question.html#a9acae68269483f51896b00acc1d86246">EcranQuestion::mettreAJourCompteARebours</a></div><div class="ttdeci">void mettreAJourCompteARebours()</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8cpp_source.html#l00133">ecranquestion.cpp:133</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a9eff9294da2e6954a896cffd68ddeb57"><div class="ttname"><a href="class_ecran_question.html#a9eff9294da2e6954a896cffd68ddeb57">EcranQuestion::afficherTempsRestant</a></div><div class="ttdeci">void afficherTempsRestant(int temps)</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8cpp_source.html#l00105">ecranquestion.cpp:105</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a9f597b2608031aeb7db9c6879827b7ba"><div class="ttname"><a href="class_ecran_question.html#a9f597b2608031aeb7db9c6879827b7ba">EcranQuestion::propositionD</a></div><div class="ttdeci">QLabel * propositionD</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00030">ecranquestion.h:30</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_a9fef9916f2d6b44d1b8fc71a355e899f"><div class="ttname"><a href="class_ecran_question.html#a9fef9916f2d6b44d1b8fc71a355e899f">EcranQuestion::demarrerCompteARebours</a></div><div class="ttdeci">void demarrerCompteARebours(int tempsDepart)</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8cpp_source.html#l00110">ecranquestion.cpp:110</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_aa4281e2ff19964c3a680e532b45a63aa"><div class="ttname"><a href="class_ecran_question.html#aa4281e2ff19964c3a680e532b45a63aa">EcranQuestion::timer</a></div><div class="ttdeci">QTimer * timer</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00034">ecranquestion.h:34</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_aafb9b2e34df1cc86d6024a623cd9b77a"><div class="ttname"><a href="class_ecran_question.html#aafb9b2e34df1cc86d6024a623cd9b77a">EcranQuestion::layoutEcranQuestion</a></div><div class="ttdeci">QVBoxLayout * layoutEcranQuestion</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00017">ecranquestion.h:17</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_ab64333b72a55b5931a6937fa1c58c65b"><div class="ttname"><a href="class_ecran_question.html#ab64333b72a55b5931a6937fa1c58c65b">EcranQuestion::layoutPropositionsCD</a></div><div class="ttdeci">QHBoxLayout * layoutPropositionsCD</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00026">ecranquestion.h:26</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_ad6251be05ac7af1b15c73784bba27f77"><div class="ttname"><a href="class_ecran_question.html#ad6251be05ac7af1b15c73784bba27f77">EcranQuestion::layoutThemeNbQuestion</a></div><div class="ttdeci">QHBoxLayout * layoutThemeNbQuestion</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00019">ecranquestion.h:19</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_ad69aeb59562e0df1e15fb119f9fc1de0"><div class="ttname"><a href="class_ecran_question.html#ad69aeb59562e0df1e15fb119f9fc1de0">EcranQuestion::layoutPropositions</a></div><div class="ttdeci">QVBoxLayout * layoutPropositions</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00024">ecranquestion.h:24</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_ad7919feb394b35f153aeb5b448a21c5a"><div class="ttname"><a href="class_ecran_question.html#ad7919feb394b35f153aeb5b448a21c5a">EcranQuestion::ecranQuestion</a></div><div class="ttdeci">QWidget * ecranQuestion</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00016">ecranquestion.h:16</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_aded14a5e73af00f04ec2f43ac01b1c45"><div class="ttname"><a href="class_ecran_question.html#aded14a5e73af00f04ec2f43ac01b1c45">EcranQuestion::tempsActuel</a></div><div class="ttdeci">int tempsActuel</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00037">ecranquestion.h:37</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_aeb7e642cbcab258203c430d68b171a01"><div class="ttname"><a href="class_ecran_question.html#aeb7e642cbcab258203c430d68b171a01">EcranQuestion::afficherThemeQuestion</a></div><div class="ttdeci">void afficherThemeQuestion(QString theme)</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8cpp_source.html#l00081">ecranquestion.cpp:81</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_af8c8805310c34a205fc98d6e318b3bde"><div class="ttname"><a href="class_ecran_question.html#af8c8805310c34a205fc98d6e318b3bde">EcranQuestion::EcranQuestion</a></div><div class="ttdeci">EcranQuestion(QuizzyGUI *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8cpp_source.html#l00005">ecranquestion.cpp:5</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html_afcea7e77925f8407944078d2f248d1f9"><div class="ttname"><a href="class_ecran_question.html#afcea7e77925f8407944078d2f248d1f9">EcranQuestion::propositionB</a></div><div class="ttdeci">QLabel * propositionB</div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00028">ecranquestion.h:28</a></div></div>
+<div class="ttc" id="aclass_q_widget_html"><div class="ttname"><a href="class_q_widget.html">QWidget</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html"><div class="ttname"><a href="class_quizzy_g_u_i.html">QuizzyGUI</a></div><div class="ttdoc">Déclaration de la classe QuizzyGUI.</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00039">quizzygui.h:40</a></div></div>
+<div class="ttc" id="aquizzygui_8cpp_html_a0ca970582bafcbb9679992b6456ed6ce"><div class="ttname"><a href="quizzygui_8cpp.html#a0ca970582bafcbb9679992b6456ed6ce">indexQuestionActuelle</a></div><div class="ttdeci">int indexQuestionActuelle</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00021">quizzygui.cpp:21</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_9342060438ee5d92e314df48637a6ec8.html">quizzy-visualisation</a></li><li class="navelem"><a class="el" href="ecranquestion_8h.html">ecranquestion.h</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Mercredi 4 Juin 2025 13:55:20 pour Projet Quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

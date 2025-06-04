@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet Quizzy:  Fichier source de question.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet Quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS CIEL IR LaSalle Avignon 2025</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('question_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">question.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="question_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef QUESTION_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define QUESTION_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_question.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_question.html">Question</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">void</span>    <a class="code" href="class_question.html#a66f8be727a3dbb5c85de10bf683ba8ea">setTheme</a>(<span class="keyword">const</span> QString&amp; <a class="code" href="class_question.html#a477da239e3a9f2b5f93e8a97317e376e">theme</a>);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    QString <a class="code" href="class_question.html#af384b7149328bd3412cd53454dabc870">getTheme</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">void</span>    <a class="code" href="class_question.html#a71b9570d0b96608d356a7fb52e486a86">setTitre</a>(QString&amp; <a class="code" href="class_question.html#a49f10fc83370e73e4856089f23e30fa3">titre</a>);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    QString <a class="code" href="class_question.html#a8d1cd76c1491252b2aa01124c5889317">getTitre</a>();</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">void</span>    <a class="code" href="class_question.html#a3fee7303cdbe82487c9383af9f53c74d">setPropA</a>(QString&amp; <a class="code" href="class_question.html#a56064bf7950462bd8071b69c9e0332aa">propositionA</a>);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    QString <a class="code" href="class_question.html#aeb0c51e5cc921782eca0a6bb0418d21a">getPropA</a>();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span>    <a class="code" href="class_question.html#aa3a8b2dfc3369ae2b80f36dee474756c">setPropB</a>(QString&amp; <a class="code" href="class_question.html#a0b3d44458c25ad6f6459c0f759fd2d64">propositionB</a>);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    QString <a class="code" href="class_question.html#a50f17fb0847c03f878fa8758d4807924">getPropB</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span>    <a class="code" href="class_question.html#aad05126385946c10dcb346d4c88434f2">setPropC</a>(QString&amp; <a class="code" href="class_question.html#a85355b9bba0c46e15d18190b52cc98e8">propositionC</a>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    QString <a class="code" href="class_question.html#abb837d2239d5043e324da6ebd5eed6ad">getPropC</a>();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span>    <a class="code" href="class_question.html#aa507b6bce51e1e85a5ffb7ea51953fff">setPropD</a>(QString&amp; <a class="code" href="class_question.html#a6e4a238688344b2991dea1f5a65da788">propositionD</a>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    QString <a class="code" href="class_question.html#a90ab8a9ab075a529e9b5989e99c72108">getPropD</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span>    <a class="code" href="class_question.html#a2d0fce5cbb8dff38c5e97a249d1319aa">setExplication</a>(QString&amp; <a class="code" href="class_question.html#ad55fd29e1445bc7039b9bb7e466a6c65">explication</a>);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    QString <a class="code" href="class_question.html#aac59c636aa3b3eb5ab579dba3833c517">getExplication</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_question.html#a29f7cfd051561ec6bbec759fd4241b52">setIdReponse</a>(<span class="keywordtype">int</span> <a class="code" href="class_question.html#a63092a2c1ea7f93c53bf3cd3d7a964ad">idReponse</a>);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">int</span>  <a class="code" href="class_question.html#a03798ab5d17bedc2e2b9427a79caa0aa">getIdReponse</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_question.html#a0c986f516b61416756209cc32153a48f">setTemps</a>(<span class="keywordtype">int</span> secondes);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">int</span>  <a class="code" href="class_question.html#ac16fcb4fa43bbbaa13f3e9e98f2b9602">getTemps</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_question.html#a62c20a01012a5675259bd47fe6c8055d">setNombre</a>(<span class="keywordtype">int</span> nb);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">int</span>  <a class="code" href="class_question.html#a4c53d9da5a389ed28a2d1a481cd134c2">getNombre</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_question.html#a477da239e3a9f2b5f93e8a97317e376e">   40</a></span>&#160;    QString <a class="code" href="class_question.html#a477da239e3a9f2b5f93e8a97317e376e">theme</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_question.html#a49f10fc83370e73e4856089f23e30fa3">   41</a></span>&#160;    QString <a class="code" href="class_question.html#a49f10fc83370e73e4856089f23e30fa3">titre</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_question.html#a56064bf7950462bd8071b69c9e0332aa">   42</a></span>&#160;    QString <a class="code" href="class_question.html#a56064bf7950462bd8071b69c9e0332aa">propositionA</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_question.html#a0b3d44458c25ad6f6459c0f759fd2d64">   43</a></span>&#160;    QString <a class="code" href="class_question.html#a0b3d44458c25ad6f6459c0f759fd2d64">propositionB</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_question.html#a85355b9bba0c46e15d18190b52cc98e8">   44</a></span>&#160;    QString <a class="code" href="class_question.html#a85355b9bba0c46e15d18190b52cc98e8">propositionC</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_question.html#a6e4a238688344b2991dea1f5a65da788">   45</a></span>&#160;    QString <a class="code" href="class_question.html#a6e4a238688344b2991dea1f5a65da788">propositionD</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_question.html#ad55fd29e1445bc7039b9bb7e466a6c65">   46</a></span>&#160;    QString <a class="code" href="class_question.html#ad55fd29e1445bc7039b9bb7e466a6c65">explication</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_question.html#a63092a2c1ea7f93c53bf3cd3d7a964ad">   48</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_question.html#a63092a2c1ea7f93c53bf3cd3d7a964ad">idReponse</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_question.html#a4c00bab782d7e7deabf7ed667bb4f73f">   49</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_question.html#a4c00bab782d7e7deabf7ed667bb4f73f">tempsParQuestion</a>  = 0;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_question.html#ace7e79767d767a5df0556c99e2483013">   50</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_question.html#ace7e79767d767a5df0556c99e2483013">nombreDeQuestions</a> = 0;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// QUESTION_H</span></div>
+<div class="ttc" id="aclass_question_html"><div class="ttname"><a href="class_question.html">Question</a></div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00006">question.h:7</a></div></div>
+<div class="ttc" id="aclass_question_html_a03798ab5d17bedc2e2b9427a79caa0aa"><div class="ttname"><a href="class_question.html#a03798ab5d17bedc2e2b9427a79caa0aa">Question::getIdReponse</a></div><div class="ttdeci">int getIdReponse()</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00078">question.cpp:78</a></div></div>
+<div class="ttc" id="aclass_question_html_a0b3d44458c25ad6f6459c0f759fd2d64"><div class="ttname"><a href="class_question.html#a0b3d44458c25ad6f6459c0f759fd2d64">Question::propositionB</a></div><div class="ttdeci">QString propositionB</div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00043">question.h:43</a></div></div>
+<div class="ttc" id="aclass_question_html_a0c986f516b61416756209cc32153a48f"><div class="ttname"><a href="class_question.html#a0c986f516b61416756209cc32153a48f">Question::setTemps</a></div><div class="ttdeci">void setTemps(int secondes)</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00083">question.cpp:83</a></div></div>
+<div class="ttc" id="aclass_question_html_a29f7cfd051561ec6bbec759fd4241b52"><div class="ttname"><a href="class_question.html#a29f7cfd051561ec6bbec759fd4241b52">Question::setIdReponse</a></div><div class="ttdeci">void setIdReponse(int idReponse)</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00073">question.cpp:73</a></div></div>
+<div class="ttc" id="aclass_question_html_a2d0fce5cbb8dff38c5e97a249d1319aa"><div class="ttname"><a href="class_question.html#a2d0fce5cbb8dff38c5e97a249d1319aa">Question::setExplication</a></div><div class="ttdeci">void setExplication(QString &amp;explication)</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00063">question.cpp:63</a></div></div>
+<div class="ttc" id="aclass_question_html_a3fee7303cdbe82487c9383af9f53c74d"><div class="ttname"><a href="class_question.html#a3fee7303cdbe82487c9383af9f53c74d">Question::setPropA</a></div><div class="ttdeci">void setPropA(QString &amp;propositionA)</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00023">question.cpp:23</a></div></div>
+<div class="ttc" id="aclass_question_html_a477da239e3a9f2b5f93e8a97317e376e"><div class="ttname"><a href="class_question.html#a477da239e3a9f2b5f93e8a97317e376e">Question::theme</a></div><div class="ttdeci">QString theme</div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00040">question.h:40</a></div></div>
+<div class="ttc" id="aclass_question_html_a49f10fc83370e73e4856089f23e30fa3"><div class="ttname"><a href="class_question.html#a49f10fc83370e73e4856089f23e30fa3">Question::titre</a></div><div class="ttdeci">QString titre</div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00041">question.h:41</a></div></div>
+<div class="ttc" id="aclass_question_html_a4c00bab782d7e7deabf7ed667bb4f73f"><div class="ttname"><a href="class_question.html#a4c00bab782d7e7deabf7ed667bb4f73f">Question::tempsParQuestion</a></div><div class="ttdeci">int tempsParQuestion</div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00049">question.h:49</a></div></div>
+<div class="ttc" id="aclass_question_html_a4c53d9da5a389ed28a2d1a481cd134c2"><div class="ttname"><a href="class_question.html#a4c53d9da5a389ed28a2d1a481cd134c2">Question::getNombre</a></div><div class="ttdeci">int getNombre() const</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00098">question.cpp:98</a></div></div>
+<div class="ttc" id="aclass_question_html_a50f17fb0847c03f878fa8758d4807924"><div class="ttname"><a href="class_question.html#a50f17fb0847c03f878fa8758d4807924">Question::getPropB</a></div><div class="ttdeci">QString getPropB()</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00038">question.cpp:38</a></div></div>
+<div class="ttc" id="aclass_question_html_a56064bf7950462bd8071b69c9e0332aa"><div class="ttname"><a href="class_question.html#a56064bf7950462bd8071b69c9e0332aa">Question::propositionA</a></div><div class="ttdeci">QString propositionA</div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00042">question.h:42</a></div></div>
+<div class="ttc" id="aclass_question_html_a62c20a01012a5675259bd47fe6c8055d"><div class="ttname"><a href="class_question.html#a62c20a01012a5675259bd47fe6c8055d">Question::setNombre</a></div><div class="ttdeci">void setNombre(int nb)</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00093">question.cpp:93</a></div></div>
+<div class="ttc" id="aclass_question_html_a63092a2c1ea7f93c53bf3cd3d7a964ad"><div class="ttname"><a href="class_question.html#a63092a2c1ea7f93c53bf3cd3d7a964ad">Question::idReponse</a></div><div class="ttdeci">int idReponse</div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00048">question.h:48</a></div></div>
+<div class="ttc" id="aclass_question_html_a66f8be727a3dbb5c85de10bf683ba8ea"><div class="ttname"><a href="class_question.html#a66f8be727a3dbb5c85de10bf683ba8ea">Question::setTheme</a></div><div class="ttdeci">void setTheme(const QString &amp;theme)</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00003">question.cpp:3</a></div></div>
+<div class="ttc" id="aclass_question_html_a6e4a238688344b2991dea1f5a65da788"><div class="ttname"><a href="class_question.html#a6e4a238688344b2991dea1f5a65da788">Question::propositionD</a></div><div class="ttdeci">QString propositionD</div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00045">question.h:45</a></div></div>
+<div class="ttc" id="aclass_question_html_a71b9570d0b96608d356a7fb52e486a86"><div class="ttname"><a href="class_question.html#a71b9570d0b96608d356a7fb52e486a86">Question::setTitre</a></div><div class="ttdeci">void setTitre(QString &amp;titre)</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00013">question.cpp:13</a></div></div>
+<div class="ttc" id="aclass_question_html_a85355b9bba0c46e15d18190b52cc98e8"><div class="ttname"><a href="class_question.html#a85355b9bba0c46e15d18190b52cc98e8">Question::propositionC</a></div><div class="ttdeci">QString propositionC</div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00044">question.h:44</a></div></div>
+<div class="ttc" id="aclass_question_html_a8d1cd76c1491252b2aa01124c5889317"><div class="ttname"><a href="class_question.html#a8d1cd76c1491252b2aa01124c5889317">Question::getTitre</a></div><div class="ttdeci">QString getTitre()</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00018">question.cpp:18</a></div></div>
+<div class="ttc" id="aclass_question_html_a90ab8a9ab075a529e9b5989e99c72108"><div class="ttname"><a href="class_question.html#a90ab8a9ab075a529e9b5989e99c72108">Question::getPropD</a></div><div class="ttdeci">QString getPropD()</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00058">question.cpp:58</a></div></div>
+<div class="ttc" id="aclass_question_html_aa3a8b2dfc3369ae2b80f36dee474756c"><div class="ttname"><a href="class_question.html#aa3a8b2dfc3369ae2b80f36dee474756c">Question::setPropB</a></div><div class="ttdeci">void setPropB(QString &amp;propositionB)</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00033">question.cpp:33</a></div></div>
+<div class="ttc" id="aclass_question_html_aa507b6bce51e1e85a5ffb7ea51953fff"><div class="ttname"><a href="class_question.html#aa507b6bce51e1e85a5ffb7ea51953fff">Question::setPropD</a></div><div class="ttdeci">void setPropD(QString &amp;propositionD)</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00053">question.cpp:53</a></div></div>
+<div class="ttc" id="aclass_question_html_aac59c636aa3b3eb5ab579dba3833c517"><div class="ttname"><a href="class_question.html#aac59c636aa3b3eb5ab579dba3833c517">Question::getExplication</a></div><div class="ttdeci">QString getExplication()</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00068">question.cpp:68</a></div></div>
+<div class="ttc" id="aclass_question_html_aad05126385946c10dcb346d4c88434f2"><div class="ttname"><a href="class_question.html#aad05126385946c10dcb346d4c88434f2">Question::setPropC</a></div><div class="ttdeci">void setPropC(QString &amp;propositionC)</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00043">question.cpp:43</a></div></div>
+<div class="ttc" id="aclass_question_html_abb837d2239d5043e324da6ebd5eed6ad"><div class="ttname"><a href="class_question.html#abb837d2239d5043e324da6ebd5eed6ad">Question::getPropC</a></div><div class="ttdeci">QString getPropC()</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00048">question.cpp:48</a></div></div>
+<div class="ttc" id="aclass_question_html_ac16fcb4fa43bbbaa13f3e9e98f2b9602"><div class="ttname"><a href="class_question.html#ac16fcb4fa43bbbaa13f3e9e98f2b9602">Question::getTemps</a></div><div class="ttdeci">int getTemps() const</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00088">question.cpp:88</a></div></div>
+<div class="ttc" id="aclass_question_html_ace7e79767d767a5df0556c99e2483013"><div class="ttname"><a href="class_question.html#ace7e79767d767a5df0556c99e2483013">Question::nombreDeQuestions</a></div><div class="ttdeci">int nombreDeQuestions</div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00050">question.h:50</a></div></div>
+<div class="ttc" id="aclass_question_html_ad55fd29e1445bc7039b9bb7e466a6c65"><div class="ttname"><a href="class_question.html#ad55fd29e1445bc7039b9bb7e466a6c65">Question::explication</a></div><div class="ttdeci">QString explication</div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00046">question.h:46</a></div></div>
+<div class="ttc" id="aclass_question_html_aeb0c51e5cc921782eca0a6bb0418d21a"><div class="ttname"><a href="class_question.html#aeb0c51e5cc921782eca0a6bb0418d21a">Question::getPropA</a></div><div class="ttdeci">QString getPropA()</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00028">question.cpp:28</a></div></div>
+<div class="ttc" id="aclass_question_html_af384b7149328bd3412cd53454dabc870"><div class="ttname"><a href="class_question.html#af384b7149328bd3412cd53454dabc870">Question::getTheme</a></div><div class="ttdeci">QString getTheme() const</div><div class="ttdef"><b>Definition:</b> <a href="question_8cpp_source.html#l00008">question.cpp:8</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_9342060438ee5d92e314df48637a6ec8.html">quizzy-visualisation</a></li><li class="navelem"><a class="el" href="question_8h.html">question.h</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Mercredi 4 Juin 2025 13:55:20 pour Projet Quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>
