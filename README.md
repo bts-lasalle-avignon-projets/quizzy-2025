@@ -1,3 +1,5 @@
+[![Qt Build](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/actions/workflows/qt-build.yml/badge.svg)](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/actions/workflows/qt-build.yml) [![Android Build](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/actions/workflows/android-build.yml/badge.svg)](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/actions/workflows/android-build.yml)
+
 # Projet : Quizzy
 
 - [Le projet quizzy](#projet--quizzy)
@@ -30,7 +32,11 @@
 
 ### Le module de visualisation
 
+![](./images/visualisation.gif)
+
 ### Le module de gestion
+
+![](./images/gestion.gif)
 
 ---
 
@@ -125,26 +131,26 @@ CREATE TABLE IF NOT EXISTS table_theme(
 
 | Fonctionalités                          | A faire | En cours | Terminé |
 | --------------------------------------- | :-----: | :------: | :-----: |
-| Visualiser une session                  |    O    |          |         |
-| Visualiser une question                 |    O    |          |         |
-| Visualiser les propositions             |    O    |          |         |
-| Visualiser un compte à rebours          |    O    |          |         |
-| Visualiser les résultats                |    O    |          |         |
-| Dialoguer avec le module de gestion     |    O    |          |         |
-| S'afficher en mode "kiosque"            |    O    |          |         |
+| Visualiser une session                  |         |          |    O    |
+| Visualiser une question                 |         |          |    O    |
+| Visualiser les propositions             |         |          |    O    |
+| Visualiser un compte à rebours          |         |          |    O    |
+| Visualiser les résultats                |         |          |    O    |
+| Dialoguer avec le module de gestion     |         |          |    O    |
+| S'afficher en mode "kiosque"            |         |          |    O    |
 
 - Module de gestion
 
 | Fonctionalités                            | A faire | En cours | Terminé |
 | ---------------------------------------   | :-----: | :------: | :-----: |
-| Démarrer / stopper une session            |    O    |          |         |
-| Sélectionner un thème                     |    O    |          |         |
-| Dialoguer avec le module de visualisation |    O    |          |         |
-| Dialoguer avec le module de jeu           |    O    |          |         |
-| Gérer une session                         |    O    |          |         |
-| Paramétrer la session                     |    O    |          |         |
-| Sauvegarder les résultats                 |    O    |          |         |
-| Visualiser un historique                  |    O    |          |         |
+| Démarrer / stopper une session            |         |          |    O    |
+| Sélectionner un thème                     |         |          |    O    |
+| Dialoguer avec le module de visualisation |         |          |    O    |
+| Dialoguer avec le module de jeu           |         |          |    O    |
+| Gérer une session                         |         |          |    O    |
+| Paramétrer la session                     |         |          |    O    |
+| Sauvegarder les résultats                 |         |    O     |         |
+| Visualiser un historique                  |         |    O     |         |
 
 ---
 
@@ -152,35 +158,65 @@ CREATE TABLE IF NOT EXISTS table_theme(
 
 ### Itération 1
 
+Du 29 Janvier au 28 Mars
+
 - **Mise en place de la BDD** : la base de données est fonctionnelle
 - **Envoyer des questions** : le module de gestion envoie des questions au module de visualisation
 - **Envoyer des propositions** : le module de gestion envoie des propositions au module de visualisation
+- **Recevoir** : le module de visualisation reçoit et traite les trames
 - **Afficher des questions** : le module de visualisation affiche les questions reçues
 - **Afficher des propositions** : le module de visualisation affiche les propositions reçues
 
 ### Itération 2
 
+Du 29 Mars au 23 Mai
+
 - **Configurer une session** : l'utilisateur peut choisir le thème, le nombre de question et le temps pour répondre
 - **Chronométrer** : les questions s'arrêtent à la fin du temps imparti
 - **Afficher le chronomètre** : le temps pour répondre est affiché
+- **Afficher la réponse** : la réponse est affichée une fois le temps écoulé
 
 ### Itération 3
 
+Du 24 Mai au 30 Mai
+
 - **Sauvegarder les résultats** : les résultats sont enregistrés à la fin d'une session
 - **Afficher l'historique** : l'utilisateur à la possibilité d'afficher l'historique
+- **Afficher les scores** : les scores sont affichés
 - **Mode kiosk** : l'affichage est configuré en mode kiosk
 
+### Itération 4
+
+Du 31 Mai au 15 Juin
+
+- **Amélioration de l'affichage** : l'interface utilisateur est plus claire et intuitive
+- **Recommencer des parties** : possibilité de relancer une partie
 ---
 
 ## Changelog
 
+### Version 1.0
+
+- [x] Dialoguer entre les modules gestion / visualisation
+- [x] Configurer une session
+- [x] Gérer le déroulement d'une session
+- [x] Visualiser une session
+- [x] Chronométrer les questions
+- [x] Visualiser les scores
 ---
 
 ## TODO
 
+- [ ] Dialoguer avec le module de jeu
+- [ ] Recommencer des parties
+- [ ] Enregistrer les scores
+- [ ] Afficher un historique
+
 ---
 
 ## Défauts constatés non corrigés
+
+Certaines questions peuvent se répéter au sein d'une même session de jeu.
 
 ---
 
