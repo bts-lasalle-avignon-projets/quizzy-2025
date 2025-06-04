@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet Quizzy:  Fichier source de ecranreponse.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet Quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS CIEL IR LaSalle Avignon 2025</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('ecranreponse_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">ecranreponse.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="ecranreponse_8cpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ecranreponse_8h.html">ecranreponse.h</a>&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="quizzygui_8h.html">quizzygui.h</a>&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QDebug&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="class_ecran_reponse.html#a4d188f2dc49f3244ba132237c0d33b67">    5</a></span>&#160;<a class="code" href="class_ecran_reponse.html#a4d188f2dc49f3244ba132237c0d33b67">EcranReponse::EcranReponse</a>(<a class="code" href="class_quizzy_g_u_i.html">QuizzyGUI</a>* parent) :</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <a class="code" href="class_q_widget.html">QWidget</a>(parent), ecranReponse(new <a class="code" href="class_q_widget.html">QWidget</a>(this)),</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    layoutEcranReponse(new QVBoxLayout(ecranReponse)),</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    layoutTitre(new QHBoxLayout()), layoutThemeNbQuestion(new QHBoxLayout()),</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    titreQuestion(new QLabel(this)), theme(new QLabel(this)),</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    nombreDeQuestion(new QLabel(this)), messageReponse(new QLabel(this)),</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    layoutPropositions(new QVBoxLayout()),</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    layoutPropositionsAB(new QHBoxLayout()),</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    layoutPropositionsCD(new QHBoxLayout()), propositionA(new QLabel(this)),</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    propositionB(new QLabel(this)), propositionC(new QLabel(this)),</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    propositionD(new QLabel(this)), layoutTimer(new QHBoxLayout()),</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    explication(new QLabel(this)), tempsRestant(new QLabel(this))</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="stringliteral">&quot;parent&quot;</span> &lt;&lt; parent;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_ecran_reponse.html#a3334fc1c3edefdb95171d789c0a1a215">ecranReponse</a>-&gt;setObjectName(<span class="stringliteral">&quot;ecranReponse&quot;</span>);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_ecran_reponse.html#af6ec77ca1c4f2fa03308ba013d6e85ac">titreQuestion</a>-&gt;setText(<span class="stringliteral">&quot;Titre de la question&quot;</span>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_ecran_reponse.html#ab6eafd5d5938aa1a79128a56076b63f7">theme</a>-&gt;setText(<span class="stringliteral">&quot;Thème&quot;</span>);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_ecran_reponse.html#ae6017b12aae5d64156a615d380e9342c">nombreDeQuestion</a>-&gt;setText(<span class="stringliteral">&quot;Question x/y&quot;</span>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_ecran_reponse.html#a8aa0d5e8331938a24396939466644e54">messageReponse</a>-&gt;setText(<span class="stringliteral">&quot;Voici la réponse !&quot;</span>);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_ecran_reponse.html#a2d3e1e0f4940e42477798838a0390258">propositionA</a>-&gt;setText(<span class="stringliteral">&quot;A - Proposition A&quot;</span>);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_ecran_reponse.html#a804828d0ffd2583590f063a92453c950">propositionB</a>-&gt;setText(<span class="stringliteral">&quot;B - Proposition B&quot;</span>);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_ecran_reponse.html#a86c27fa5ebaa33e78744fb527a88caea">propositionC</a>-&gt;setText(<span class="stringliteral">&quot;C - Proposition C&quot;</span>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_ecran_reponse.html#a3c0c17ceef9dd0e9237d895a35001fd1">propositionD</a>-&gt;setText(<span class="stringliteral">&quot;D - Proposition D&quot;</span>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_ecran_reponse.html#a53ce0c5dbb397ffc80443c75bf7eba16">explication</a>-&gt;setText(<span class="stringliteral">&quot;Explication de la bonne réponse.&quot;</span>);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_ecran_reponse.html#af6ec77ca1c4f2fa03308ba013d6e85ac">titreQuestion</a>-&gt;setWordWrap(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_ecran_reponse.html#af6ec77ca1c4f2fa03308ba013d6e85ac">titreQuestion</a>-&gt;setMaximumWidth(1200);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="class_ecran_reponse.html#af6ec77ca1c4f2fa03308ba013d6e85ac">titreQuestion</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="class_ecran_reponse.html#ab6eafd5d5938aa1a79128a56076b63f7">theme</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_ecran_reponse.html#ae6017b12aae5d64156a615d380e9342c">nombreDeQuestion</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="class_ecran_reponse.html#a8aa0d5e8331938a24396939466644e54">messageReponse</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_ecran_reponse.html#a53ce0c5dbb397ffc80443c75bf7eba16">explication</a>-&gt;setWordWrap(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="class_ecran_reponse.html#a53ce0c5dbb397ffc80443c75bf7eba16">explication</a>-&gt;setMaximumWidth(1800);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_ecran_reponse.html#a53ce0c5dbb397ffc80443c75bf7eba16">explication</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_ecran_reponse.html#a418192cbe507cd7bbff7389ec712bfae">tempsRestant</a>-&gt;setAlignment(Qt::AlignRight);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_ecran_reponse.html#afbaa70c1a663614b554e96ad8e5c5583">layoutPropositions</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_ecran_reponse.html#a2d3e1e0f4940e42477798838a0390258">propositionA</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_ecran_reponse.html#a804828d0ffd2583590f063a92453c950">propositionB</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="class_ecran_reponse.html#a86c27fa5ebaa33e78744fb527a88caea">propositionC</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="class_ecran_reponse.html#a3c0c17ceef9dd0e9237d895a35001fd1">propositionD</a>-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="class_ecran_reponse.html#afdfc3b531854b1cdd47aa7a7601ddb8b">layoutEcranReponse</a>-&gt;addLayout(<a class="code" href="class_ecran_reponse.html#a7f2d12cb61a7383d4577304bec83cd0a">layoutTitre</a>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="class_ecran_reponse.html#a7f2d12cb61a7383d4577304bec83cd0a">layoutTitre</a>-&gt;addWidget(<a class="code" href="class_ecran_reponse.html#af6ec77ca1c4f2fa03308ba013d6e85ac">titreQuestion</a>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="class_ecran_reponse.html#a7f2d12cb61a7383d4577304bec83cd0a">layoutTitre</a>-&gt;addLayout(<a class="code" href="class_ecran_reponse.html#a8fca9035828509751164a1a20585e82e">layoutThemeNbQuestion</a>);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="class_ecran_reponse.html#a8fca9035828509751164a1a20585e82e">layoutThemeNbQuestion</a>-&gt;addWidget(<a class="code" href="class_ecran_reponse.html#ab6eafd5d5938aa1a79128a56076b63f7">theme</a>);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="class_ecran_reponse.html#a8fca9035828509751164a1a20585e82e">layoutThemeNbQuestion</a>-&gt;addWidget(<a class="code" href="class_ecran_reponse.html#ae6017b12aae5d64156a615d380e9342c">nombreDeQuestion</a>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="class_ecran_reponse.html#afdfc3b531854b1cdd47aa7a7601ddb8b">layoutEcranReponse</a>-&gt;addWidget(<a class="code" href="class_ecran_reponse.html#a8aa0d5e8331938a24396939466644e54">messageReponse</a>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_ecran_reponse.html#afdfc3b531854b1cdd47aa7a7601ddb8b">layoutEcranReponse</a>-&gt;addLayout(<a class="code" href="class_ecran_reponse.html#afbaa70c1a663614b554e96ad8e5c5583">layoutPropositions</a>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="class_ecran_reponse.html#afbaa70c1a663614b554e96ad8e5c5583">layoutPropositions</a>-&gt;addLayout(<a class="code" href="class_ecran_reponse.html#af073dfcf57eb54add9c73f76f3855513">layoutPropositionsAB</a>);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="class_ecran_reponse.html#af073dfcf57eb54add9c73f76f3855513">layoutPropositionsAB</a>-&gt;addWidget(<a class="code" href="class_ecran_reponse.html#a2d3e1e0f4940e42477798838a0390258">propositionA</a>);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="class_ecran_reponse.html#af073dfcf57eb54add9c73f76f3855513">layoutPropositionsAB</a>-&gt;addWidget(<a class="code" href="class_ecran_reponse.html#a804828d0ffd2583590f063a92453c950">propositionB</a>);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="class_ecran_reponse.html#afbaa70c1a663614b554e96ad8e5c5583">layoutPropositions</a>-&gt;addLayout(<a class="code" href="class_ecran_reponse.html#a37d400dbc4f5d23404b7378c617800d5">layoutPropositionsCD</a>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="class_ecran_reponse.html#a37d400dbc4f5d23404b7378c617800d5">layoutPropositionsCD</a>-&gt;addWidget(<a class="code" href="class_ecran_reponse.html#a86c27fa5ebaa33e78744fb527a88caea">propositionC</a>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="class_ecran_reponse.html#a37d400dbc4f5d23404b7378c617800d5">layoutPropositionsCD</a>-&gt;addWidget(<a class="code" href="class_ecran_reponse.html#a3c0c17ceef9dd0e9237d895a35001fd1">propositionD</a>);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="class_ecran_reponse.html#afdfc3b531854b1cdd47aa7a7601ddb8b">layoutEcranReponse</a>-&gt;addWidget(<a class="code" href="class_ecran_reponse.html#a53ce0c5dbb397ffc80443c75bf7eba16">explication</a>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="class_ecran_reponse.html#afdfc3b531854b1cdd47aa7a7601ddb8b">layoutEcranReponse</a>-&gt;addLayout(<a class="code" href="class_ecran_reponse.html#a44e21e7555a01a27ba62fb9e0c73b8d1">layoutTimer</a>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="class_ecran_reponse.html#a44e21e7555a01a27ba62fb9e0c73b8d1">layoutTimer</a>-&gt;addStretch();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="class_ecran_reponse.html#a44e21e7555a01a27ba62fb9e0c73b8d1">layoutTimer</a>-&gt;addWidget(<a class="code" href="class_ecran_reponse.html#a418192cbe507cd7bbff7389ec712bfae">tempsRestant</a>);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    parent-&gt;<a class="code" href="class_quizzy_g_u_i.html#a85d0b7faacb42f889ce1ea2911cc208e">getEcrans</a>()-&gt;addWidget(<a class="code" href="class_ecran_reponse.html#a3334fc1c3edefdb95171d789c0a1a215">ecranReponse</a>);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_ecran_reponse.html#a65e43b04c83d98b2cf8a87fc26474ff7">   73</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_ecran_reponse.html#a65e43b04c83d98b2cf8a87fc26474ff7">EcranReponse::afficherTitreQuestion</a>(QString titre)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="class_ecran_reponse.html#af6ec77ca1c4f2fa03308ba013d6e85ac">titreQuestion</a>-&gt;setText(titre);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="class_ecran_reponse.html#a2acfe2c9c4d9f8570b3c198fbbc4371d">   78</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_ecran_reponse.html#a2acfe2c9c4d9f8570b3c198fbbc4371d">EcranReponse::afficherThemeQuestion</a>(QString themeQuestions)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="class_ecran_reponse.html#ab6eafd5d5938aa1a79128a56076b63f7">theme</a>-&gt;setText(themeQuestions);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="class_ecran_reponse.html#afe23188de795409f988caf88a78d0cf6">   83</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_ecran_reponse.html#afe23188de795409f988caf88a78d0cf6">EcranReponse::afficherNbQuestions</a>(QString nbQuestions,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                                       <span class="keywordtype">int</span>     <a class="code" href="quizzygui_8cpp.html#a0ca970582bafcbb9679992b6456ed6ce">indexQuestionActuelle</a>)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;{</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    QString texte =</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      QString::number(<a class="code" href="quizzygui_8cpp.html#a0ca970582bafcbb9679992b6456ed6ce">indexQuestionActuelle</a>) + <span class="stringliteral">&quot; / &quot;</span> + nbQuestions;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="class_ecran_reponse.html#ae6017b12aae5d64156a615d380e9342c">nombreDeQuestion</a>-&gt;setText(texte);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="class_ecran_reponse.html#a7343ec90fc7eccf8260332fe8543f237">   91</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_ecran_reponse.html#a7343ec90fc7eccf8260332fe8543f237">EcranReponse::afficherPropositions</a>(QString propA,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                                        QString propB,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                                        QString propC,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                                        QString propD)</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;{</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="class_ecran_reponse.html#a2d3e1e0f4940e42477798838a0390258">propositionA</a>-&gt;setText(propA);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="class_ecran_reponse.html#a804828d0ffd2583590f063a92453c950">propositionB</a>-&gt;setText(propB);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <a class="code" href="class_ecran_reponse.html#a86c27fa5ebaa33e78744fb527a88caea">propositionC</a>-&gt;setText(propC);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <a class="code" href="class_ecran_reponse.html#a3c0c17ceef9dd0e9237d895a35001fd1">propositionD</a>-&gt;setText(propD);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="class_ecran_reponse.html#a14633550dc545062e6cb181f8bd7f3e0">  102</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_ecran_reponse.html#a14633550dc545062e6cb181f8bd7f3e0">EcranReponse::afficherPropositionCorrecte</a>(<span class="keywordtype">int</span> idReponse)</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    QVector&lt;QLabel*&gt; propositions = { <a class="code" href="class_ecran_reponse.html#a2d3e1e0f4940e42477798838a0390258">propositionA</a>,</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                                      <a class="code" href="class_ecran_reponse.html#a804828d0ffd2583590f063a92453c950">propositionB</a>,</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                                      <a class="code" href="class_ecran_reponse.html#a86c27fa5ebaa33e78744fb527a88caea">propositionC</a>,</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                                      <a class="code" href="class_ecran_reponse.html#a3c0c17ceef9dd0e9237d895a35001fd1">propositionD</a> };</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 4; ++i)</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">if</span>(i == idReponse - 1)</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            propositions[i]-&gt;setObjectName(<span class="stringliteral">&quot;propositionCorrecte&quot;</span>);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            propositions[i]-&gt;setObjectName(<span class="stringliteral">&quot;propositionIncorrecte&quot;</span>);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        propositions[i]-&gt;style()-&gt;unpolish(propositions[i]);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        propositions[i]-&gt;style()-&gt;polish(propositions[i]);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        propositions[i]-&gt;update();</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="class_ecran_reponse.html#ac52b4e49b5e97799801cdc3bcf5967ec">  125</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_ecran_reponse.html#ac52b4e49b5e97799801cdc3bcf5967ec">EcranReponse::afficherTempsRestant</a>(<span class="keywordtype">int</span> temps)</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;{</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <a class="code" href="class_ecran_reponse.html#a418192cbe507cd7bbff7389ec712bfae">tempsRestant</a>-&gt;setText(QString::number(temps));</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="class_ecran_reponse.html#ac3dbfd274f978d8e3db25a2a8b675950">  130</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_ecran_reponse.html#ac3dbfd274f978d8e3db25a2a8b675950">EcranReponse::afficherExplication</a>(QString texte)</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;{</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <a class="code" href="class_ecran_reponse.html#a53ce0c5dbb397ffc80443c75bf7eba16">explication</a>-&gt;setText(texte);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="class_ecran_reponse.html#aabc370a00003627bc896d2f02174e442">  135</a></span>&#160;<a class="code" href="class_ecran_reponse.html#aabc370a00003627bc896d2f02174e442">EcranReponse::~EcranReponse</a>()</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;{</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;}</div>
+<div class="ttc" id="aclass_ecran_reponse_html_a14633550dc545062e6cb181f8bd7f3e0"><div class="ttname"><a href="class_ecran_reponse.html#a14633550dc545062e6cb181f8bd7f3e0">EcranReponse::afficherPropositionCorrecte</a></div><div class="ttdeci">void afficherPropositionCorrecte(int idReponse)</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8cpp_source.html#l00102">ecranreponse.cpp:102</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a2acfe2c9c4d9f8570b3c198fbbc4371d"><div class="ttname"><a href="class_ecran_reponse.html#a2acfe2c9c4d9f8570b3c198fbbc4371d">EcranReponse::afficherThemeQuestion</a></div><div class="ttdeci">void afficherThemeQuestion(QString themeQuestions)</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8cpp_source.html#l00078">ecranreponse.cpp:78</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a2d3e1e0f4940e42477798838a0390258"><div class="ttname"><a href="class_ecran_reponse.html#a2d3e1e0f4940e42477798838a0390258">EcranReponse::propositionA</a></div><div class="ttdeci">QLabel * propositionA</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00027">ecranreponse.h:27</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a3334fc1c3edefdb95171d789c0a1a215"><div class="ttname"><a href="class_ecran_reponse.html#a3334fc1c3edefdb95171d789c0a1a215">EcranReponse::ecranReponse</a></div><div class="ttdeci">QWidget * ecranReponse</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00016">ecranreponse.h:16</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a37d400dbc4f5d23404b7378c617800d5"><div class="ttname"><a href="class_ecran_reponse.html#a37d400dbc4f5d23404b7378c617800d5">EcranReponse::layoutPropositionsCD</a></div><div class="ttdeci">QHBoxLayout * layoutPropositionsCD</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00026">ecranreponse.h:26</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a3c0c17ceef9dd0e9237d895a35001fd1"><div class="ttname"><a href="class_ecran_reponse.html#a3c0c17ceef9dd0e9237d895a35001fd1">EcranReponse::propositionD</a></div><div class="ttdeci">QLabel * propositionD</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00030">ecranreponse.h:30</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a418192cbe507cd7bbff7389ec712bfae"><div class="ttname"><a href="class_ecran_reponse.html#a418192cbe507cd7bbff7389ec712bfae">EcranReponse::tempsRestant</a></div><div class="ttdeci">QLabel * tempsRestant</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00033">ecranreponse.h:33</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a44e21e7555a01a27ba62fb9e0c73b8d1"><div class="ttname"><a href="class_ecran_reponse.html#a44e21e7555a01a27ba62fb9e0c73b8d1">EcranReponse::layoutTimer</a></div><div class="ttdeci">QHBoxLayout * layoutTimer</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00031">ecranreponse.h:31</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a4d188f2dc49f3244ba132237c0d33b67"><div class="ttname"><a href="class_ecran_reponse.html#a4d188f2dc49f3244ba132237c0d33b67">EcranReponse::EcranReponse</a></div><div class="ttdeci">EcranReponse(QuizzyGUI *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8cpp_source.html#l00005">ecranreponse.cpp:5</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a53ce0c5dbb397ffc80443c75bf7eba16"><div class="ttname"><a href="class_ecran_reponse.html#a53ce0c5dbb397ffc80443c75bf7eba16">EcranReponse::explication</a></div><div class="ttdeci">QLabel * explication</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00032">ecranreponse.h:32</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a65e43b04c83d98b2cf8a87fc26474ff7"><div class="ttname"><a href="class_ecran_reponse.html#a65e43b04c83d98b2cf8a87fc26474ff7">EcranReponse::afficherTitreQuestion</a></div><div class="ttdeci">void afficherTitreQuestion(QString titre)</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8cpp_source.html#l00073">ecranreponse.cpp:73</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a7343ec90fc7eccf8260332fe8543f237"><div class="ttname"><a href="class_ecran_reponse.html#a7343ec90fc7eccf8260332fe8543f237">EcranReponse::afficherPropositions</a></div><div class="ttdeci">void afficherPropositions(QString propA, QString propB, QString propC, QString propD)</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8cpp_source.html#l00091">ecranreponse.cpp:91</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a7f2d12cb61a7383d4577304bec83cd0a"><div class="ttname"><a href="class_ecran_reponse.html#a7f2d12cb61a7383d4577304bec83cd0a">EcranReponse::layoutTitre</a></div><div class="ttdeci">QHBoxLayout * layoutTitre</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00018">ecranreponse.h:18</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a804828d0ffd2583590f063a92453c950"><div class="ttname"><a href="class_ecran_reponse.html#a804828d0ffd2583590f063a92453c950">EcranReponse::propositionB</a></div><div class="ttdeci">QLabel * propositionB</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00028">ecranreponse.h:28</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a86c27fa5ebaa33e78744fb527a88caea"><div class="ttname"><a href="class_ecran_reponse.html#a86c27fa5ebaa33e78744fb527a88caea">EcranReponse::propositionC</a></div><div class="ttdeci">QLabel * propositionC</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00029">ecranreponse.h:29</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a8aa0d5e8331938a24396939466644e54"><div class="ttname"><a href="class_ecran_reponse.html#a8aa0d5e8331938a24396939466644e54">EcranReponse::messageReponse</a></div><div class="ttdeci">QLabel * messageReponse</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00023">ecranreponse.h:23</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_a8fca9035828509751164a1a20585e82e"><div class="ttname"><a href="class_ecran_reponse.html#a8fca9035828509751164a1a20585e82e">EcranReponse::layoutThemeNbQuestion</a></div><div class="ttdeci">QHBoxLayout * layoutThemeNbQuestion</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00019">ecranreponse.h:19</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_aabc370a00003627bc896d2f02174e442"><div class="ttname"><a href="class_ecran_reponse.html#aabc370a00003627bc896d2f02174e442">EcranReponse::~EcranReponse</a></div><div class="ttdeci">~EcranReponse()</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8cpp_source.html#l00135">ecranreponse.cpp:135</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_ab6eafd5d5938aa1a79128a56076b63f7"><div class="ttname"><a href="class_ecran_reponse.html#ab6eafd5d5938aa1a79128a56076b63f7">EcranReponse::theme</a></div><div class="ttdeci">QLabel * theme</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00021">ecranreponse.h:21</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_ac3dbfd274f978d8e3db25a2a8b675950"><div class="ttname"><a href="class_ecran_reponse.html#ac3dbfd274f978d8e3db25a2a8b675950">EcranReponse::afficherExplication</a></div><div class="ttdeci">void afficherExplication(QString texte)</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8cpp_source.html#l00130">ecranreponse.cpp:130</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_ac52b4e49b5e97799801cdc3bcf5967ec"><div class="ttname"><a href="class_ecran_reponse.html#ac52b4e49b5e97799801cdc3bcf5967ec">EcranReponse::afficherTempsRestant</a></div><div class="ttdeci">void afficherTempsRestant(int temps)</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8cpp_source.html#l00125">ecranreponse.cpp:125</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_ae6017b12aae5d64156a615d380e9342c"><div class="ttname"><a href="class_ecran_reponse.html#ae6017b12aae5d64156a615d380e9342c">EcranReponse::nombreDeQuestion</a></div><div class="ttdeci">QLabel * nombreDeQuestion</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00022">ecranreponse.h:22</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_af073dfcf57eb54add9c73f76f3855513"><div class="ttname"><a href="class_ecran_reponse.html#af073dfcf57eb54add9c73f76f3855513">EcranReponse::layoutPropositionsAB</a></div><div class="ttdeci">QHBoxLayout * layoutPropositionsAB</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00025">ecranreponse.h:25</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_af6ec77ca1c4f2fa03308ba013d6e85ac"><div class="ttname"><a href="class_ecran_reponse.html#af6ec77ca1c4f2fa03308ba013d6e85ac">EcranReponse::titreQuestion</a></div><div class="ttdeci">QLabel * titreQuestion</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00020">ecranreponse.h:20</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_afbaa70c1a663614b554e96ad8e5c5583"><div class="ttname"><a href="class_ecran_reponse.html#afbaa70c1a663614b554e96ad8e5c5583">EcranReponse::layoutPropositions</a></div><div class="ttdeci">QVBoxLayout * layoutPropositions</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00024">ecranreponse.h:24</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_afdfc3b531854b1cdd47aa7a7601ddb8b"><div class="ttname"><a href="class_ecran_reponse.html#afdfc3b531854b1cdd47aa7a7601ddb8b">EcranReponse::layoutEcranReponse</a></div><div class="ttdeci">QVBoxLayout * layoutEcranReponse</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00017">ecranreponse.h:17</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html_afe23188de795409f988caf88a78d0cf6"><div class="ttname"><a href="class_ecran_reponse.html#afe23188de795409f988caf88a78d0cf6">EcranReponse::afficherNbQuestions</a></div><div class="ttdeci">void afficherNbQuestions(QString nbQuestions, int indexQuestionActuelle)</div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8cpp_source.html#l00083">ecranreponse.cpp:83</a></div></div>
+<div class="ttc" id="aclass_q_widget_html"><div class="ttname"><a href="class_q_widget.html">QWidget</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html"><div class="ttname"><a href="class_quizzy_g_u_i.html">QuizzyGUI</a></div><div class="ttdoc">Déclaration de la classe QuizzyGUI.</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00039">quizzygui.h:40</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a85d0b7faacb42f889ce1ea2911cc208e"><div class="ttname"><a href="class_quizzy_g_u_i.html#a85d0b7faacb42f889ce1ea2911cc208e">QuizzyGUI::getEcrans</a></div><div class="ttdeci">QStackedWidget * getEcrans()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00057">quizzygui.cpp:57</a></div></div>
+<div class="ttc" id="aecranreponse_8h_html"><div class="ttname"><a href="ecranreponse_8h.html">ecranreponse.h</a></div></div>
+<div class="ttc" id="aquizzygui_8cpp_html_a0ca970582bafcbb9679992b6456ed6ce"><div class="ttname"><a href="quizzygui_8cpp.html#a0ca970582bafcbb9679992b6456ed6ce">indexQuestionActuelle</a></div><div class="ttdeci">int indexQuestionActuelle</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00021">quizzygui.cpp:21</a></div></div>
+<div class="ttc" id="aquizzygui_8h_html"><div class="ttname"><a href="quizzygui_8h.html">quizzygui.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_9342060438ee5d92e314df48637a6ec8.html">quizzy-visualisation</a></li><li class="navelem"><a class="el" href="ecranreponse_8cpp.html">ecranreponse.cpp</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Mercredi 4 Juin 2025 13:55:20 pour Projet Quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>
