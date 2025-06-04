@@ -1,0 +1,9 @@
+class Joueur
+!!!133762.cpp!!!	setNom(in nom : QString) : void
+    this->nom = nom;
+!!!133890.cpp!!!	getNom() : QString
+    return nom;
+!!!134018.cpp!!!	setScore(in score : int) : void
+    this->score = score;
+!!!134146.cpp!!!	getScore() : int
+    return score;

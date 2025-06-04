@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet Quizzy:  Fichier source de quizzygui.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet Quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS CIEL IR LaSalle Avignon 2025</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('quizzygui_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">quizzygui.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="quizzygui_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef QUIZZYGUI_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define QUIZZYGUI_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QtWidgets&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="joueur_8h.html">joueur.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="question_8h.html">question.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="quizzygui_8h.html#a26145160ca6da867eb178d792aba94c3">    9</a></span>&#160;<span class="preprocessor">#define CHEMIN_LOGO &quot;:/images/logo.png&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="quizzygui_8h.html#a2beb39c1faebf7fe95355123fcfdb7f0">   11</a></span>&#160;<span class="preprocessor">#define TEST_ECRANS</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">class </span><a class="code" href="class_communication_bluetooth.html">CommunicationBluetooth</a>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="quizzygui_8h.html#a75a6df0e4e67539a5599efbd68bae5eb">   19</a></span>&#160;<span class="preprocessor">#define NOM_APPLICATION &quot;Quizzy&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="quizzygui_8h.html#a121d9d72e2cc9cdcf09da6b88fa7859d">   25</a></span>&#160;<span class="preprocessor">#define VERSION_APPLICATION &quot;1.0&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">class </span><a class="code" href="class_quizzy.html">Quizzy</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">class </span><a class="code" href="class_ecran_attente.html">EcranAttente</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">class </span><a class="code" href="class_ecran_accueil.html">EcranAccueil</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">class </span><a class="code" href="class_ecran_question.html">EcranQuestion</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">class </span><a class="code" href="class_ecran_reponse.html">EcranReponse</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">class </span><a class="code" href="class_ecran_fin.html">EcranFin</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html">   39</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_quizzy_g_u_i.html">QuizzyGUI</a> : <span class="keyword">public</span> <a class="code" href="class_q_main_window.html">QMainWindow</a></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_quizzy_g_u_i.html#ab8b68898ebaa89f12c7677277d1d4eb1">QuizzyGUI</a>(<a class="code" href="class_q_widget.html">QWidget</a>* parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="class_quizzy_g_u_i.html#a561bea95e2c81da782ecf4fb45a99e74">~QuizzyGUI</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    QStackedWidget* <a class="code" href="class_quizzy_g_u_i.html#a85d0b7faacb42f889ce1ea2911cc208e">getEcrans</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8">   48</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8">Ecran</a></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8a628f493d57b894d8486902b7e6e3fc33">   50</a></span>&#160;        <a class="code" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8a628f493d57b894d8486902b7e6e3fc33">idEcranAttente</a> = 0,</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8a05e4fe921d2ff7e9160c663ead5c8161">   51</a></span>&#160;        <a class="code" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8a05e4fe921d2ff7e9160c663ead5c8161">idEcranAccueil</a>,</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8a2cfe43253e73a865b22f2bb6461817a0">   52</a></span>&#160;        <a class="code" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8a2cfe43253e73a865b22f2bb6461817a0">idEcranQuestion</a>,</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8ac9434a46ea6f801e48abc65afd0c433c">   53</a></span>&#160;        <a class="code" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8ac9434a46ea6f801e48abc65afd0c433c">idEcranReponse</a>,</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8a3be97d153a6cd307715fe0c45a7562d8">   54</a></span>&#160;        <a class="code" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8a3be97d153a6cd307715fe0c45a7562d8">idEcranFin</a>,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8af21ac0fa0b0e9c4c026a4eb78e7f62d9">NbEcrans</a></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8af21ac0fa0b0e9c4c026a4eb78e7f62d9">   56</a></span>&#160;    };</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#ac8e096a265e655fcc764502b1bee1c3a">   59</a></span>&#160;    <a class="code" href="class_communication_bluetooth.html">CommunicationBluetooth</a>* <a class="code" href="class_quizzy_g_u_i.html#ac8e096a265e655fcc764502b1bee1c3a">communication</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a77fd8be3d8e37151d35138980ae1ef61">   60</a></span>&#160;    <a class="code" href="class_quizzy.html">Quizzy</a>*                 <a class="code" href="class_quizzy_g_u_i.html#a77fd8be3d8e37151d35138980ae1ef61">quizzy</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a008a2870c1ddbf512ec230b175a0b311">   61</a></span>&#160;    <a class="code" href="class_joueur.html">Joueur</a>                  <a class="code" href="class_quizzy_g_u_i.html#a008a2870c1ddbf512ec230b175a0b311">joueur1</a>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a4c0193f891cf1f4435fb3a2c7de21694">   62</a></span>&#160;    <a class="code" href="class_joueur.html">Joueur</a>                  <a class="code" href="class_quizzy_g_u_i.html#a4c0193f891cf1f4435fb3a2c7de21694">joueur2</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#aaa41d958a0fbc58e71feed56482db984">   63</a></span>&#160;    <a class="code" href="class_question.html">Question</a>                <a class="code" href="class_quizzy_g_u_i.html#aaa41d958a0fbc58e71feed56482db984">question</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a3653fa8abdb6347f1d2e1e14310ccca6">   65</a></span>&#160;    QStackedWidget* <a class="code" href="class_quizzy_g_u_i.html#a3653fa8abdb6347f1d2e1e14310ccca6">ecrans</a>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a0db45b251f8a80c6bf116d2cd39133ec">   66</a></span>&#160;    QVBoxLayout*    <a class="code" href="class_quizzy_g_u_i.html#a0db45b251f8a80c6bf116d2cd39133ec">layoutPrincipal</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a136027bc1e55c232af388519bbb06c97">   67</a></span>&#160;    <a class="code" href="class_ecran_attente.html">EcranAttente</a>*   <a class="code" href="class_quizzy_g_u_i.html#a136027bc1e55c232af388519bbb06c97">ecranAttente</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a2da54a26e724682ee8b65b8b30be6184">   68</a></span>&#160;    <a class="code" href="class_ecran_accueil.html">EcranAccueil</a>*   <a class="code" href="class_quizzy_g_u_i.html#a2da54a26e724682ee8b65b8b30be6184">ecranAccueil</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a05b3fffb5ca3ca076c50f9301bdac253">   69</a></span>&#160;    <a class="code" href="class_ecran_question.html">EcranQuestion</a>*  <a class="code" href="class_quizzy_g_u_i.html#a05b3fffb5ca3ca076c50f9301bdac253">ecranQuestion</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a907bbb403b2c3794fe386e8a3d18e6b9">   70</a></span>&#160;    <a class="code" href="class_ecran_reponse.html">EcranReponse</a>*   <a class="code" href="class_quizzy_g_u_i.html#a907bbb403b2c3794fe386e8a3d18e6b9">ecranReponse</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a7c670d826a5a8c4c3132328c2cfe2b36">   71</a></span>&#160;    <a class="code" href="class_ecran_fin.html">EcranFin</a>*       <a class="code" href="class_quizzy_g_u_i.html#a7c670d826a5a8c4c3132328c2cfe2b36">ecranFin</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#a4cee93ef2c92be3712eb2fa079e5a3ea">initialiserEvenements</a>();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#a6f66b5da7a81d19dedcaf0f31d1085ee">initialiserEcrans</a>();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#a49b79e8cf147760360d5fbcd3e68bb8a">creerEcrans</a>();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#ab069b5986fd8b2237b0a8cd0ce31a40d">creerEcranAttente</a>();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#ab1ccc3034b22bfce791adfcf4c32e45d">creerEcranAccueil</a>();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#aad0ffed9f323dfc21d1b3c3306361464">creerEcranQuestion</a>();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#aae0ee4fc5983e9dfff340fc9d67652dc">creerEcranReponse</a>();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#a312c5ed796fd3020d63c7891453bedac">creerEcranFin</a>();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a18cddcaa870e23ec518906906b645647">   83</a></span>&#160;    <a class="code" href="class_joueur.html">Joueur</a>* <a class="code" href="class_quizzy_g_u_i.html#a18cddcaa870e23ec518906906b645647">getJoueur1</a>()</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">return</span> &amp;<a class="code" href="class_quizzy_g_u_i.html#a008a2870c1ddbf512ec230b175a0b311">joueur1</a>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a9fa71a4bb8333cfa160e7c865db39926">   87</a></span>&#160;    <a class="code" href="class_joueur.html">Joueur</a>* <a class="code" href="class_quizzy_g_u_i.html#a9fa71a4bb8333cfa160e7c865db39926">getJoueur2</a>()</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordflow">return</span> &amp;<a class="code" href="class_quizzy_g_u_i.html#a4c0193f891cf1f4435fb3a2c7de21694">joueur2</a>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="class_quizzy_g_u_i.html#a560c03cd28506a9439ed21462c619b86">   91</a></span>&#160;    <a class="code" href="class_question.html">Question</a>* <a class="code" href="class_quizzy_g_u_i.html#a560c03cd28506a9439ed21462c619b86">getQuestion</a>()</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">return</span> &amp;<a class="code" href="class_quizzy_g_u_i.html#aaa41d958a0fbc58e71feed56482db984">question</a>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#a4f75796c1b46ae4b48d1b200f86ab407">afficherEcran</a>(<a class="code" href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8">QuizzyGUI::Ecran</a> ecran);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#a1f3d99da844f0b73274e95eeac2b88f7">afficherEcranAttente</a>();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#ab0e3d223f5b3738d985a21b3ea52fd00">afficherEcranSuivant</a>();</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#a6e7206629f00bd3903224127e1f815c6">afficherMessageConnexion</a>(QString nom, QString adresse);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#a82c4d99b48c7e680ea8853067fcd7bf8">afficherMessageDeconnexion</a>(QString nom, QString adresse);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#a1989706cd87a2c25120fffe0029d0bb0">afficherConfiguration</a>();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#a49566edd32e0555a131e67275f7567f2">afficherNomsJoueurs</a>();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#a96b58bc54a60bbb928438ad164908b05">afficherQuestion</a>();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#ad33eabc2bba3e898de109bfc455ed6b4">afficherScores</a>();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy_g_u_i.html#a12123f2a085678b5d0c5cfb070b17be9">determinerGagnant</a>();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;};</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// QUIZZYGUI_H</span></div>
+<div class="ttc" id="aclass_communication_bluetooth_html"><div class="ttname"><a href="class_communication_bluetooth.html">CommunicationBluetooth</a></div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00022">communicationbluetooth.h:23</a></div></div>
+<div class="ttc" id="aclass_ecran_accueil_html"><div class="ttname"><a href="class_ecran_accueil.html">EcranAccueil</a></div><div class="ttdef"><b>Definition:</b> <a href="ecranaccueil_8h_source.html#l00008">ecranaccueil.h:9</a></div></div>
+<div class="ttc" id="aclass_ecran_attente_html"><div class="ttname"><a href="class_ecran_attente.html">EcranAttente</a></div><div class="ttdef"><b>Definition:</b> <a href="ecranattente_8h_source.html#l00008">ecranattente.h:9</a></div></div>
+<div class="ttc" id="aclass_ecran_fin_html"><div class="ttname"><a href="class_ecran_fin.html">EcranFin</a></div><div class="ttdef"><b>Definition:</b> <a href="ecranfin_8h_source.html#l00010">ecranfin.h:11</a></div></div>
+<div class="ttc" id="aclass_ecran_question_html"><div class="ttname"><a href="class_ecran_question.html">EcranQuestion</a></div><div class="ttdef"><b>Definition:</b> <a href="ecranquestion_8h_source.html#l00008">ecranquestion.h:9</a></div></div>
+<div class="ttc" id="aclass_ecran_reponse_html"><div class="ttname"><a href="class_ecran_reponse.html">EcranReponse</a></div><div class="ttdef"><b>Definition:</b> <a href="ecranreponse_8h_source.html#l00008">ecranreponse.h:9</a></div></div>
+<div class="ttc" id="aclass_joueur_html"><div class="ttname"><a href="class_joueur.html">Joueur</a></div><div class="ttdef"><b>Definition:</b> <a href="joueur_8h_source.html#l00006">joueur.h:7</a></div></div>
+<div class="ttc" id="aclass_q_main_window_html"><div class="ttname"><a href="class_q_main_window.html">QMainWindow</a></div></div>
+<div class="ttc" id="aclass_q_widget_html"><div class="ttname"><a href="class_q_widget.html">QWidget</a></div></div>
+<div class="ttc" id="aclass_question_html"><div class="ttname"><a href="class_question.html">Question</a></div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00006">question.h:7</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html"><div class="ttname"><a href="class_quizzy_g_u_i.html">QuizzyGUI</a></div><div class="ttdoc">Déclaration de la classe QuizzyGUI.</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00039">quizzygui.h:40</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a008a2870c1ddbf512ec230b175a0b311"><div class="ttname"><a href="class_quizzy_g_u_i.html#a008a2870c1ddbf512ec230b175a0b311">QuizzyGUI::joueur1</a></div><div class="ttdeci">Joueur joueur1</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00061">quizzygui.h:61</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a05b3fffb5ca3ca076c50f9301bdac253"><div class="ttname"><a href="class_quizzy_g_u_i.html#a05b3fffb5ca3ca076c50f9301bdac253">QuizzyGUI::ecranQuestion</a></div><div class="ttdeci">EcranQuestion * ecranQuestion</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00069">quizzygui.h:69</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a0db45b251f8a80c6bf116d2cd39133ec"><div class="ttname"><a href="class_quizzy_g_u_i.html#a0db45b251f8a80c6bf116d2cd39133ec">QuizzyGUI::layoutPrincipal</a></div><div class="ttdeci">QVBoxLayout * layoutPrincipal</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00066">quizzygui.h:66</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a12123f2a085678b5d0c5cfb070b17be9"><div class="ttname"><a href="class_quizzy_g_u_i.html#a12123f2a085678b5d0c5cfb070b17be9">QuizzyGUI::determinerGagnant</a></div><div class="ttdeci">void determinerGagnant()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00216">quizzygui.cpp:216</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a136027bc1e55c232af388519bbb06c97"><div class="ttname"><a href="class_quizzy_g_u_i.html#a136027bc1e55c232af388519bbb06c97">QuizzyGUI::ecranAttente</a></div><div class="ttdeci">EcranAttente * ecranAttente</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00067">quizzygui.h:67</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a18cddcaa870e23ec518906906b645647"><div class="ttname"><a href="class_quizzy_g_u_i.html#a18cddcaa870e23ec518906906b645647">QuizzyGUI::getJoueur1</a></div><div class="ttdeci">Joueur * getJoueur1()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00083">quizzygui.h:83</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a1989706cd87a2c25120fffe0029d0bb0"><div class="ttname"><a href="class_quizzy_g_u_i.html#a1989706cd87a2c25120fffe0029d0bb0">QuizzyGUI::afficherConfiguration</a></div><div class="ttdeci">void afficherConfiguration()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00163">quizzygui.cpp:163</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a1f3d99da844f0b73274e95eeac2b88f7"><div class="ttname"><a href="class_quizzy_g_u_i.html#a1f3d99da844f0b73274e95eeac2b88f7">QuizzyGUI::afficherEcranAttente</a></div><div class="ttdeci">void afficherEcranAttente()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00125">quizzygui.cpp:125</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a2da54a26e724682ee8b65b8b30be6184"><div class="ttname"><a href="class_quizzy_g_u_i.html#a2da54a26e724682ee8b65b8b30be6184">QuizzyGUI::ecranAccueil</a></div><div class="ttdeci">EcranAccueil * ecranAccueil</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00068">quizzygui.h:68</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a312c5ed796fd3020d63c7891453bedac"><div class="ttname"><a href="class_quizzy_g_u_i.html#a312c5ed796fd3020d63c7891453bedac">QuizzyGUI::creerEcranFin</a></div><div class="ttdeci">void creerEcranFin()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00114">quizzygui.cpp:114</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a3653fa8abdb6347f1d2e1e14310ccca6"><div class="ttname"><a href="class_quizzy_g_u_i.html#a3653fa8abdb6347f1d2e1e14310ccca6">QuizzyGUI::ecrans</a></div><div class="ttdeci">QStackedWidget * ecrans</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00065">quizzygui.h:65</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a49566edd32e0555a131e67275f7567f2"><div class="ttname"><a href="class_quizzy_g_u_i.html#a49566edd32e0555a131e67275f7567f2">QuizzyGUI::afficherNomsJoueurs</a></div><div class="ttdeci">void afficherNomsJoueurs()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00172">quizzygui.cpp:172</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a49b79e8cf147760360d5fbcd3e68bb8a"><div class="ttname"><a href="class_quizzy_g_u_i.html#a49b79e8cf147760360d5fbcd3e68bb8a">QuizzyGUI::creerEcrans</a></div><div class="ttdeci">void creerEcrans()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00072">quizzygui.cpp:72</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a4c0193f891cf1f4435fb3a2c7de21694"><div class="ttname"><a href="class_quizzy_g_u_i.html#a4c0193f891cf1f4435fb3a2c7de21694">QuizzyGUI::joueur2</a></div><div class="ttdeci">Joueur joueur2</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00062">quizzygui.h:62</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a4cee93ef2c92be3712eb2fa079e5a3ea"><div class="ttname"><a href="class_quizzy_g_u_i.html#a4cee93ef2c92be3712eb2fa079e5a3ea">QuizzyGUI::initialiserEvenements</a></div><div class="ttdeci">void initialiserEvenements()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00239">quizzygui.cpp:239</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a4f75796c1b46ae4b48d1b200f86ab407"><div class="ttname"><a href="class_quizzy_g_u_i.html#a4f75796c1b46ae4b48d1b200f86ab407">QuizzyGUI::afficherEcran</a></div><div class="ttdeci">void afficherEcran(QuizzyGUI::Ecran ecran)</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00119">quizzygui.cpp:119</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a560c03cd28506a9439ed21462c619b86"><div class="ttname"><a href="class_quizzy_g_u_i.html#a560c03cd28506a9439ed21462c619b86">QuizzyGUI::getQuestion</a></div><div class="ttdeci">Question * getQuestion()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00091">quizzygui.h:91</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a561bea95e2c81da782ecf4fb45a99e74"><div class="ttname"><a href="class_quizzy_g_u_i.html#a561bea95e2c81da782ecf4fb45a99e74">QuizzyGUI::~QuizzyGUI</a></div><div class="ttdeci">~QuizzyGUI()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00052">quizzygui.cpp:52</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a6e7206629f00bd3903224127e1f815c6"><div class="ttname"><a href="class_quizzy_g_u_i.html#a6e7206629f00bd3903224127e1f815c6">QuizzyGUI::afficherMessageConnexion</a></div><div class="ttdeci">void afficherMessageConnexion(QString nom, QString adresse)</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00082">quizzygui.cpp:82</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a6f66b5da7a81d19dedcaf0f31d1085ee"><div class="ttname"><a href="class_quizzy_g_u_i.html#a6f66b5da7a81d19dedcaf0f31d1085ee">QuizzyGUI::initialiserEcrans</a></div><div class="ttdeci">void initialiserEcrans()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00062">quizzygui.cpp:62</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a77fd8be3d8e37151d35138980ae1ef61"><div class="ttname"><a href="class_quizzy_g_u_i.html#a77fd8be3d8e37151d35138980ae1ef61">QuizzyGUI::quizzy</a></div><div class="ttdeci">Quizzy * quizzy</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00060">quizzygui.h:60</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a7c670d826a5a8c4c3132328c2cfe2b36"><div class="ttname"><a href="class_quizzy_g_u_i.html#a7c670d826a5a8c4c3132328c2cfe2b36">QuizzyGUI::ecranFin</a></div><div class="ttdeci">EcranFin * ecranFin</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00071">quizzygui.h:71</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a82c4d99b48c7e680ea8853067fcd7bf8"><div class="ttname"><a href="class_quizzy_g_u_i.html#a82c4d99b48c7e680ea8853067fcd7bf8">QuizzyGUI::afficherMessageDeconnexion</a></div><div class="ttdeci">void afficherMessageDeconnexion(QString nom, QString adresse)</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00088">quizzygui.cpp:88</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a85d0b7faacb42f889ce1ea2911cc208e"><div class="ttname"><a href="class_quizzy_g_u_i.html#a85d0b7faacb42f889ce1ea2911cc208e">QuizzyGUI::getEcrans</a></div><div class="ttdeci">QStackedWidget * getEcrans()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00057">quizzygui.cpp:57</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a907bbb403b2c3794fe386e8a3d18e6b9"><div class="ttname"><a href="class_quizzy_g_u_i.html#a907bbb403b2c3794fe386e8a3d18e6b9">QuizzyGUI::ecranReponse</a></div><div class="ttdeci">EcranReponse * ecranReponse</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00070">quizzygui.h:70</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a96b58bc54a60bbb928438ad164908b05"><div class="ttname"><a href="class_quizzy_g_u_i.html#a96b58bc54a60bbb928438ad164908b05">QuizzyGUI::afficherQuestion</a></div><div class="ttdeci">void afficherQuestion()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00178">quizzygui.cpp:178</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_a9fa71a4bb8333cfa160e7c865db39926"><div class="ttname"><a href="class_quizzy_g_u_i.html#a9fa71a4bb8333cfa160e7c865db39926">QuizzyGUI::getJoueur2</a></div><div class="ttdeci">Joueur * getJoueur2()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00087">quizzygui.h:87</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_aa8297a86214371955373247d9e0ddfa8"><div class="ttname"><a href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8">QuizzyGUI::Ecran</a></div><div class="ttdeci">Ecran</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00048">quizzygui.h:49</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_aa8297a86214371955373247d9e0ddfa8a05e4fe921d2ff7e9160c663ead5c8161"><div class="ttname"><a href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8a05e4fe921d2ff7e9160c663ead5c8161">QuizzyGUI::idEcranAccueil</a></div><div class="ttdeci">@ idEcranAccueil</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00051">quizzygui.h:51</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_aa8297a86214371955373247d9e0ddfa8a2cfe43253e73a865b22f2bb6461817a0"><div class="ttname"><a href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8a2cfe43253e73a865b22f2bb6461817a0">QuizzyGUI::idEcranQuestion</a></div><div class="ttdeci">@ idEcranQuestion</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00052">quizzygui.h:52</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_aa8297a86214371955373247d9e0ddfa8a3be97d153a6cd307715fe0c45a7562d8"><div class="ttname"><a href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8a3be97d153a6cd307715fe0c45a7562d8">QuizzyGUI::idEcranFin</a></div><div class="ttdeci">@ idEcranFin</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00054">quizzygui.h:54</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_aa8297a86214371955373247d9e0ddfa8a628f493d57b894d8486902b7e6e3fc33"><div class="ttname"><a href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8a628f493d57b894d8486902b7e6e3fc33">QuizzyGUI::idEcranAttente</a></div><div class="ttdeci">@ idEcranAttente</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00050">quizzygui.h:50</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_aa8297a86214371955373247d9e0ddfa8ac9434a46ea6f801e48abc65afd0c433c"><div class="ttname"><a href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8ac9434a46ea6f801e48abc65afd0c433c">QuizzyGUI::idEcranReponse</a></div><div class="ttdeci">@ idEcranReponse</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00053">quizzygui.h:53</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_aa8297a86214371955373247d9e0ddfa8af21ac0fa0b0e9c4c026a4eb78e7f62d9"><div class="ttname"><a href="class_quizzy_g_u_i.html#aa8297a86214371955373247d9e0ddfa8af21ac0fa0b0e9c4c026a4eb78e7f62d9">QuizzyGUI::NbEcrans</a></div><div class="ttdeci">@ NbEcrans</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00056">quizzygui.h:55</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_aaa41d958a0fbc58e71feed56482db984"><div class="ttname"><a href="class_quizzy_g_u_i.html#aaa41d958a0fbc58e71feed56482db984">QuizzyGUI::question</a></div><div class="ttdeci">Question question</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00063">quizzygui.h:63</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_aad0ffed9f323dfc21d1b3c3306361464"><div class="ttname"><a href="class_quizzy_g_u_i.html#aad0ffed9f323dfc21d1b3c3306361464">QuizzyGUI::creerEcranQuestion</a></div><div class="ttdeci">void creerEcranQuestion()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00104">quizzygui.cpp:104</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_aae0ee4fc5983e9dfff340fc9d67652dc"><div class="ttname"><a href="class_quizzy_g_u_i.html#aae0ee4fc5983e9dfff340fc9d67652dc">QuizzyGUI::creerEcranReponse</a></div><div class="ttdeci">void creerEcranReponse()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00109">quizzygui.cpp:109</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_ab069b5986fd8b2237b0a8cd0ce31a40d"><div class="ttname"><a href="class_quizzy_g_u_i.html#ab069b5986fd8b2237b0a8cd0ce31a40d">QuizzyGUI::creerEcranAttente</a></div><div class="ttdeci">void creerEcranAttente()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00094">quizzygui.cpp:94</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_ab0e3d223f5b3738d985a21b3ea52fd00"><div class="ttname"><a href="class_quizzy_g_u_i.html#ab0e3d223f5b3738d985a21b3ea52fd00">QuizzyGUI::afficherEcranSuivant</a></div><div class="ttdeci">void afficherEcranSuivant()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00130">quizzygui.cpp:130</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_ab1ccc3034b22bfce791adfcf4c32e45d"><div class="ttname"><a href="class_quizzy_g_u_i.html#ab1ccc3034b22bfce791adfcf4c32e45d">QuizzyGUI::creerEcranAccueil</a></div><div class="ttdeci">void creerEcranAccueil()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00099">quizzygui.cpp:99</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_ab8b68898ebaa89f12c7677277d1d4eb1"><div class="ttname"><a href="class_quizzy_g_u_i.html#ab8b68898ebaa89f12c7677277d1d4eb1">QuizzyGUI::QuizzyGUI</a></div><div class="ttdeci">QuizzyGUI(QWidget *parent=nullptr)</div><div class="ttdoc">Constructeur de la classe QuizzyGUI.</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00031">quizzygui.cpp:31</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_ac8e096a265e655fcc764502b1bee1c3a"><div class="ttname"><a href="class_quizzy_g_u_i.html#ac8e096a265e655fcc764502b1bee1c3a">QuizzyGUI::communication</a></div><div class="ttdeci">CommunicationBluetooth * communication</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8h_source.html#l00059">quizzygui.h:59</a></div></div>
+<div class="ttc" id="aclass_quizzy_g_u_i_html_ad33eabc2bba3e898de109bfc455ed6b4"><div class="ttname"><a href="class_quizzy_g_u_i.html#ad33eabc2bba3e898de109bfc455ed6b4">QuizzyGUI::afficherScores</a></div><div class="ttdeci">void afficherScores()</div><div class="ttdef"><b>Definition:</b> <a href="quizzygui_8cpp_source.html#l00206">quizzygui.cpp:206</a></div></div>
+<div class="ttc" id="aclass_quizzy_html"><div class="ttname"><a href="class_quizzy.html">Quizzy</a></div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00041">quizzy.h:42</a></div></div>
+<div class="ttc" id="ajoueur_8h_html"><div class="ttname"><a href="joueur_8h.html">joueur.h</a></div></div>
+<div class="ttc" id="aquestion_8h_html"><div class="ttname"><a href="question_8h.html">question.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_9342060438ee5d92e314df48637a6ec8.html">quizzy-visualisation</a></li><li class="navelem"><a class="el" href="quizzygui_8h.html">quizzygui.h</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Mercredi 4 Juin 2025 13:55:20 pour Projet Quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

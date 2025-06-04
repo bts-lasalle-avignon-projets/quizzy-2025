@@ -1,0 +1,209 @@
+class CommunicationBluetooth
+!!!128042.cpp!!!	CommunicationBluetooth(inout gui : QuizzyGUI = nullptr)
+    qDebug() << Q_FUNC_INFO << this;
+
+    if(appareil.isValid())
+    {
+        appareil.powerOn();
+
+        nomDeLAppareil     = appareil.name();
+        adresseDeLAppareil = appareil.address().toString();
+
+        demarrerServeur();
+
+        appareil.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
+    }
+!!!128170.cpp!!!	~CommunicationBluetooth()
+    arreterServeur();
+    appareil.setHostMode(QBluetoothLocalDevice::HostPoweredOff);
+    qDebug() << Q_FUNC_INFO << this;
+!!!128298.cpp!!!	demarrerServeur() : void
+    if(serveur == nullptr)
+    {
+        qDebug() << Q_FUNC_INFO << getNomAppareil() << getAdresseAppareil();
+        serveur =
+          new QBluetoothServer(QBluetoothServiceInfo::RfcommProtocol, this);
+        connect(serveur,
+                SIGNAL(newConnection()),
+                this,
+                SLOT(connecterAppareil()));
+
+        QBluetoothUuid uuid(QBluetoothUuid::Rfcomm);
+        informationsDuService = serveur->listen(uuid, serviceNom);
+    }
+!!!128426.cpp!!!	arreterServeur() : void
+    informationsDuService.unregisterService();
+
+    if(socket)
+    {
+        if(socket->isOpen())
+            socket->close();
+        delete socket;
+        socket = nullptr;
+    }
+
+    delete serveur;
+    serveur = nullptr;
+!!!128002.cpp!!!	reconnecterAppareil() : void
+    arreterServeur();
+    demarrerServeur();
+!!!128258.cpp!!!	getNomAppareil() : QString
+    return nomDeLAppareil;
+!!!128386.cpp!!!	getAdresseAppareil() : QString
+    return adresseDeLAppareil;
+!!!128514.cpp!!!	getPeripheriquesDistants() : QList<QBluetoothAddress>
+    return appareil.connectedDevices();
+!!!128682.cpp!!!	deconnecterAppareil() : void
+    if(connecte)
+    {
+        qDebug() << Q_FUNC_INFO << socket->peerName()
+                 << socket->peerAddress().toString();
+        connecte = false;
+        emit appareilDeconnecte(socket->peerName(),
+                                socket->peerAddress().toString());
+    }
+!!!128554.cpp!!!	connecterAppareil() : void
+    socket = serveur->nextPendingConnection();
+    if(!socket)
+        return;
+
+    qDebug() << Q_FUNC_INFO << socket->peerName()
+             << socket->peerAddress().toString();
+    connect(socket, SIGNAL(disconnected()), this, SLOT(deconnecterAppareil()));
+    connect(socket, SIGNAL(readyRead()), this, SLOT(recevoirTrame()));
+
+    connecte = true;
+    emit appareilConnecte(socket->peerName(), socket->peerAddress().toString());
+!!!128810.cpp!!!	recevoirTrame() : void
+    QByteArray donnees;
+
+    donnees       = socket->readAll();
+    QString trame = QString(donnees);
+    qDebug() << Q_FUNC_INFO << "trame" << trame;
+
+    separerTrame(trame);
+!!!128770.cpp!!!	separerTrame(in trame : QString) : void
+    trame.replace("\\n", "\n");
+    trame                    = trame.mid(2, trame.length() - 3);
+    QStringList trameSeparee = trame.split(";");
+    traiterTrame(trameSeparee);
+!!!128898.cpp!!!	traiterTrame(in trameSeparee : QStringList) : void
+    QChar typeDeTrame = trameSeparee[TYPE_DE_TRAME].at(0);
+
+    qDebug() << Q_FUNC_INFO << "typeDeTrame" << typeDeTrame;
+
+    switch(typeDeTrame.toLatin1())
+    {
+        case 'C':
+        {
+            QString theme       = trameSeparee[THEME];
+            QString temps       = trameSeparee[TEMPS];
+            QString nbQuestions = trameSeparee[NOMBRE_DE_QUESTION];
+
+            auto gui = qobject_cast<QuizzyGUI*>(parent());
+            if(!gui)
+                return;
+
+            gui->getQuestion()->setTheme(theme);
+            gui->getQuestion()->setTemps(temps.toInt());
+            gui->getQuestion()->setNombre(nbQuestions.toInt());
+
+            emit signalConfiguration();
+
+            qDebug() << Q_FUNC_INFO << "theme" << theme << "temps" << temps
+                     << "nbQuestions" << nbQuestions;
+
+            break;
+        }
+        case 'J':
+        {
+            QString joueur1 = trameSeparee[NOM_JOUEUR_1];
+            QString joueur2 = trameSeparee[NOM_JOUEUR_2];
+
+            auto gui = qobject_cast<QuizzyGUI*>(parent());
+            if(!gui)
+                return;
+
+            gui->getJoueur1()->setNom(joueur1);
+            gui->getJoueur2()->setNom(joueur2);
+
+            emit signalNomsJoueurs();
+
+            qDebug() << Q_FUNC_INFO << "joueur1" << joueur1 << "joueur2"
+                     << joueur2;
+            break;
+        }
+        case 'Q':
+        {
+            QString titre        = trameSeparee[TITRE_QUESTION];
+            QString propositionA = trameSeparee[PROPOSITION_A];
+            QString propositionB = trameSeparee[PROPOSITION_B];
+            QString propositionC = trameSeparee[PROPOSITION_C];
+            QString propositionD = trameSeparee[PROPOSITION_D];
+            QString idReponse    = trameSeparee[NUMERO_REPONSE];
+            QString explication  = trameSeparee[EXPLICATION];
+
+            qDebug() << Q_FUNC_INFO << "titre" << titre << "propositions"
+                     << propositionA << propositionB << propositionC
+                     << propositionD << "idReponse" << idReponse
+                     << "explication" << explication;
+
+            auto gui = qobject_cast<QuizzyGUI*>(parent());
+            if(!gui)
+                return;
+
+            gui->getQuestion()->setTitre(titre);
+            gui->getQuestion()->setPropA(propositionA);
+            gui->getQuestion()->setPropB(propositionB);
+            gui->getQuestion()->setPropC(propositionC);
+            gui->getQuestion()->setPropD(propositionD);
+            gui->getQuestion()->setIdReponse(idReponse.toInt());
+            gui->getQuestion()->setExplication(explication);
+
+            emit signalQuestion();
+
+            break;
+        }
+        case 'S':
+        {
+            emit signalEcranSuivant();
+            break;
+        }
+        case 'R':
+        {
+            QString score1 = trameSeparee[NOM_JOUEUR_1];
+            QString score2 = trameSeparee[NOM_JOUEUR_2];
+
+            auto gui = qobject_cast<QuizzyGUI*>(parent());
+            if(!gui)
+                return;
+
+            gui->getJoueur1()->setScore(score1.toInt());
+            gui->getJoueur2()->setScore(score2.toInt());
+
+            emit signalScore();
+
+            qDebug() << Q_FUNC_INFO << "score1" << score1 << "score2" << score2;
+            break;
+        }
+        case 'T':
+        {
+            break;
+        }
+        case 'F':
+        {
+            break;
+        }
+        default:
+        {
+            qDebug() << Q_FUNC_INFO << "typeDeTrame inconnue !";
+            break;
+        }
+    }
+!!!128642.cpp!!!	envoyer(in trame : QString) : void
+    if(socket == nullptr || !socket->isOpen())
+        return;
+
+    qDebug() << Q_FUNC_INFO << "trame" << QString(trame);
+    trame += "\r\n";
+    socket->write(trame.toLatin1());

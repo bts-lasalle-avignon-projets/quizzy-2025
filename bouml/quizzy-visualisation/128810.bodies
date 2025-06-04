@@ -1,0 +1,186 @@
+class QuizzyGUI
+!!!130730.cpp!!!	QuizzyGUI(inout parent : QWidget = nullptr)
+    qDebug() << Q_FUNC_INFO << this;
+
+    setWindowTitle(QString(NOM_APPLICATION) + QString(" v") +
+                   QString(VERSION_APPLICATION));
+
+    creerEcrans();
+    initialiserEvenements();
+#ifdef RASPBERRY_PI
+    setFixedSize(LARGEUR_ECRAN, HAUTEUR_ECRAN);
+    showFullScreen();
+
+#else
+    showMaximized();
+#endif
+    afficherEcranAttente();
+!!!130858.cpp!!!	~QuizzyGUI()
+    qDebug() << Q_FUNC_INFO << this;
+!!!136834.cpp!!!	getEcrans() : QStackedWidget
+    return ecrans;
+!!!136962.cpp!!!	initialiserEvenements() : void
+    connect(communication,
+            SIGNAL(appareilConnecte(QString, QString)),
+            this,
+            SLOT(afficherMessageConnexion(QString, QString)));
+    connect(communication,
+            SIGNAL(appareilDeconnecte(QString, QString)),
+            this,
+            SLOT(afficherMessageDeconnexion(QString, QString)));
+    connect(communication,
+            &CommunicationBluetooth::signalEcranSuivant,
+            this,
+            &QuizzyGUI::afficherEcranSuivant);
+    connect(communication,
+            &CommunicationBluetooth::signalConfiguration,
+            this,
+            &QuizzyGUI::afficherConfiguration);
+    connect(communication,
+            &CommunicationBluetooth::signalNomsJoueurs,
+            this,
+            &QuizzyGUI::afficherNomsJoueurs);
+    connect(communication,
+            &CommunicationBluetooth::signalQuestion,
+            this,
+            &QuizzyGUI::afficherQuestion);
+    connect(communication,
+            &CommunicationBluetooth::signalScore,
+            this,
+            &QuizzyGUI::determinerGagnant);
+#ifdef TEST_ECRANS
+    // Flèche droite pour écran suivant
+    QAction* actionAllerDroite = new QAction(this);
+    actionAllerDroite->setShortcut(QKeySequence(Qt::Key_Right));
+    addAction(actionAllerDroite);
+    connect(actionAllerDroite,
+            SIGNAL(triggered()),
+            this,
+            SLOT(afficherEcranSuivant()));
+#endif
+!!!137090.cpp!!!	initialiserEcrans() : void
+    ecrans          = new QStackedWidget(this);
+    layoutPrincipal = new QVBoxLayout();
+    layoutPrincipal->addWidget(ecrans);
+    QWidget* centralWidget = new QWidget(this);
+    centralWidget->setLayout(layoutPrincipal);
+    setCentralWidget(centralWidget);
+!!!137218.cpp!!!	creerEcrans() : void
+    initialiserEcrans();
+    creerEcranAttente();
+    creerEcranAccueil();
+    creerEcranQuestion();
+    creerEcranReponse();
+    creerEcranFin();
+!!!137346.cpp!!!	creerEcranAttente() : void
+    ecranAttente = new EcranAttente(this);
+!!!137474.cpp!!!	creerEcranAccueil() : void
+    ecranAccueil = new EcranAccueil(this);
+!!!137602.cpp!!!	creerEcranQuestion() : void
+    ecranQuestion = new EcranQuestion(this);
+!!!137730.cpp!!!	creerEcranReponse() : void
+    ecranReponse = new EcranReponse(this);
+!!!137858.cpp!!!	creerEcranFin() : void
+    ecranFin = new EcranFin(this);
+!!!138370.cpp!!!	afficherEcran(in ecran : QuizzyGUI::Ecran) : void
+    qDebug() << Q_FUNC_INFO << "ecran" << ecran;
+    ecrans->setCurrentIndex(ecran);
+!!!138498.cpp!!!	afficherEcranAttente() : void
+    afficherEcran(Ecran::idEcranAttente);
+!!!138626.cpp!!!	afficherEcranSuivant() : void
+    int indexCourant = ecrans->currentIndex();
+    if(indexCourant == idEcranReponse)
+    {
+        indexQuestionActuelle++;
+        qDebug() << Q_FUNC_INFO << "indexQuestionActuelle"
+                 << indexQuestionActuelle;
+
+        if(indexQuestionActuelle < getQuestion()->getNombre())
+        {
+            afficherEcran(QuizzyGUI::Ecran(indexCourant - 1));
+            ecranQuestion->afficherNbQuestions(
+              QString::number((getQuestion()->getNombre())),
+              indexQuestionActuelle + 1);
+            ecranReponse->afficherNbQuestions(
+              QString::number((getQuestion()->getNombre())),
+              indexQuestionActuelle + 1);
+        }
+        else
+        {
+            afficherEcran(QuizzyGUI::Ecran(indexCourant + 1));
+        }
+    }
+    else
+    {
+        if(indexCourant < ecrans->count() - 1)
+        {
+            afficherEcran(QuizzyGUI::Ecran(indexCourant + 1));
+        }
+    }
+!!!138754.cpp!!!	afficherMessageConnexion(in nom : QString, in adresse : QString) : void
+    ecranAttente->afficherMessageConnexion(QString("Appareil ") + nom +
+                                           QString(" connecté !"));
+!!!138882.cpp!!!	afficherMessageDeconnexion(in nom : QString, in adresse : QString) : void
+    ecranAttente->afficherMessageConnexion(QString("Appareil ") + nom +
+                                           QString(" déconnecté !"));
+!!!139010.cpp!!!	afficherConfiguration() : void
+    ecranAccueil->afficherThemeChoisi(getQuestion()->getTheme());
+    ecranAccueil->afficherTempsParQuestion(
+      QString::number(getQuestion()->getTemps()));
+    ecranAccueil->afficherNombreDeQuestions(
+      QString::number(getQuestion()->getNombre()));
+!!!139138.cpp!!!	afficherNomsJoueurs() : void
+    ecranAccueil->afficherNomsJoueurs(getJoueur1()->getNom(),
+                                      getJoueur2()->getNom());
+!!!139266.cpp!!!	afficherQuestion() : void
+    QThread::sleep(1);
+    ecranQuestion->afficherTitreQuestion(getQuestion()->getTitre());
+    ecranQuestion->afficherThemeQuestion(getQuestion()->getTheme());
+    ecranQuestion->afficherNbQuestions(
+      QString::number(getQuestion()->getNombre()),
+      indexQuestionActuelle + 1);
+    ecranQuestion->afficherPropositions(getQuestion()->getPropA(),
+                                        getQuestion()->getPropB(),
+                                        getQuestion()->getPropC(),
+                                        getQuestion()->getPropD());
+    ecranQuestion->demarrerCompteARebours(getQuestion()->getTemps());
+
+    ecranReponse->afficherTitreQuestion(getQuestion()->getTitre());
+    ecranReponse->afficherThemeQuestion(getQuestion()->getTheme());
+    ecranReponse->afficherNbQuestions(
+      QString::number(getQuestion()->getNombre()),
+      indexQuestionActuelle + 1);
+    ecranReponse->afficherPropositions(getQuestion()->getPropA(),
+                                       getQuestion()->getPropB(),
+                                       getQuestion()->getPropC(),
+                                       getQuestion()->getPropD());
+    ecranReponse->afficherPropositionCorrecte(getQuestion()->getIdReponse());
+    ecranReponse->afficherTempsRestant(0);
+    ecranReponse->afficherExplication(getQuestion()->getExplication());
+!!!139394.cpp!!!	afficherScores() : void
+    QString nomJ1   = getJoueur1()->getNom();
+    QString nomJ2   = getJoueur2()->getNom();
+    QString scoreJ1 = QString::number(getJoueur1()->getScore());
+    QString scoreJ2 = QString::number(getJoueur2()->getScore());
+
+    ecranFin->afficherScores(nomJ1, nomJ2, scoreJ1, scoreJ2);
+!!!139522.cpp!!!	determinerGagnant() : void
+    QString nomJ1   = getJoueur1()->getNom();
+    QString nomJ2   = getJoueur2()->getNom();
+    int     scoreJ1 = getJoueur1()->getScore();
+    int     scoreJ2 = getJoueur2()->getScore();
+
+    if(scoreJ1 > scoreJ2)
+    {
+        ecranFin->afficherGagnant("Gagnant : " + nomJ1);
+    }
+    else if(scoreJ2 > scoreJ1)
+    {
+        ecranFin->afficherGagnant("Gagnant : " + nomJ2);
+    }
+    else
+    {
+        ecranFin->afficherGagnant("Égalité !");
+    }
+
+    afficherScores();

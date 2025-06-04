@@ -1,0 +1,54 @@
+format 224
+
+classcanvas 128003 class_ref 134659 // BaseDeDonnees
+  classdiagramsettings member_max_width 0 end
+  xyz 2136 387 3005
+end
+classcanvas 128298 class_ref 135850 // AppCompatActivity
+  classdiagramsettings member_max_width 0 end
+  xyz 909.8 364.4 2006
+end
+classcanvas 128515 class_ref 134915 // ConnexionBluetoothClient
+  classdiagramsettings member_max_width 0 end
+  xyz 1337 663 2000
+end
+classcanvas 128643 class_ref 135171 // PartieEnCours
+  classdiagramsettings member_max_width 0 end
+  xyz 853 662 3005
+end
+classcanvas 129155 class_ref 135722 // ParametresSession
+  classdiagramsettings member_max_width 0 end
+  xyz 463 650 3011
+end
+classcanvas 129411 class_ref 135978 // Quizzy
+  classdiagramsettings member_max_width 0 end
+  xyz 1757.1 281.1 3012
+end
+relationcanvas 128131 relation_ref 134659 // <unidirectional association>
+  from ref 128003 z 3006 to point 2057 317
+  line 128259 z 3006 to point 2057 393
+  line 128387 z 3006 to ref 128003
+  role_a_pos 2146 450 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128771 relation_ref 134915 // <generalisation>
+  from ref 128643 z 3006 to ref 128298
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128899 relation_ref 135043 // <unidirectional association>
+  from ref 128643 z 3006 to ref 128515
+  role_a_pos 1174 746 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129283 relation_ref 135082 // <generalisation>
+  from ref 129155 z 3012 to ref 128298
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129539 relation_ref 135210 // <generalisation>
+  from ref 129411 z 3013 to ref 128298
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end
