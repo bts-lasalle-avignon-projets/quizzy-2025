@@ -1,26 +1,23 @@
-[![Qt Build](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/actions/workflows/qt-build.yml/badge.svg)](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/actions/workflows/qt-build.yml) [![Android Build](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/actions/workflows/android-build.yml/badge.svg)](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/actions/workflows/android-build.yml)
+[![Qt Build](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/actions/workflows/qt-build.yml/badge.svg)](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/actions/workflows/qt-build.yml) [![Android Build](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/actions/workflows/android-build.yml/badge.svg)](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/actions/workflows/android-build.yml) [![release](https://img.shields.io/github/v/release/bts-lasalle-avignon-projets/quizzy-2025)](https://github.com/bts-lasalle-avignon-projets/quizzy-2025/releases)
 
-# Projet : Quizzy
+# Projet BTS CIEL 2025 : Quizzy
 
-- [Le projet quizzy](#projet--quizzy)
+- [Projet BTS CIEL 2025 : Quizzy](#projet-bts-ciel-2025--quizzy)
   - [Présentation](#présentation)
-    - [Quizzy](#quizzy)
-    - [Le module de visualisation](#le-module-de-visualisation)
-    - [Le module de gestion](#le-module-de-gestion)
-  - [Utilisation](#utilisation)
-  - [Diaporamas de présentation](#diaporamas-de-présentation)
+  - [Fonctionnalités](#fonctionnalités)
   - [Diagrammes de cas d'utilisation](#diagrammes-de-cas-dutilisation)
-    - [Module de visualisation](#module-de-visualisation)
-    - [Module de gestion](#module-de-gestion)
   - [Diagrammes de classes](#diagrammes-de-classes)
   - [Base de données](#base-de-données)
-  - [Fonctionnalités](#fonctionnalités)
-  - [Itérations](#itérations)
+  - [Protocole](#protocole)
+  - [Gestion de projet](#gestion-de-projet)
     - [Itération 1](#itération-1)
     - [Itération 2](#itération-2)
     - [Itération 3](#itération-3)
+    - [Itération 4](#itération-4)
   - [Changelog](#changelog)
+    - [Version 1.0](#version-10)
   - [TODO](#todo)
+    - [Version 1.1](#version-11)
   - [Défauts constatés non corrigés](#défauts-constatés-non-corrigés)
   - [Équipe de développement](#équipe-de-développement)
 
@@ -28,106 +25,29 @@
 
 ## Présentation
 
-### Quizzy
+QUIZZY est un système numérique d'évaluation ludique sous forme de questionnaire à choix multiple (QCM) où une question est posée et la réponse est à choisir parmi un ensemble de propositions.
 
-### Le module de visualisation
+Il se pratique à plusieurs autour de plusieurs pupitres et d’un écran principal. Un pupitre est composé :
 
-![](./images/visualisation.gif)
+- 4 buzzers (bouton poussoir de type arcade)
+- un bandeau leds multicolores
+- un écran (en option)
 
-### Le module de gestion
+L’évaluateur dispose d’une tablette permettant d’assurer la session d’évaluation.
 
-![](./images/gestion.gif)
+Le système QUIZZY est décomposé en trois modules :
 
----
+- Module de gestion de quiz (Tablette-QUIZZY)
+- Module de jeu (Pupitre-QUIZZY)
+- Module de visualisation (Écran-QUIZZY)
 
-## Utilisation
+Les modules communiquent via le Bluetooth :
 
----
-
-## Diaporamas de présentation
-
----
-
-## Diagrammes de cas dutilisation 
-
-### Module de visualisation
-
-![](./images/DCUModuleDeVisualisation.png)
-
-### Module de gestion
-
-![](./images/DCUModuleDeGestion.png)
-
----
-
-## Diagrammes de classes
-
-- Module de visualisation
-
-- Module de gestion
-
----
-
-## Base de données
-
-```sql
-CREATE TABLE IF NOT EXISTS table_quiz(
-    quizzID INTEGER PRIMARY KEY AUTOINCREMENT, 
-    themeID INTEGER, 
-    horodatage TEXT NOT NULL, 
-    gagnantID INTEGER DEFAULT 0, 
-    FOREIGN KEY (themeID) REFERENCES table_theme(themeID) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS table_resultats(
-    quizzID INTEGER, 
-    participantID INTEGER, 
-    score REAL, 
-    PRIMARY KEY (quizzID, participantID),
-    FOREIGN KEY (quizzID) REFERENCES table_quiz(quizzID) ON DELETE CASCADE,
-    FOREIGN KEY (participantID) REFERENCES table_participant(participantID) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS table_question(
-    questionID INTEGER PRIMARY KEY AUTOINCREMENT,
-    themeID INTEGER,
-    question TEXT NOT NULL,
-    proposition1 TEXT NOT NULL,
-    proposition2 TEXT NOT NULL,
-    proposition3 TEXT NOT NULL,
-    proposition4 TEXT NOT NULL,
-    explication TEXT DEFAULT '',
-    reponse INTEGER NOT NULL,
-    points	REAL DEFAULT 1,
-    FOREIGN KEY (themeID) REFERENCES table_theme(themeID) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS table_reponse(
-    quizzID INTEGER,
-    participantID INTEGER,
-    questionID INTEGER,
-    temps INTEGER DEFAULT NULL,
-    reponse INTEGER NOT NULL,
-    PRIMARY KEY (quizzID, participantID, questionID),
-    FOREIGN KEY (quizzID) REFERENCES table_quiz(quizzID) ON DELETE CASCADE,
-    FOREIGN KEY (participantID) REFERENCES table_participant(participantID) ON DELETE CASCADE,
-    FOREIGN KEY (questionID) REFERENCES table_question(questionID) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS table_participant(
-    participantID INTEGER PRIMARY KEY AUTOINCREMENT,
-    prenom TEXT NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS table_theme(
-    themeID INTEGER PRIMARY KEY AUTOINCREMENT,
-    theme TEXT NOT NULL
-);
-```
+![](./images/modules.png)
 
 ## Fonctionnalités
 
-- Module de visualisation
+- Module de visualisation (Qt/Raspberry Pi)
 
 | Fonctionalités                          | A faire | En cours | Terminé |
 | --------------------------------------- | :-----: | :------: | :-----: |
@@ -139,7 +59,9 @@ CREATE TABLE IF NOT EXISTS table_theme(
 | Dialoguer avec le module de gestion     |         |          |    O    |
 | S'afficher en mode "kiosque"            |         |          |    O    |
 
-- Module de gestion
+![](./images/visualisation.gif)
+
+- Module de gestion (Java/Android)
 
 | Fonctionalités                            | A faire | En cours | Terminé |
 | ---------------------------------------   | :-----: | :------: | :-----: |
@@ -152,9 +74,43 @@ CREATE TABLE IF NOT EXISTS table_theme(
 | Sauvegarder les résultats                 |         |    O     |         |
 | Visualiser un historique                  |         |    O     |         |
 
----
+![](./images/gestion.gif)
 
-## Itérations
+## Diagrammes de cas d'utilisation
+
+- Module de visualisation
+
+![](./images/DCUModuleDeVisualisation-v1.png)
+
+- Module de gestion
+
+![](./images/DCUModuleDeGestion-v1.png)
+
+## Diagrammes de classes
+
+- Module de visualisation
+
+![](./images/DCModuleDeVisualisation-v1.png)
+
+- Module de gestion
+
+![](./images/DCModuleDeGestion-v1.png)
+
+## Base de données
+
+cf. [ldd.sql](./bdd/ldd.sql)
+
+![](./images/bdd.png)
+
+## Protocole
+
+![](./images/protocole.png)
+
+![](./images/DSQuizzy.png)
+
+## Gestion de projet
+
+[GitHub Project](https://github.com/orgs/bts-lasalle-avignon-projets/projects/25)
 
 ### Itération 1
 
@@ -191,7 +147,6 @@ Du 31 Mai au 15 Juin
 
 - **Amélioration de l'affichage** : l'interface utilisateur est plus claire et intuitive
 - **Recommencer des parties** : possibilité de relancer une partie
----
 
 ## Changelog
 
@@ -203,27 +158,24 @@ Du 31 Mai au 15 Juin
 - [x] Visualiser une session
 - [x] Chronométrer les questions
 - [x] Visualiser les scores
----
 
 ## TODO
+
+### Version 1.1
 
 - [ ] Dialoguer avec le module de jeu
 - [ ] Recommencer des parties
 - [ ] Enregistrer les scores
 - [ ] Afficher un historique
 
----
-
 ## Défauts constatés non corrigés
 
 Certaines questions peuvent se répéter au sein d'une même session de jeu.
 
----
-
 ## Équipe de développement
 
-- ÉTUDIANT 1 : [RAFFIN Louis](https://github.com/LouisRaffin)
-- ÉTUDIANT 2 : [GASSE Lenny](https://github.com/lgasse)
+- Module de visualisation (Qt/RPI) : [RAFFIN Louis](https://github.com/LouisRaffin)
+- Module de gestion de quiz (Java/android) : [GASSE Lenny](https://github.com/lgasse)
 
 ---
 
