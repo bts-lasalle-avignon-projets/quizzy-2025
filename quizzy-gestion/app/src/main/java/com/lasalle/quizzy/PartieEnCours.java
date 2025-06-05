@@ -29,6 +29,9 @@ public class PartieEnCours extends AppCompatActivity {
     private int tempsParQuestion;
     private int nombreQuestions;
     private int questionsEnvoyees = 1;
+    private int scoreJoueur1 = 0;
+    private int scoreJoueur2 = 0;
+    private int bonneReponseActuelle = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -61,6 +64,16 @@ public class PartieEnCours extends AppCompatActivity {
                     "00:E0:4C:6D:20:A3", // écran
                     "24:6F:28:10:5A:46"  // pupitre
             );
+
+            connexionBluetooth.setOnTrameReceivedListener((joueur, couleur) -> {
+                runOnUiThread(() -> {
+                    // Réagir à la réception d'une trame (ex: mise à jour UI)
+                    Log.d("_PartieEnCours", "pupitre " + joueur + " bouton " + couleur);
+                    Toast.makeText(this, "Joueur " + joueur + " a pressé bouton " + couleur, Toast.LENGTH_SHORT).show();
+                    gestionReponseJoueur(joueur, couleur);
+                });
+            });
+
             connexionBluetooth.start();
 
             initialiserBluetoothEtParams(intent);
@@ -78,6 +91,7 @@ private void initialiserRessources() {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "clic boutonRetourAccueil");
+            connexionBluetooth.envoyerEcran("@@F\n");
             Intent activitePrincipale = new Intent(PartieEnCours.this, Quizzy.class);
             startActivity(activitePrincipale);
         }
@@ -87,7 +101,7 @@ private void initialiserRessources() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "clic boutonQuestionSuivante");
-                recevoirS();
+                questionSuivante();
             }
         });
 
@@ -109,6 +123,7 @@ private void initialiserRessources() {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                connexionBluetooth.envoyerEcran("@@F\n");
                 Intent activitePrincipale = new Intent(PartieEnCours.this, Quizzy.class);
                 startActivity(activitePrincipale);
         }
@@ -121,39 +136,39 @@ private void initialiserRessources() {
         themeID = intent.getIntExtra("themeID", 1);
         tempsParQuestion = intent.getIntExtra("tempsParQuestion", 10);
         nombreQuestions = intent.getIntExtra("nombreQuestions", 1);
+        bonneReponseActuelle = intent.getIntExtra("bonneReponseInitiale", -1);
+        Log.d(TAG, "Bonne réponse initiale : " + bonneReponseActuelle);
+
         Log.d(TAG, "Bluetooth initialisé avec themeID=" + themeID + ", temps=" + tempsParQuestion + ", nbQuestions=" + nombreQuestions);
     }
 
     private void planifierReponseInitiale()
     {
         new Handler().postDelayed(() -> {
-            connexionBluetooth.envoyerEcran("@@S;\n");
+            connexionBluetooth.envoyerEcran("@@S\n");
             Log.d(TAG, "Révélation réponse première question");
         }, tempsParQuestion * 1000);
     }
 
-    public void afficherScore()
-    {
+    public void afficherScore() {
         runOnUiThread(() -> {
             if (questionsEnvoyees >= nombreQuestions) {
                 Log.d(TAG, "Toutes les questions ont été envoyées");
 
-                connexionBluetooth.envoyerEcran("@@R;17;18\n");
+                connexionBluetooth.envoyerEcran("@@R;" + scoreJoueur1 + ";" + scoreJoueur2 + "\n");
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 connexionBluetooth.envoyerEcran("@@S\n");
-                return;
-            }
-            else {
+            } else {
                 Toast.makeText(PartieEnCours.this, "Veuillez terminer le Quizz avant de consulter le score ", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void recevoirS()
+    public void questionSuivante()
     {
         runOnUiThread(() -> {
             if (questionsEnvoyees >= nombreQuestions) {
@@ -163,14 +178,26 @@ private void initialiserRessources() {
 
             BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance(getApplicationContext());
             String trameQuestion = baseDeDonnees.getQuestionAleatoireParTheme(themeID);
-            connexionBluetooth.envoyerEcran(trameQuestion);
 
+            String[] questionDetails = trameQuestion.split(";");
+            if (questionDetails.length >= 6) {
+                try {
+                    bonneReponseActuelle = Integer.parseInt(questionDetails[6].trim());
+                    Log.d(TAG, "Nouvelle bonne réponse : " + bonneReponseActuelle);
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "Erreur en extrayant la bonne réponse", e);
+                    bonneReponseActuelle = -1;
+                }
+            }
+
+            connexionBluetooth.envoyerEcran(trameQuestion);
             Log.d(TAG, "Question envoyée : " + trameQuestion);
             questionsEnvoyees++;
 
             new Handler().postDelayed(() -> {
                 connexionBluetooth.envoyerEcran("@@S\n");
                 Log.d(TAG, "Trame suivant envoyée (affichage question)");
+                connexionBluetooth.envoyerPupitre("$S\n");
 
                 new Handler().postDelayed(() -> {
                     connexionBluetooth.envoyerEcran("@@S\n");
@@ -179,5 +206,40 @@ private void initialiserRessources() {
 
             }, 1000);
         });
+    }
+
+    private void gestionReponseJoueur(int joueur, char couleur) {
+        int reponseDonnee;
+
+        switch (couleur) {
+            case 'R':
+                reponseDonnee = 1;
+                break;
+            case 'J':
+                reponseDonnee = 2;
+                break;
+            case 'B':
+                reponseDonnee = 3;
+                break;
+            case 'V':
+                reponseDonnee = 4;
+                break;
+            default:
+                Log.w(TAG, "Réponse invalide reçue : " + couleur);
+                return;
+        }
+        if (reponseDonnee == bonneReponseActuelle) {
+            if (joueur == 1) {
+                scoreJoueur1++;
+                Log.i(TAG, "Bonne réponse du Joueur 1. Score actuel : " + scoreJoueur1);
+            } else if (joueur == 2) {
+                scoreJoueur2++;
+                Log.i(TAG, "Bonne réponse du Joueur 2. Score actuel : " + scoreJoueur2);
+            } else {
+                Log.w(TAG, "Numéro de joueur inconnu : " + joueur);
+            }
+        } else {
+            Log.i(TAG, "Mauvaise réponse du Joueur " + joueur);
+        }
     }
 }

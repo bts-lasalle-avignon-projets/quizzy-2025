@@ -19,7 +19,6 @@ import android.os.Build;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 
-
 public class ParametresSession extends AppCompatActivity
 {
     private static final String TAG = "_ParametresSession";
@@ -27,7 +26,6 @@ public class ParametresSession extends AppCompatActivity
 
     private Button boutonRetourAccueil;
     private Button boutonLancementCreationJoueur;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,11 +43,9 @@ public class ParametresSession extends AppCompatActivity
                 );
             }
         }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activite_parametres_session);
         Log.d(TAG, "onCreate()");
-
 
         connexionBluetooth = new ConnexionBluetoothClient(
                 this,
@@ -58,10 +54,8 @@ public class ParametresSession extends AppCompatActivity
         );
         connexionBluetooth.start();
 
-
         initialiserRessources();
     }
-
 
     @Override
     protected void onDestroy() {
@@ -71,18 +65,15 @@ public class ParametresSession extends AppCompatActivity
         }
     }
 
-
     private void initialiserRessources()
     {
         boutonRetourAccueil = findViewById(R.id.boutonRetourAccueil);
         boutonLancementCreationJoueur = findViewById(R.id.boutonLancementCreationJoueur);
 
-
         boutonRetourAccueil.setOnClickListener(v -> {
             Log.d(TAG, "clic boutonRetourAccueil");
             startActivity(new Intent(this, Quizzy.class));
         });
-
 
         boutonLancementCreationJoueur.setOnClickListener(v -> {
             String joueurCreer = ((EditText) findViewById(R.id.creationJoueur)).getText().toString().trim();
@@ -91,32 +82,25 @@ public class ParametresSession extends AppCompatActivity
                 return;
             }
 
-
             BaseDeDonnees base = BaseDeDonnees.getInstance(getApplicationContext());
             SQLiteDatabase db = base.getWritableDatabase();
-
 
             ContentValues valeurs = new ContentValues();
             valeurs.put("prenom", joueurCreer);
             long resultat = db.insert("table_participant", null, valeurs);
 
-
             Toast.makeText(this, resultat != -1 ?
                     "Joueur ajouté avec succès" :
                     "Erreur lors de l'ajout", Toast.LENGTH_SHORT).show();
 
-
             startActivity(new Intent(this, ParametresSession.class));
         });
 
-
         BaseDeDonnees base = BaseDeDonnees.getInstance(this);
-
 
         ArrayList<String> themes = base.getThemes();
         Spinner spinnerTheme = findViewById(R.id.spinner_theme);
         spinnerTheme.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, themes));
-
 
         ArrayList<String> participants = base.getParticipants();
         Spinner spinnerJoueur1 = findViewById(R.id.spinner_joueur1);
@@ -125,10 +109,8 @@ public class ParametresSession extends AppCompatActivity
         spinnerJoueur1.setAdapter(participantAdapter);
         spinnerJoueur2.setAdapter(participantAdapter);
 
-
         Spinner spinnerTemps = findViewById(R.id.spinner_TempsQuestion);
         spinnerTemps.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"10", "15", "30"}));
-
 
         findViewById(R.id.lancementSession).setOnClickListener(v -> {
             String theme = spinnerTheme.getSelectedItem().toString().trim();
@@ -137,24 +119,20 @@ public class ParametresSession extends AppCompatActivity
             String joueur1 = spinnerJoueur1.getSelectedItem().toString().trim();
             String joueur2 = spinnerJoueur2.getSelectedItem().toString().trim();
 
-
             if (theme.isEmpty() || temps.isEmpty() || nombreQuestions.isEmpty()) {
                 Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-
             connexionBluetooth.envoyerEcran("@@C;" + theme + ";" + temps + ";" + nombreQuestions + "\n");
+            connexionBluetooth.envoyerPupitre("$C;" + temps + ";" + nombreQuestions + "\n");
             pause(1000);
-
 
             connexionBluetooth.envoyerEcran("@@J;" + joueur1 + ";" + joueur2 + "\n");
             pause(1000);
 
-
             connexionBluetooth.envoyerEcran("@@S;\n");
             pause(4000);
-
 
             int themeID = -1;
             ArrayList<String> tousLesThemes = base.getThemes();
@@ -165,32 +143,42 @@ public class ParametresSession extends AppCompatActivity
                 }
             }
 
-
             if (themeID == -1) {
                 Toast.makeText(this, "Thème introuvable", Toast.LENGTH_SHORT).show();
                 return;
             }
-
 
             String trameQuestion = base.getQuestionAleatoireParTheme(themeID);
             if (!trameQuestion.isEmpty()) {
                 connexionBluetooth.envoyerEcran(trameQuestion);
                 pause(500);
                 connexionBluetooth.envoyerEcran("@@S;\n");
+                connexionBluetooth.envoyerPupitre("$S;\n");
             } else {
                 Toast.makeText(this, "Aucune question trouvée pour ce thème", Toast.LENGTH_SHORT).show();
             }
 
-
+            connexionBluetooth.closeConnexion();
             Intent partie = new Intent(this, PartieEnCours.class);
             partie.putExtra("themeID", themeID);
             partie.putExtra("tempsParQuestion", Integer.parseInt(temps));
             partie.putExtra("nombreQuestions", Integer.parseInt(nombreQuestions));
             partie.putExtra("lancerTimer", true);
+
+            int bonneReponse = -1;
+            String[] questionDetails = trameQuestion.split(";");
+            if (questionDetails.length >= 6) {
+                try {
+                    bonneReponse = Integer.parseInt(questionDetails[6]);
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "Erreur d'extraction de la bonne réponse", e);
+                }
+            }
+            partie.putExtra("bonneReponseInitiale", bonneReponse);
+
             startActivity(partie);
         });
     }
-
 
     private void pause(int ms) {
         try {
