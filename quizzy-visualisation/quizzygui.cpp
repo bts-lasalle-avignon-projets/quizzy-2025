@@ -236,6 +236,12 @@ void QuizzyGUI::determinerGagnant()
     afficherScores();
 }
 
+void QuizzyGUI::finirPartie()
+{
+    afficherEcranAttente();
+    indexQuestionActuelle = 0;
+}
+
 void QuizzyGUI::initialiserEvenements()
 {
     connect(communication,
@@ -266,6 +272,10 @@ void QuizzyGUI::initialiserEvenements()
             &CommunicationBluetooth::signalScore,
             this,
             &QuizzyGUI::determinerGagnant);
+    connect(communication,
+            &CommunicationBluetooth::signalFin,
+            this,
+            &QuizzyGUI::finirPartie);
 #ifdef TEST_ECRANS
     // Flèche droite pour écran suivant
     QAction* actionAllerDroite = new QAction(this);

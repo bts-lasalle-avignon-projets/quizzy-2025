@@ -245,6 +245,7 @@ void CommunicationBluetooth::traiterTrame(QStringList trameSeparee)
         }
         case 'F':
         {
+            emit signalFin();
             break;
         }
         default:
