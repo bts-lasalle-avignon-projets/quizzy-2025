@@ -11,7 +11,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
 {
     private static final String  TAG         = "_BaseDeDonnees";
     public static final String   NOM_BDD     = "quizzy.db";
-    public static final int      VERSION_BDD = 5;
+    public static final int      VERSION_BDD = 6;
     private static BaseDeDonnees baseDeDonnees = null;
     private final SQLiteDatabase sqlite;
 

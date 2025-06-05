@@ -1,5 +1,6 @@
 package com.lasalle.quizzy;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,15 +16,12 @@ import androidx.core.app.ActivityCompat;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Build;
-import java.sql.*;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
-import android.content.SharedPreferences;
-import android.widget.TextView;
 
 public class ParametresSession extends AppCompatActivity
 {
-    private static final String TAG = "_ParametresSession"; //!< TAG pour les logs (cf. Logcat)
+    private static final String TAG = "_ParametresSession";
     private ConnexionBluetoothClient connexionBluetooth;
 
     private Button boutonRetourAccueil;
@@ -45,15 +43,20 @@ public class ParametresSession extends AppCompatActivity
                 );
             }
         }
-        String adresseMAC = "00:E0:4C:6D:20:A3";
-        connexionBluetooth = new ConnexionBluetoothClient(this, adresseMAC);
-        connexionBluetooth.start();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activite_parametres_session);
         Log.d(TAG, "onCreate()");
+
+        connexionBluetooth = new ConnexionBluetoothClient(
+                this,
+                "00:E0:4C:6D:20:A3", // écran
+                "24:6F:28:10:5A:46"  // pupitre
+        );
+        connexionBluetooth.start();
+
         initialiserRessources();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -64,103 +67,53 @@ public class ParametresSession extends AppCompatActivity
 
     private void initialiserRessources()
     {
-        this.boutonRetourAccueil = findViewById(R.id.boutonRetourAccueil);
+        boutonRetourAccueil = findViewById(R.id.boutonRetourAccueil);
+        boutonLancementCreationJoueur = findViewById(R.id.boutonLancementCreationJoueur);
 
-        boutonRetourAccueil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Log.d(TAG, "clic boutonRetourAccueil");
-                Intent activitePrincipale = new Intent(ParametresSession.this, Quizzy.class);
-                startActivity(activitePrincipale);
-            }
+        boutonRetourAccueil.setOnClickListener(v -> {
+            Log.d(TAG, "clic boutonRetourAccueil");
+            startActivity(new Intent(this, Quizzy.class));
         });
 
-        this.boutonLancementCreationJoueur = findViewById(R.id.boutonLancementCreationJoueur);
-
-        boutonLancementCreationJoueur.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Log.d(TAG, "clic boutonLancemntCreationJoueur");
-                String joueurCreer = ((EditText) findViewById(R.id.creationJoueur)).getText().toString().trim();
-
-
-                if (joueurCreer.isEmpty()) {
-                    Toast.makeText(ParametresSession.this, "Veuillez remplir le champ", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance(getApplicationContext());
-                    SQLiteDatabase db = baseDeDonnees.getWritableDatabase();
-
-
-                    ContentValues valeurs = new ContentValues();
-                    valeurs.put("prenom", joueurCreer);
-
-
-                    long resultat = db.insert("table_participant", null, valeurs);
-
-
-                    if (resultat != -1) {
-                        Toast.makeText(ParametresSession.this, "Joueur ajouté avec succès", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(ParametresSession.this, "Erreur lors de l'ajout", Toast.LENGTH_SHORT).show();
-                    }
-                    Intent activiteParametresSession = new Intent(ParametresSession.this, ParametresSession.class);
-                    startActivity(activiteParametresSession);
-                }
+        boutonLancementCreationJoueur.setOnClickListener(v -> {
+            String joueurCreer = ((EditText) findViewById(R.id.creationJoueur)).getText().toString().trim();
+            if (joueurCreer.isEmpty()) {
+                Toast.makeText(this, "Veuillez remplir le champ", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            BaseDeDonnees base = BaseDeDonnees.getInstance(getApplicationContext());
+            SQLiteDatabase db = base.getWritableDatabase();
+
+            ContentValues valeurs = new ContentValues();
+            valeurs.put("prenom", joueurCreer);
+            long resultat = db.insert("table_participant", null, valeurs);
+
+            Toast.makeText(this, resultat != -1 ?
+                    "Joueur ajouté avec succès" :
+                    "Erreur lors de l'ajout", Toast.LENGTH_SHORT).show();
+
+            startActivity(new Intent(this, ParametresSession.class));
         });
 
-        BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance(this);
+        BaseDeDonnees base = BaseDeDonnees.getInstance(this);
 
-        ArrayList<String> themes = baseDeDonnees.getThemes();
+        ArrayList<String> themes = base.getThemes();
         Spinner spinnerTheme = findViewById(R.id.spinner_theme);
+        spinnerTheme.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, themes));
 
-        ArrayAdapter<String> adapterTheme = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                themes
-        );
-        adapterTheme.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTheme.setAdapter(adapterTheme);
-
-        ArrayList<String> participants = baseDeDonnees.getParticipants();
+        ArrayList<String> participants = base.getParticipants();
         Spinner spinnerJoueur1 = findViewById(R.id.spinner_joueur1);
-
-        ArrayAdapter<String> adapterParticipant1 = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                participants
-        );
-        adapterParticipant1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerJoueur1.setAdapter(adapterParticipant1);
-
         Spinner spinnerJoueur2 = findViewById(R.id.spinner_joueur2);
-
-        ArrayAdapter<String> adapterParticipant2 = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                participants
-        );
-        adapterParticipant2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerJoueur2.setAdapter(adapterParticipant2);
+        ArrayAdapter<String> participantAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, participants);
+        spinnerJoueur1.setAdapter(participantAdapter);
+        spinnerJoueur2.setAdapter(participantAdapter);
 
         Spinner spinnerTemps = findViewById(R.id.spinner_TempsQuestion);
+        spinnerTemps.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"10", "15", "30"}));
 
-        String[] valeurTemps = {"10", "15", "30"};
-        ArrayAdapter<String> adapterTemps = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                valeurTemps
-        );
-        adapterTemps.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTemps.setAdapter(adapterTemps);
-
-        Button boutonLancerSession = findViewById(R.id.lancementSession);
-
-        boutonLancerSession.setOnClickListener(v -> {
-            String theme = ((Spinner) findViewById(R.id.spinner_theme)).getSelectedItem().toString().trim();
+        findViewById(R.id.lancementSession).setOnClickListener(v -> {
+            String theme = spinnerTheme.getSelectedItem().toString().trim();
             String temps = spinnerTemps.getSelectedItem().toString().trim();
             String nombreQuestions = ((EditText) findViewById(R.id.nbrQuestion)).getText().toString().trim();
             String joueur1 = spinnerJoueur1.getSelectedItem().toString().trim();
@@ -171,34 +124,18 @@ public class ParametresSession extends AppCompatActivity
                 return;
             }
 
-            String trame = "@@C;" + theme + ";" + temps + ";" + nombreQuestions + "\n";
-            connexionBluetooth.envoyer(trame);
+            connexionBluetooth.envoyerEcran("@@C;" + theme + ";" + temps + ";" + nombreQuestions + "\n");
+            connexionBluetooth.envoyerPupitre("$C;" + temps + ";" + nombreQuestions + "\n");
+            pause(1000);
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            connexionBluetooth.envoyerEcran("@@J;" + joueur1 + ";" + joueur2 + "\n");
+            pause(1000);
 
-            trame = "@@J;" + joueur1 + ";" + joueur2 + "\n";
-            connexionBluetooth.envoyer(trame);
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            connexionBluetooth.envoyer("@@S;\n");
-
-            try {
-                Thread.sleep(4000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            connexionBluetooth.envoyerEcran("@@S;\n");
+            pause(4000);
 
             int themeID = -1;
-            ArrayList<String> tousLesThemes = baseDeDonnees.getThemes();
+            ArrayList<String> tousLesThemes = base.getThemes();
             for (int i = 0; i < tousLesThemes.size(); i++) {
                 if (tousLesThemes.get(i).equals(theme)) {
                     themeID = i + 1;
@@ -211,30 +148,43 @@ public class ParametresSession extends AppCompatActivity
                 return;
             }
 
-            String trameQuestion = baseDeDonnees.getQuestionAleatoireParTheme(themeID);
+            String trameQuestion = base.getQuestionAleatoireParTheme(themeID);
             if (!trameQuestion.isEmpty()) {
-                connexionBluetooth.envoyer(trameQuestion);
+                connexionBluetooth.envoyerEcran(trameQuestion);
+                pause(500);
+                connexionBluetooth.envoyerEcran("@@S;\n");
+                connexionBluetooth.envoyerPupitre("$S;\n");
             } else {
                 Toast.makeText(this, "Aucune question trouvée pour ce thème", Toast.LENGTH_SHORT).show();
             }
 
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            connexionBluetooth.closeConnexion();
+            Intent partie = new Intent(this, PartieEnCours.class);
+            partie.putExtra("themeID", themeID);
+            partie.putExtra("tempsParQuestion", Integer.parseInt(temps));
+            partie.putExtra("nombreQuestions", Integer.parseInt(nombreQuestions));
+            partie.putExtra("lancerTimer", true);
+
+            int bonneReponse = -1;
+            String[] questionDetails = trameQuestion.split(";");
+            if (questionDetails.length >= 6) {
+                try {
+                    bonneReponse = Integer.parseInt(questionDetails[6]);
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "Erreur d'extraction de la bonne réponse", e);
+                }
             }
+            partie.putExtra("bonneReponseInitiale", bonneReponse);
 
-            trame = "@@S;" + "\n";
-            connexionBluetooth.envoyer(trame);
-
-            Intent activitePartieEnCours = new Intent(ParametresSession.this, PartieEnCours.class);
-            activitePartieEnCours.putExtra("themeID", themeID);
-            activitePartieEnCours.putExtra("tempsParQuestion", Integer.parseInt(temps));
-            activitePartieEnCours.putExtra("nombreQuestions", Integer.parseInt(nombreQuestions));
-            activitePartieEnCours.putExtra("lancerTimer", true);
-            startActivity(activitePartieEnCours);
-
+            startActivity(partie);
         });
     }
-}
 
+    private void pause(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
