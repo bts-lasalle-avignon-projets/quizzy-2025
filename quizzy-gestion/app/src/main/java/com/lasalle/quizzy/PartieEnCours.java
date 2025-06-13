@@ -61,7 +61,7 @@ public class PartieEnCours extends AppCompatActivity {
             }
             connexionBluetooth = new ConnexionBluetoothClient(
                     this,
-                    "00:E0:4C:6D:20:A3", // écran
+                    "2C:CF:67:94:CF:DE", // écran
                     "24:6F:28:10:5A:46"  // pupitre
             );
 

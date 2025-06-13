@@ -11,7 +11,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
 {
     private static final String  TAG         = "_BaseDeDonnees";
     public static final String   NOM_BDD     = "quizzy.db";
-    public static final int      VERSION_BDD = 6;
+    public static final int      VERSION_BDD = 7;
     private static BaseDeDonnees baseDeDonnees = null;
     private final SQLiteDatabase sqlite;
 
@@ -113,7 +113,8 @@ public class BaseDeDonnees extends SQLiteOpenHelper
             + " (1,'Informatique'),\n"
             + " (2,'Culture générale'),\n"
             + " (3,'Cinéma'),\n"
-            + " (4,'Musique');";
+            + " (4,'Musique'),\n"
+            + " (5,'Geek')";
 
     private static final String AJOUTE_QUESTIONS =
             "INSERT INTO " + TABLE_QUESTION +
@@ -157,7 +158,51 @@ public class BaseDeDonnees extends SQLiteOpenHelper
                     "(4,'Quel est le nom de l''album qui a propulsé Nirvana au sommet avec le titre \"Smells Like Teen Spirit\" ?','In Utero','Bleach','MTV Unplugged','Nevermind',4,'\"Nevermind\" de Nirvana, sorti en 1991, a marqué un tournant dans le rock alternatif, avec \"Smells Like Teen Spirit\" comme chanson phare.'),\n" +
                     "(4,'Quel genre musical est principalement associé à Elvis Presley ?','Rock & Roll','Pop','Jazz','Soul',1,'Elvis Presley est une icône du rock & roll, fusionnant des éléments de musique noire et de la culture populaire des années 50.'),\n" +
                     "(4,'Quel groupe a sorti l''album \"The Dark Side of the Moon\" en 1973 ?','Led Zeppelin','The Who','Pink Floyd','The Rolling Stones',3,'\"The Dark Side of the Moon\" de Pink Floyd est un album conceptuel qui est devenu un classique de la musique rock progressif.'),\n" +
-                    "(4,'Quel musicien est surnommé \"le roi de la pop\" ?','Prince','Michael Jackson','Elton John','Justin Timberlake',2,'Michael Jackson est surnommé \"le roi de la pop\" en raison de ses nombreuses contributions au genre pop et de son impact mondial.');";
+                    "(4,'Quel musicien est surnommé \"le roi de la pop\" ?','Prince','Michael Jackson','Elton John','Justin Timberlake',2,'Michael Jackson est surnommé \"le roi de la pop\" en raison de ses nombreuses contributions au genre pop et de son impact mondial.'),\n" +
+                    "(5,'Dans quel jeu vidéo peut-on trouver la Triforce ?','The Witcher','Final Fantasy','The Legend of Zelda','Dark Souls',3,'La Triforce est un artefact emblématique de la série The Legend of Zelda.'),\n" +
+                    "(5,'Quel est le nom du personnage principal de la série Halo ?','Marcus Fenix','Master Chief','Duke Nukem','Shepard',2,'Master Chief est le protagoniste emblématique de la série Halo.'),\n" +
+                    "(5,'Quel est le premier jeu vidéo commercialisé ?','Space Invaders','Pong','Pac-Man','Tennis for Two',2,'Pong est considéré comme le premier jeu vidéo commercialisé à grande échelle en 1972.'),\n" +
+                    "(5,'Dans quel jeu incarne-t-on un chasseur de monstres nommé Geralt de Riv ?','Dark Souls','The Witcher','Dragon Age','Skyrim',2,'Geralt de Riv est le personnage principal de la série The Witcher.'),\n" +
+                    "(5,'Quel studio a développé la série Dark Souls ?','Capcom','FromSoftware','Ubisoft','Square Enix',2,'FromSoftware est le développeur derrière Dark Souls.'),\n" +
+                    "(5,'Dans quel jeu trouve-t-on la ville de Rapture ?','BioShock','Fallout','Mass Effect','Half-Life',1,'Rapture est une ville sous-marine dystopique dans BioShock.'),\n" +
+                    "(5,'Quel est le nom du plombier le plus célèbre des jeux vidéo ?','Luigi','Wario','Sonic','Mario',4,'Mario est la mascotte emblématique de Nintendo.'),\n" +
+                    "(5,'Dans quel jeu vidéo peut-on trouver un creeper ?','Roblox','Terraria','Minecraft','Rust',3,'Les creepers sont des ennemis emblématiques de Minecraft.'),\n" +
+                    "(5,'Qui est le créateur de Minecraft ?','Gabe Newell','Markus Persson','Elon Musk','Tim Sweeney',2,'Markus Persson, alias Notch, a créé Minecraft.'),\n" +
+                    "(5,'Quel est le jeu vidéo le plus vendu de tous les temps ?','Tetris','Grand Theft Auto V','Minecraft','Fortnite',3,'Minecraft est le jeu vidéo le plus vendu dans l''histoire.'),\n" +
+                    "(5,'Quel est le studio à l’origine de la série The Elder Scrolls ?','Rockstar Games','Bethesda','Bioware','Valve',2,'Bethesda Game Studios est le développeur de la série The Elder Scrolls.'),\n" +
+                    "(5,'Quel personnage féminin est l’héroïne de la série Tomb Raider ?','Jill Valentine','Samus Aran','Lara Croft','Chun-Li',3,'Lara Croft est l’héroïne emblématique de la série Tomb Raider.'),\n" +
+                    "(5,'Dans quel jeu incarne-t-on un tueur à gages nommé Agent 47 ?','Dishonored','Hitman','Max Payne','Watch Dogs',2,'Agent 47 est le personnage principal de la série Hitman.'),\n" +
+                    "(5,'Quel jeu vidéo se déroule à Vice City ?','GTA San Andreas','GTA III','GTA Vice City','GTA IV',3,'Vice City est une ville fictive apparaissant dans le jeu GTA Vice City.'),\n" +
+                    "(5,'Dans quel jeu incarne-t-on un chevalier mort-vivant cherchant à briser une malédiction ?','Dark Souls','Elden Ring','Bloodborne','Demon''s Souls',1,'Dark Souls met en scène un élu mort-vivant dans un monde en ruine.'),\n" +
+                    "(5,'Dans quel jeu faut-il attraper tous les Pokémon ?','Pokémon','Digimon','Monster Rancher','Yu-Gi-Oh!',1,'Attraper tous les Pokémon est l’objectif principal dans les jeux Pokémon.'),\n" +
+                    "(5,'Quelle console a popularisé le stick analogique ?','PlayStation','Sega Saturn','Nintendo 64','Dreamcast',3,'La manette de la Nintendo 64 introduisait un stick analogique central.'),\n" +
+                    "(5,'Qui est le fondateur de Valve Corporation ?','Todd Howard','Gabe Newell','Hideo Kojima','Phil Spencer',2,'Gabe Newell a cofondé Valve et est célèbre pour la série Half-Life.'),\n" +
+                    "(5,'Dans quel jeu joue-t-on une simulation de ferme avec des graphismes rétro ?','Harvest Moon','Stardew Valley','Animal Crossing','Rune Factory',2,'Stardew Valley est un jeu de ferme inspiré de Harvest Moon.'),\n" +
+                    "(5,'Quel jeu de tir en ligne est célèbre pour ses skins et ses headshots ?','Overwatch','Apex Legends','Call of Duty','Counter-Strike: Global Offensive',4,'CS:GO est célèbre pour son gameplay compétitif et ses skins d’armes.'),\n" +
+                    "(5,'Dans quel jeu incarne-t-on Kratos, le dieu de la guerre ?','God of War','Assassin''s Creed','Devil May Cry','Bayonetta',1,'Kratos est le protagoniste de la série God of War.'),\n" +
+                    "(5,'Quel jeu indépendant met en scène un petit chevalier en quête dans un royaume souterrain ?','Dead Cells','Celeste','Hollow Knight','Ori and the Blind Forest',3,'Hollow Knight est un jeu d’action-exploration dans un monde souterrain.'),\n" +
+                    "(5,'Quel est le nom de la princesse souvent sauvée par Mario ?','Daisy','Zelda','Peach','Pauline',3,'Peach est la princesse du Royaume Champignon souvent capturée.'),\n" +
+                    "(5,'Quel jeu d’horreur se déroule dans une pizzeria avec des animatroniques ?','Outlast','Five Nights at Freddy’s','Silent Hill','Resident Evil',2,'Five Nights at Freddy’s met en scène des animatroniques hostiles.'),\n" +
+                    "(5,'Dans quel jeu les joueurs s’affrontent pour être le dernier survivant ?','League of Legends','Among Us','Fortnite','Overwatch',3,'Fortnite est un battle royale populaire avec construction.'),\n" +
+                    "(5,'Quel jeu consiste à identifier l’imposteur à bord d’un vaisseau spatial ?','Overcooked','Among Us','Destiny','Dead Space',2,'Among Us oppose imposteurs et coéquipiers dans une station spatiale.'),\n" +
+                    "(5,'Quel est le nom du personnage principal dans la série Metal Gear ?','Big Boss','Liquid Snake','Raiden','Solid Snake',4,'Solid Snake est le héros emblématique de la saga Metal Gear.'),\n" +
+                    "(5,'Quel jeu est célèbre pour la ligne Its dangerous to go alone! Take this. ?','Zelda II','Final Fantasy','The Legend of Zelda','Chrono Trigger',3,'Cette phrase culte vient du tout premier The Legend of Zelda.'),\n" +
+                    "(5,'Quel jeu utilise des portails pour résoudre des énigmes ?','Quantum Conundrum','Half-Life','Portal','The Talos Principle',3,'Portal est un jeu de réflexion basé sur la création de portails.'),\n" +
+                    "(5,'Dans quel jeu contrôle-t-on une boule bleue nommée Sonic ?','Mega Man','Sonic the Hedgehog','Crash Bandicoot','Rayman',2,'Sonic est la mascotte de SEGA depuis les années 1990.'),\n" +
+                    "(5,'Quel jeu vidéo a popularisé le mode Battle Royale ?','H1Z1','PUBG','Call of Duty','Apex Legends',2,'PlayerUnknown''s Battlegrounds a été un pionnier du battle royale.'),\n" +
+                    "(5,'Quel jeu propose de gérer une ville avec des Sims ?','City Skylines','The Sims','RollerCoaster Tycoon','SimCity',2,'The Sims permet de contrôler la vie quotidienne de personnages.'),\n" +
+                    "(5,'Qui marche à 30° vers l avant?','City Skylines','The AA','RollerCoaster Tycoon','SimCity',2,'AA va très très vite'),\n" +
+                    "(5,'Quel jeu d’aventure narratif a été développé par Quantic Dream ?','Life is Strange','Heavy Rain','Until Dawn','Firewatch',2,'Heavy Rain est un thriller interactif développé par Quantic Dream.'),\n" +
+                    "(5,'Quel jeu de rythme utilise un sabre laser pour trancher des cubes ?','Dance Central','Just Dance','Beat Saber','Guitar Hero',3,'Beat Saber est un jeu VR où l’on tranche des blocs au rythme de la musique.'),\n" +
+                    "(5,'Quel jeu de rôle japonais met en scène Cloud Strife ?','Persona 5','Final Fantasy VII','Dragon Quest','Xenoblade Chronicles',2,'Cloud est le héros emblématique de Final Fantasy VII.'),\n" +
+                    "(5,'Quel jeu de survie prend place dans un monde cubique ?','Rust','Terraria','Ark: Survival Evolved','Minecraft',4,'Minecraft combine exploration, survie et construction dans un monde cubique.'),\n" +
+                    "(5,'Quel jeu célèbre fête chaque année une convention nommée BlizzCon ?','League of Legends','StarCraft','World of Warcraft','Overwatch',3,'World of Warcraft est au cœur de la communauté Blizzard.'),\n" +
+                    "(5,'Quel jeu multijoueur oppose des terroristes à des contre-terroristes ?','Rainbow Six Siege','Call of Duty','Battlefield','Counter-Strike',4,'Counter-Strike est un jeu tactique opposant deux équipes avec des objectifs.'),\n" +
+                    "(5,'Quel jeu a pour personnage principal un bandicoot ?','Spyro','Ratchet & Clank','Crash Bandicoot','Jak and Daxter',3,'Crash Bandicoot est la mascotte emblématique de Naughty Dog.'),\n" +
+                    "(5,'Quel jeu en ligne consiste à capturer des points de contrôle et des charges utiles ?','Overwatch','Team Fortress 2','Valorant','Apex Legends',2,'Team Fortress 2 a popularisé ce mode avec ses classes de personnages.'),\n" +
+                    "(5,'Quel jeu vous plonge dans la Grèce antique en tant que mercenaire ?','The Witcher 3','Assassin''s Creed Odyssey','Skyrim','Immortals Fenyx Rising',2,'Assassin''s Creed Odyssey vous met dans la peau d’un mercenaire grec.'),\n" +
+                    "(5,'Quel jeu met en scène un enfant accompagné d’une créature géante nommée Trico ?','ICO','The Last Guardian','Shadow of the Colossus','Ori and the Will of the Wisps',2,'The Last Guardian est centré sur la relation entre un enfant et Trico.'),\n" +
+                    "(5,'Quel jeu se déroule sur l’île tropicale de Yara ?','Far Cry 5','Just Cause 4','Far Cry 6','Call of Juarez',3,'Far Cry 6 se déroule sur l’île fictive de Yara, inspirée de Cuba.');";
 
     private BaseDeDonnees(Context context)
     {
